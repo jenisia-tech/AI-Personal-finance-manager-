@@ -1,0 +1,312 @@
+export type TransactionType = 'income' | 'expense';
+
+export type TransactionCategory =
+  | 'Food'
+  | 'Transport'
+  | 'Shopping'
+  | 'Education'
+  | 'Entertainment'
+  | 'Bills'
+  | 'Healthcare'
+  | 'Salary'
+  | 'Freelance'
+  | 'Investments'
+  | 'Allowance'
+  | 'Other';
+
+export type PaymentMode =
+  | 'UPI'
+  | 'Credit Card'
+  | 'Debit Card'
+  | 'Net Banking'
+  | 'Cash';
+
+export interface Transaction {
+  id: string;
+  type: TransactionType;
+  amount: number;
+  category: TransactionCategory;
+  paymentMode: PaymentMode;
+  date: string; // YYYY-MM-DD
+  description: string;
+  createdAt: string;
+}
+
+export interface Budget {
+  id: string;
+  category: TransactionCategory;
+  limit: number;
+  period: 'monthly';
+  alertThreshold: number; // percentage, e.g. 80
+}
+
+export interface SavingsGoal {
+  id: string;
+  title: string;
+  targetAmount: number;
+  currentAmount: number;
+  targetDate: string; // YYYY-MM-DD
+  category: string;
+  icon: string;
+  color: string;
+}
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  monthlyIncome: number;
+  currency: string;
+  theme: 'light' | 'dark';
+  apiKey?: string;
+}
+
+export interface FinancialHealthScore {
+  score: number; // 0 - 100
+  grade: 'Excellent' | 'Good' | 'Fair' | 'Critical';
+  factors: {
+    name: string;
+    impact: 'positive' | 'warning' | 'negative';
+    description: string;
+  }[];
+  recommendations: string[];
+}
+
+export interface FilterOptions {
+  search: string;
+  type: 'all' | 'income' | 'expense';
+  category: string;
+  paymentMode: string;
+  sortBy: 'date' | 'amount';
+  sortOrder: 'asc' | 'desc';
+}
+
+/* =========================================================================
+ * COURSE OUTCOME 1 (CO1): Intelligent Agent Models & Problem-Solving
+ * ========================================================================= */
+
+export type AgentGoalId =
+  | 'avoid_budget_breach'
+  | 'reach_savings_goal'
+  | 'maintain_emergency_fund'
+  | 'reduce_discretionary';
+
+export interface AgentGoal {
+  id: AgentGoalId;
+  name: string;
+  description: string;
+  targetMetric: string;
+  targetValue: number;
+}
+
+export interface AgentPerception {
+  totalIncome: number;
+  totalExpenses: number;
+  netSurplus: number;
+  savingsRate: number; // in %
+  daysElapsed: number;
+  daysRemaining: number;
+  daysInMonth: number;
+  safeDailySpend: number;
+  actualDailySpend: number;
+  highestCategory: {
+    category: TransactionCategory;
+    amount: number;
+    percentage: number;
+  } | null;
+  budgetAlerts: {
+    category: TransactionCategory;
+    limit: number;
+    spent: number;
+    utilization: number;
+    excess: number;
+  }[];
+  activeGoals: {
+    id: string;
+    title: string;
+    target: number;
+    current: number;
+    monthlyNeeded: number;
+    monthsRemaining: number;
+  }[];
+  emergencyFundMonths: number;
+}
+
+export interface AgentCondition {
+  conditionId: string;
+  description: string;
+  severity: 'safe' | 'info' | 'warning' | 'critical';
+  metric: string;
+  value: number;
+  threshold: number;
+}
+
+export interface AgentAction {
+  actionId: string;
+  title: string;
+  type: 'budget_cut' | 'boost_savings' | 'emergency_reallocation' | 'discretionary_pause';
+  suggestedAmount: number;
+  targetCategory?: TransactionCategory;
+  actionDetails: string;
+}
+
+export interface AgentCounterfactual {
+  metricName: string;
+  before: number;
+  after: number;
+  unit: string;
+  improvement: boolean;
+  explanation: string;
+}
+
+export interface AgentRecommendation {
+  goal: AgentGoal;
+  conditionsDetected: AgentCondition[];
+  selectedAction: AgentAction;
+  explanation: string;
+  rationale: string[];
+  expectedOutcome: string;
+  counterfactual: AgentCounterfactual;
+}
+
+export interface AgentCycleState {
+  timestamp: string;
+  perception: AgentPerception;
+  conditions: AgentCondition[];
+  activeGoal: AgentGoal;
+  recommendation: AgentRecommendation | null;
+}
+
+/* =========================================================================
+ * COURSE OUTCOME 2 (CO2): Uninformed & Informed Search Techniques
+ * ========================================================================= */
+
+export interface SearchState {
+  month: number;
+  currentSavings: number;
+}
+
+export interface SearchAction {
+  month: number;
+  saveAmount: number;
+}
+
+export interface SearchNode {
+  state: SearchState;
+  parent: SearchNode | null;
+  action: SearchAction | null;
+  g: number; // Path cost (cumulative months or penalty)
+  h: number; // Heuristic estimate to target savings
+  f: number; // Evaluation function f(n)
+  depth: number;
+}
+
+export interface SearchTraceStep {
+  stepNumber: number;
+  state: SearchState;
+  actionTaken?: SearchAction;
+  heuristic: number;
+  evaluationScore: number;
+  frontierSize: number;
+  visitedCount: number;
+  isGoal: boolean;
+  notes: string;
+}
+
+export interface SavingsPlanStep {
+  month: number;
+  saveAmount: number;
+  resultingSavings: number;
+}
+
+export interface SearchResult {
+  algorithm: 'BFS' | 'BestFirst';
+  success: boolean;
+  plan: SavingsPlanStep[];
+  totalSaved: number;
+  targetSavings: number;
+  planningHorizonMonths: number;
+  statesExplored: number;
+  maxFrontierSize: number;
+  executionTimeMs: number;
+  trace: SearchTraceStep[];
+  message: string;
+}
+
+export interface SearchComparison {
+  bfsResult: SearchResult;
+  bestFirstResult: SearchResult;
+  fasterAlgorithm: 'BFS' | 'BestFirst' | 'Equal';
+  fewerStatesAlgorithm: 'BFS' | 'BestFirst' | 'Equal';
+  analysis: string;
+}
+
+/* =========================================================================
+ * COURSE OUTCOME 4 (CO4): Rule-Based & Probabilistic Reasoning
+ * ========================================================================= */
+
+export interface FinancialFact {
+  key: string;
+  label: string;
+  value: any;
+  formattedValue: string;
+  category: 'income' | 'expense' | 'budget' | 'goal' | 'timing' | 'cashflow' | 'safety';
+}
+
+export interface InferenceRule {
+  id: string;
+  name: string;
+  category: 'budget' | 'savings' | 'cashflow' | 'safety' | 'expense';
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  conditionDescription: string;
+  evaluate: (facts: Record<string, any>) => boolean;
+  getConclusion: (facts: Record<string, any>) => string;
+  getAction: (facts: Record<string, any>) => string;
+  getRequiredFacts: () => string[];
+}
+
+export interface RuleEvaluationResult {
+  ruleId: string;
+  ruleName: string;
+  category: string;
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  conditionDescription: string;
+  satisfied: boolean;
+  factsUsed: { key: string; label: string; value: any; formatted: string }[];
+  conclusion: string;
+  recommendedAction: string;
+}
+
+export interface MonteCarloConfig {
+  budget: number;
+  alreadySpent: number;
+  daysElapsed: number;
+  daysRemaining: number;
+  meanDailySpend: number;
+  stdDevDailySpend: number;
+  simulationCount: number;
+  randomSeed: number;
+}
+
+export interface SimulationQuantiles {
+  p10: number;
+  p50: number; // Median projected total
+  p90: number;
+  min: number;
+  max: number;
+  mean: number;
+}
+
+export type RiskCategory = 'Low' | 'Moderate' | 'High';
+
+export interface MonteCarloSimulationResult {
+  simulationCount: number;
+  breachCount: number;
+  breachProbability: number; // percentage (0 - 100)
+  riskCategory: RiskCategory;
+  quantiles: SimulationQuantiles;
+  simulatedTotalsSample: number[]; // First 40 for distribution visual
+  assumptions: string[];
+  limitations: string[];
+  explanation: string;
+  recommendedMitigation: string;
+}
