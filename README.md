@@ -23,6 +23,8 @@
    - [Persistent SQLite Database Architecture](#persistent-sqlite-database-architecture)
    - [Multi-Tenant User Workspace Isolation](#multi-tenant-user-workspace-isolation)
    - [Zero Default/Invented Data Policy](#zero-defaultinvented-data-policy)
+   - [Left Sidebar Navigation & Badge Alignment Fix](#left-sidebar-navigation--badge-alignment-fix)
+   - [Transaction Action Modal Alignment & Layout Polish](#transaction-action-modal-alignment--layout-polish)
 3. [Integration of Course Outcomes (CO1, CO2, CO4, CO5) in Normal Workflow](#-integration-of-course-outcomes-co1-co2-co4-co5-in-normal-workflow)
    - [CO1: Intelligent Agent on Dashboard & AI Advisor](#co1-intelligent-agent-on-dashboard--ai-advisor)
    - [CO2: Search-Based Milestone Planning in Savings Goals](#co2-search-based-milestone-planning-in-savings-goals)
@@ -40,6 +42,7 @@
 9. [Automated Verification & Unit Test Suite (88 Tests)](#-automated-verification--unit-test-suite-88-tests)
 10. [Getting Started (Run Locally)](#-getting-started-run-locally)
 11. [Step-by-Step Academic Evaluation Demonstration Script](#-step-by-step-academic-evaluation-demonstration-script)
+12. [Academic Viva Q&A Cheat Sheet (CO1, CO2, CO4, CO5)](#-academic-viva-qa-cheat-sheet-co1-co2-co4-co5)
 
 ---
 
@@ -48,9 +51,9 @@
 **AI Personal Finance Manager** is a production-grade, secure financial engineering web application tailored for Indian users (students, salaried professionals, and families). Built with an **Express + Node.js** backend, a **Native SQLite (`node:sqlite`)** persistent database, and a **React 18 + TypeScript + Vite + Tailwind CSS** frontend styled with an elegant **Bubblegum & Lace** visual theme, it combines comprehensive accounting capabilities with **transparent, deterministic, explainable Artificial Intelligence**.
 
 Unlike simple expense trackers, this application doubles as an interactive **AI Algorithms Laboratory** and seamlessly integrates academic AI concepts into everyday financial management:
-- **CO1, CO2, and CO4 in Daily Workflow:** Autonomous agent recommendations on the Dashboard, heuristic search roadmaps in Savings Goals, and forward-chaining rules with Monte Carlo risk simulation in the Budget Planner.
-- **Dedicated Academic AI Algorithms Lab:** An educational workbench to compare BFS vs. Best-First Search traces, test agent counterfactuals with spending sliders, and inspect stochastic distribution quantiles.
-- **100% Deterministic & Offline AI:** Mathematical agent cycles, state-space search with visited-node pruning, forward-chaining deduction, and seeded Monte Carlo stochastic simulations.
+- **CO1, CO2, CO4, and CO5 in Daily Workflow:** Autonomous agent recommendations on the Dashboard (CO1), heuristic search roadmaps in Savings Goals (CO2), forward-chaining rules with Monte Carlo risk simulation in the Budget Planner (CO4), and supervised Linear Regression spending forecasts on the Dashboard and Spending Prediction view (CO5).
+- **Dedicated Academic AI Algorithms Lab:** An educational workbench to compare BFS vs. Best-First Search traces (CO2), test agent counterfactuals with spending sliders (CO1), inspect stochastic distribution quantiles (CO4), and experiment with step-by-step Ordinary Least Squares (OLS) machine learning derivations (CO5).
+- **100% Deterministic & Offline AI:** Mathematical agent cycles, state-space search with visited-node pruning, forward-chaining deduction, seeded Monte Carlo stochastic simulations, and closed-form Least Squares regression.
 - **Strict Multi-Tenant Security:** Every user has an isolated workspace protected by bcrypt password hashing, JWT authentication stored in HttpOnly cookies, and strict server-side authorization.
 - **Zero Hallucinated / Default Financial Data:** Fresh accounts open with clean, empty states. No fake transactions, budgets, or balances are generated automatically.
 - **Bubblegum & Lace Design System:** A delightful, modern palette featuring Bubblegum Pink (`#FF5E97`), Sweet Mint (`#10B981`), Peach Lace (`#FB923C`), warm lace backgrounds (`#FFF9FA`), and high-contrast dark mode.
@@ -100,6 +103,21 @@ Unlike simple expense trackers, this application doubles as an interactive **AI 
   - Savings Goals: Empty list
 - Clean, welcoming empty-state prompts guide users to add their first real transaction.
 - Development demo data is strictly relegated to an explicit, manual seed utility (`/api/data/dev-seed` in Settings) and is never invoked automatically for new registrations.
+
+### Left Sidebar Navigation & Badge Alignment Fix
+- **Root Cause (Sidebar text wrapping & badge stacking):** At `w-64` (256px), the desktop sidebar rail was too narrow for multi-token navigation items and badges. Items such as *"Spending Prediction"* and *"AI Algorithms Lab"* broke across 2 to 3 lines, while the `CO5 ML` and `CO1–CO5` chips suffered vertical text wrapping.
+- **Implementation & Polish:**
+  - Expanded the sidebar width from `w-64` (256px) to `w-72` (288px) to establish comfortable horizontal spacing.
+  - Added `whitespace-nowrap truncate` to navigation item labels to prevent multi-line breaks.
+  - Enforced `shrink-0` on badges (`CO5 ML`, `CO1–CO5`), ensuring badges remain strictly on a single line beside their label.
+  - Aligned the active indicator highlight, icon gutters, and surplus counter with consistent padding and typography across light and dark modes.
+
+### Transaction Action Modal Alignment & Layout Polish
+- **Root Cause (Modal popup alignment):** In the transaction modal and quick-action bar, the action buttons (*Add Income*, *Add Expense*, *Add Deposit*, *Withdraw*) suffered from uneven margins, misaligned icons, and inconsistent widths on medium-to-large viewports.
+- **Implementation & Polish:**
+  - Re-engineered the action type selector into a clean, balanced 2x2 grid with centered icon glyphs and uniform button heights.
+  - Aligned modal header typography, close buttons, and form labels with consistent spacing.
+  - Standardized monetary input adornments (`₹`) and color-coded active states for Income (Mint `#10B981`), Expense (Bubblegum `#FF5E97`), and Goals (Purple `#8B5CF6`).
 
 ---
 
@@ -692,6 +710,52 @@ Follow this structured script when demonstrating the platform for evaluation or 
    - Click **AI Algorithms Lab** $\rightarrow$ **CO5: ML Prediction**.
    - Switch to **Academic Demonstration / Viva Testbench**.
    - Toggle presets (Known Linear Trend, Zero Variance, Seasonal Variance) and inspect the step-by-step table displaying $\bar{x}, \bar{y}, SS_{xx}, SS_{xy}, SS_{yy}$, proving complete algorithmic transparency to academic examiners.
+
+---
+
+## 💡 Academic Viva Q&A Cheat Sheet (CO1, CO2, CO4, CO5)
+
+This section prepares students to answer common viva voce questions asked by examiners:
+
+### 1. General Architecture & Security
+- **Q: How is user data kept isolated between multiple users?**
+  - **A:** User isolation is enforced server-side via SQL parameterized queries (`WHERE user_id = ?`). The user ID is extracted strictly from the verified JWT payload contained in the `HttpOnly` cookie or `Authorization` header. Client-supplied IDs in request bodies are ignored. Cross-tenant access attempts return `404 Not Found` or `403 Forbidden`.
+- **Q: Why was Native SQLite (`node:sqlite`) chosen over MongoDB or PostgreSQL?**
+  - **A:** Native SQLite is embedded directly into Node.js v22+ (`node:sqlite`), requiring zero external database daemon setups or C++ compiler toolchains (`node-gyp`). With Write-Ahead Logging (WAL) enabled, it provides atomic transactions, high read/write concurrency, and zero corruption for desktop/server deployment.
+
+### 2. Course Outcome 1 (CO1: Intelligent Agent Models)
+- **Q: What architecture does the financial agent follow?**
+  - **A:** A formal 5-stage agent cycle: **Perceive** (reads income, expenses, category spending), **Analyze** (calculates savings velocity and budget thresholds), **Decide** (evaluates active goal priorities), **Act** (generates concrete financial recommendations), and **Evaluate** (computes counterfactual predicted metrics without mutating database records).
+- **Q: What is a counterfactual evaluation in CO1?**
+  - **A:** Counterfactual reasoning asks *"What would happen to the user's financial health score if the recommended action is executed?"* It computes the predicted outcome (e.g. $+15\%$ savings velocity) so the user can compare alternatives before taking action.
+
+### 3. Course Outcome 2 (CO2: Uninformed vs. Informed Search)
+- **Q: What is the difference between BFS and Greedy Best-First Search for milestone planning?**
+  - **A:** BFS uses an uninformed FIFO queue exploring states level by level; it mathematically guarantees finding the plan with the *minimum number of months*. Greedy Best-First Search uses an informed Priority Queue ordered by the heuristic distance $h(n) = \max(0, \text{Target} - S_n)$, expanding nodes that appear closest to the goal first.
+- **Q: How does the search algorithm prevent infinite loops?**
+  - **A:** State-space visited pruning using a JavaScript `Set` tracking serialized `(monthIndex, accumulatedSavings)` keys. If a state has already been visited with equal or higher savings, it is pruned from exploration.
+
+### 4. Course Outcome 4 (CO4: Reasoning Under Uncertainty)
+- **Q: How does the rule engine work?**
+  - **A:** It implements forward chaining (data-driven reasoning). Live financial facts extracted from database transactions form the working memory. If all premises of a rule evaluate to true, the rule fires and adds its conclusion and action to the inference list.
+- **Q: How does Monte Carlo budget risk estimation work?**
+  - **A:** It models daily spending as a Gaussian random variable $(\mu, \sigma)$ derived from elapsed month expenditures. It simulates $N=1,000$ future month trajectories using the deterministic Mulberry32 PRNG and Box-Muller transform, outputting the exact breach probability ($0-100\%$) and quantiles ($P_{10}, P_{50}, P_{90}$).
+
+### 5. Course Outcome 5 (CO5: Machine Learning for Decision-Making)
+- **Q: Why was Ordinary Least Squares (OLS) Linear Regression selected for CO5?**
+  - **A:** Monthly expenditure over time is a continuous numerical target ($y \in \mathbb{R}^+$). OLS regression provides an exact, closed-form analytic solution ($\hat{y} = mx + c$) that is 100% deterministic, explainable, and offline without requiring external paid cloud APIs or stochastic gradient descent randomness.
+- **Q: How are raw transactions prepared for the regression model?**
+  - **A:** Only verified expense records (`type = 'expense'`) with positive amounts ($>0$) dated on or before the current date are included. Income and deposits are excluded. Expenses are aggregated chronologically into calendar months (`YYYY-MM`). The months are mapped to sequential predictor indices $x \in \{0, 1, \dots, n-1\}$.
+- **Q: Why is a minimum of 3 months ($n \ge 3$) required?**
+  - **A:** In simple linear regression with 2 parameters (slope $m$ and intercept $c$), degrees of freedom equal $df = n - 2$. A single observation ($n=1$) is undefined. Two observations ($n=2$) yield $df=0$ (an exact line connecting two points without any residual variance to verify a trend). At least 3 months ($n=3$) ensures $df = 1$, allowing statistical validation and preventing overfitted, misleading extrapolations.
+- **Q: What is Chronological Holdout Validation and why not use random k-fold cross-validation?**
+  - **A:** Financial transactions are time-series data where the arrow of time matters. Random shuffling causes **lookahead bias (data leakage)** by training on future observations to predict past observations. Chronological holdout splits the data chronologically: it trains strictly on the first $k$ months and evaluates on the subsequent un-seen holdout months.
+- **Q: What is Mean Absolute Error (MAE)?**
+  - **A:** $\text{MAE} = \frac{1}{T} \sum |y_j - \hat{y}_j|$. It quantifies the average absolute error between predicted spending and actual spending on holdout months in Indian Rupees (₹), providing an intuitive metric of prediction deviation.
+- **Q: How is zero-variance historical expenditure handled?**
+  - **A:** When all historical monthly expenses are identical ($y_i = C$), $SS_{yy} = 0$. The algorithm detects zero variance, sets slope $m = 0$ and intercept $c = C$, predicting exactly $C$ with $R^2 = 1.0$ without division-by-zero errors.
+- **Q: How does the model connect to intelligent decision-making?**
+  - **A:** The forecasted next-month spending $\hat{y}_{\text{next}}$ is compared against the user's active monthly budget ceiling. If $\hat{y}_{\text{next}} > \text{Budget}$, the system triggers an intelligent warning with the estimated excess amount and percentage, advising the user to curb discretionary expenses before the new month starts.
 
 ---
 
