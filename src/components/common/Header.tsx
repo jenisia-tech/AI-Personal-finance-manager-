@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
           className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-apple-blue/10 to-apple-purple/10 dark:from-apple-blue/20 dark:to-apple-purple/20 text-apple-blue dark:text-pink-300 hover:opacity-90 rounded-full text-xs font-semibold border border-apple-blue/20 transition shadow-sm"
         >
           <Bot className="w-3.5 h-3.5" />
-          <span>AI Lab (CO1, CO2, CO4)</span>
+          <span>AI Lab (CO1•CO2•CO4•CO5)</span>
         </button>
 
         {/* Month Selector */}

@@ -15,6 +15,7 @@ import { BudgetPlannerView } from './components/budget/BudgetPlannerView';
 import { SavingsGoalsView } from './components/goals/SavingsGoalsView';
 import { AnalyticsView } from './components/analytics/AnalyticsView';
 import { AIAdvisorView } from './components/advisor/AIAdvisorView';
+import { SpendingPredictionView } from './components/prediction/SpendingPredictionView';
 import { AIAlgorithmsLabView } from './components/ai-lab/AIAlgorithmsLabView';
 import { SettingsView } from './components/settings/SettingsView';
 
@@ -36,6 +37,7 @@ export const AppContent: React.FC = () => {
           {activeTab === 'budget' && <BudgetPlannerView setActiveTab={setActiveTab} />}
           {activeTab === 'goals' && <SavingsGoalsView setActiveTab={setActiveTab} />}
           {activeTab === 'analytics' && <AnalyticsView />}
+          {activeTab === 'prediction' && <SpendingPredictionView setActiveTab={setActiveTab} />}
           {activeTab === 'advisor' && <AIAdvisorView setActiveTab={setActiveTab} />}
           {activeTab === 'ai-lab' && <AIAlgorithmsLabView />}
           {activeTab === 'settings' && <SettingsView />}

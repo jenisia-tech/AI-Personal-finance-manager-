@@ -1,5 +1,5 @@
 # AI Personal Finance Manager 💸🤖
-### Advanced AI-Driven Personal Finance Platform Demonstrating Course Outcomes CO1, CO2, and CO4 with Full-Stack Authentication, Database Persistence & Workflow Integration
+### Advanced AI-Driven Personal Finance Platform Demonstrating Course Outcomes CO1, CO2, CO4, and CO5 with Full-Stack Authentication, Database Persistence & Workflow Integration
 
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B%20%7C%20v25-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-5.3.0-000000?logo=express&logoColor=white)](https://expressjs.com/)
@@ -9,7 +9,7 @@
 [![Vite](https://img.shields.io/badge/Vite-5.4.21-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Theme](https://img.shields.io/badge/Theme-Bubblegum_%26_Lace-FF5E97)](https://tailwindcss.com/)
-[![Vitest](https://img.shields.io/badge/Vitest-74_Tests_Passed-4BB543?logo=vitest&logoColor=white)](https://vitest.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-88_Tests_Passed-4BB543?logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Currency](https://img.shields.io/badge/Currency-₹_INR-FF9933)](https://en.wikipedia.org/wiki/Indian_rupee)
 [![Security](https://img.shields.io/badge/Auth-JWT_%2B_Bcrypt_%2B_HttpOnly-red)](#)
 
@@ -23,19 +23,21 @@
    - [Persistent SQLite Database Architecture](#persistent-sqlite-database-architecture)
    - [Multi-Tenant User Workspace Isolation](#multi-tenant-user-workspace-isolation)
    - [Zero Default/Invented Data Policy](#zero-defaultinvented-data-policy)
-3. [Integration of Course Outcomes (CO1, CO2, CO4) in Normal Workflow](#-integration-of-course-outcomes-co1-co2-co4-in-normal-workflow)
+3. [Integration of Course Outcomes (CO1, CO2, CO4, CO5) in Normal Workflow](#-integration-of-course-outcomes-co1-co2-co4-co5-in-normal-workflow)
    - [CO1: Intelligent Agent on Dashboard & AI Advisor](#co1-intelligent-agent-on-dashboard--ai-advisor)
    - [CO2: Search-Based Milestone Planning in Savings Goals](#co2-search-based-milestone-planning-in-savings-goals)
    - [CO4: Forward-Chaining Rules & Monte Carlo in Budget Planner](#co4-forward-chaining-rules--monte-carlo-in-budget-planner)
-4. [Academic Course Outcomes (CO1, CO2, CO4) in Dedicated AI Lab](#-academic-course-outcomes-co1-co2-co4-in-dedicated-ai-lab)
+   - [CO5: Machine Learning Spending Prediction on Dashboard & Dedicated View](#co5-machine-learning-spending-prediction-on-dashboard--dedicated-view)
+4. [Academic Course Outcomes (CO1, CO2, CO4, CO5) in Dedicated AI Lab](#-academic-course-outcomes-co1-co2-co4-co5-in-dedicated-ai-lab)
    - [CO1: Intelligent Agent Models & Goal-Based Problem Solving](#co1-intelligent-agent-models--goal-based-problem-solving)
    - [CO2: Uninformed & Informed Search Techniques](#co2-uninformed--informed-search-techniques)
    - [CO4: Reasoning Under Uncertainty (Rules & Probabilities)](#co4-reasoning-under-uncertainty-rules--probabilities)
+   - [CO5: Machine Learning for Intelligent Decision-Making (Linear Regression)](#co5-machine-learning-for-intelligent-decision-making-linear-regression)
 5. [Complete System Architecture & Directory Map](#-complete-system-architecture--directory-map)
 6. [Database Schema & Migrations](#-database-schema--migrations)
 7. [API Specification](#-api-specification)
 8. [Environment Configuration](#-environment-configuration)
-9. [Automated Verification & Unit Test Suite (74 Tests)](#-automated-verification--unit-test-suite-74-tests)
+9. [Automated Verification & Unit Test Suite (88 Tests)](#-automated-verification--unit-test-suite-88-tests)
 10. [Getting Started (Run Locally)](#-getting-started-run-locally)
 11. [Step-by-Step Academic Evaluation Demonstration Script](#-step-by-step-academic-evaluation-demonstration-script)
 
@@ -101,21 +103,22 @@ Unlike simple expense trackers, this application doubles as an interactive **AI 
 
 ---
 
-## ⚡ Integration of Course Outcomes (CO1, CO2, CO4) in Normal Workflow
+## ⚡ Integration of Course Outcomes (CO1, CO2, CO4, CO5) in Normal Workflow
 
-Rather than existing only inside the laboratory, CO1, CO2, and CO4 are integrated directly into the daily user workflow:
+Rather than existing only inside an isolated laboratory, CO1, CO2, CO4, and CO5 are integrated directly into the daily user workflow:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    DAILY USER WORKFLOW AI INTEGRATION                       │
-├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│     DASHBOARD (CO1)      │   SAVINGS GOALS (CO2)    │  BUDGET PLANNER (CO4) │
-├──────────────────────────┼──────────────────────────┼───────────────────────┤
-│ • Auto & Manual Advice   │ • Goal Roadmap Generator │ • Real-Time Rule      │
-│ • Active Goal Switcher   │ • Uninformed: BFS Plan   │   Engine Diagnostics  │
-│ • Counterfactual Metrics │ • Informed: Best-First   │ • On-Demand Monte     │
-│ • 5-Stage Agent Pipeline │ • Preview in Goal Modal  │   Carlo Risk (N=1000) │
-└──────────────────────────┴──────────────────────────┴───────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                            DAILY USER WORKFLOW AI INTEGRATION                               │
+├──────────────────────────┬──────────────────────────┬───────────────────────┬───────────────┤
+│     DASHBOARD (CO1)      │   SAVINGS GOALS (CO2)    │  BUDGET PLANNER (CO4) │ SPEND ML(CO5) │
+├──────────────────────────┼──────────────────────────┼───────────────────────┼───────────────┤
+│ • Auto & Manual Advice   │ • Goal Roadmap Generator │ • Real-Time Rule      │ • OLS Linear  │
+│ • Active Goal Switcher   │ • Uninformed: BFS Plan   │   Engine Diagnostics  │   Regression  │
+│ • Counterfactual Metrics │ • Informed: Best-First   │ • On-Demand Monte     │ • Next-Month  │
+│ • 5-Stage Agent Pipeline │ • Preview in Goal Modal  │   Carlo Risk (N=1000) │   Forecast    │
+│ • ML Spend Summary Card  │                          │                       │ • Holdout MAE │
+└──────────────────────────┴──────────────────────────┴───────────────────────┴───────────────┘
 ```
 
 ### CO1: Intelligent Agent on Dashboard & AI Advisor
@@ -145,9 +148,18 @@ Rather than existing only inside the laboratory, CO1, CO2, and CO4 are integrate
   - Emits actionable daily spending curbs to ensure budget adherence.
 - **Zero Performance Overhead:** Simulations run strictly on demand, avoiding heavy repeated calculations on unrelated re-renders.
 
+### CO5: Machine Learning Spending Prediction on Dashboard & Dedicated View
+- **Dashboard Spending Forecast Widget:** Displays predicted next-month expenditure, delta relative to recent month ($+₹\dots$ / $-₹\dots$), direction badge, and budget compliance status directly on the user's home screen.
+- **Dedicated Spending Prediction Page (`/prediction`):**
+  - **KPI Cards:** Next Month Predicted Expenses, Recent Actual Total, Variance (Rupees and %), Dataset Size ($n$ Months) and Goodness of Fit ($R^2$).
+  - **Recharts Visualization:** Composed bar and line chart displaying verified historical expenses alongside the highlighted machine learning extrapolation.
+  - **Chronological Holdout Model Evaluation:** Measures Mean Absolute Error (MAE) by training strictly on earlier months and evaluating on holdout un-seen months.
+  - **Intelligent Budget Decision-Making:** Compares projected spending against active category budget limits, warning users in advance if an expenditure overrun is forecast.
+  - **Explainable AI (XAI) & Disclaimer:** Plain-language interpretation with explicit mathematical disclosures ($y = mx + c$) and probabilistic disclaimers.
+
 ---
 
-## 🔬 Academic Course Outcomes (CO1, CO2, CO4) in Dedicated AI Lab
+## 🔬 Academic Course Outcomes (CO1, CO2, CO4, CO5) in Dedicated AI Lab
 
 The **AI Algorithms Lab** (`src/components/ai-lab/`) remains fully preserved as an educational demonstration workbench sharing the exact same underlying services.
 
@@ -163,6 +175,60 @@ The **AI Algorithms Lab** (`src/components/ai-lab/`) remains fully preserved as 
 ### CO4: Reasoning Under Uncertainty (Rules & Probabilities)
 - Forward-Chaining Rule Engine evaluating working memory facts against inference rules.
 - Seeded Monte Carlo Simulation with Box-Muller Gaussian daily volatility and quantile spectrum chart.
+
+### CO5: Machine Learning for Intelligent Decision-Making (Linear Regression)
+
+#### Academic Relevance & Syllabus Mapping
+Course Outcome 5 (CO5) states: **“Solve different machine learning techniques for the intelligent decision-making problems.”**
+In FinIntel AI, this is achieved by modeling monthly personal financial expenditures as a continuous time-series regression task. The machine learning model identifies expenditure trajectories and produces an intelligent decision comparing expected next-month liabilities against monthly budget caps.
+
+#### Why Linear Regression?
+1. **Supervised Learning on Historical Records:** The model learns directly from ground-truth observed expenditure points $(x_i, y_i)$.
+2. **Interpretable Closed-Form Analytic Solution:** Unlike black-box neural networks or stochastic gradient descent models, Ordinary Least Squares (OLS) has an exact closed-form solution with zero random variance.
+3. **No External APIs or Cloud Dependencies:** 100% offline, privacy-preserving, and executed locally on the server/client without API keys or telemetry.
+4. **Transparent Decision Boundary:** The slope $m$ directly quantifies whether spending is expanding ($m > 0$), contracting ($m < 0$), or steady ($m \approx 0$).
+
+#### Mathematical Formulation (Ordinary Least Squares)
+Given $n$ historical calendar month expense points $(x_0, y_0), (x_1, y_1), \dots, (x_{n-1}, y_{n-1})$ where:
+- $x_i \in \{0, 1, \dots, n-1\}$ represents the chronological calendar month index.
+- $y_i > 0$ represents the total recorded expense amount in Indian Rupees (₹) for month $x_i$.
+
+The model fits the linear hypothesis:
+$$\hat{y} = m \cdot x + c$$
+
+The parameters are computed by minimizing the residual sum of squares:
+$$S(m, c) = \sum_{i=0}^{n-1} (y_i - (m \cdot x_i + c))^2$$
+
+Taking partial derivatives and solving the normal equations yields:
+$$\bar{x} = \frac{1}{n}\sum_{i=0}^{n-1} x_i, \quad \bar{y} = \frac{1}{n}\sum_{i=0}^{n-1} y_i$$
+$$SS_{xx} = \sum_{i=0}^{n-1} (x_i - \bar{x})^2, \quad SS_{xy} = \sum_{i=0}^{n-1} (x_i - \bar{x})(y_i - \bar{y}), \quad SS_{yy} = \sum_{i=0}^{n-1} (y_i - \bar{y})^2$$
+
+The optimal slope $m$ and y-intercept $c$ are:
+$$m = \frac{SS_{xy}}{SS_{xx}}, \quad c = \bar{y} - m \cdot \bar{x}$$
+
+The next calendar month corresponds to index $x = n$:
+$$\hat{y}_{\text{next}} = \max(0, m \cdot n + c)$$
+
+#### Zero Variance and Boundary Safeguards
+- **Zero Variance ($SS_{yy} = 0$):** When all observed monthly expenses are identical ($y_i = C$), $m = 0$ and $c = C$. The model accurately predicts $\hat{y} = C$ with $R^2 = 1.0$.
+- **Non-Negative Expense Bound:** Since expenditures cannot be negative, predictions are clamped to $\max(0, \hat{y})$.
+- **Strict Data Threshold ($n \ge 3$):** A minimum of 3 distinct monthly observations is strictly required before fitting. For $n < 3$, the system returns `hasEnoughData: false` with an explanatory message.
+
+#### Model Evaluation: Chronological Holdout Validation & MAE
+Standard $K$-fold cross-validation or random data splitting causes **lookahead bias / temporal data leakage** in time-series forecasting.
+FinIntel AI implements a strict **chronological holdout split** when $n \ge 4$:
+1. The earliest $k = n - 1$ or $n - 2$ months form the training set.
+2. The remaining most recent observed months form the un-seen holdout test set.
+3. The model is trained strictly on earlier months and evaluated on later months.
+4. Generalization error is measured via **Mean Absolute Error (MAE)**:
+$$\text{MAE} = \frac{1}{T} \sum_{j=1}^{T} |y_j - \hat{y}_j|$$
+MAE is reported in Indian Rupees (₹), providing an intuitive measure of average prediction deviation.
+
+#### Intelligent Decision-Making: Budget Comparison
+The ML prediction is linked directly with personal financial governance:
+- If $\hat{y}_{\text{next}} > \text{Budget}$: Emits an **Overrun Warning** indicating the estimated excess $(\hat{y}_{\text{next}} - \text{Budget})$ in ₹ and percentage. Recommends trimming discretionary spending.
+- If $\hat{y}_{\text{next}} \le \text{Budget}$: Confirms **Budget Adherence** and calculates the projected surplus buffer $(\text{Budget} - \hat{y}_{\text{next}})$.
+- If no budget is set: Informs the user that establishing a budget in Budget Planner unlocks automated variance comparisons.
 
 ---
 
@@ -189,15 +255,20 @@ AI-Personal-finance-manager-/
 │   ├── middleware/
 │   │   ├── auth.ts              # JWT authentication & session verification middleware
 │   │   └── rateLimiter.ts       # Auth rate limiter (bypassed in test mode)
+│   ├── services/
+│   │   └── linearRegressionService.ts # [CO5] OLS regression, holdout MAE, budget comparison
 │   ├── routes/
 │   │   ├── auth.ts              # /api/auth/register, /login, /logout, /me
 │   │   ├── transactions.ts      # /api/transactions CRUD with user isolation
 │   │   ├── budgets.ts           # /api/budgets CRUD with user isolation
 │   │   ├── goals.ts             # /api/goals CRUD + /deposit and /withdraw actions
 │   │   ├── user.ts              # /api/user/profile update
-│   │   └── data.ts              # /api/data/dev-seed, /export, /import
+│   │   ├── data.ts              # /api/data/dev-seed, /export, /import
+│   │   └── prediction.ts        # [CO5] /api/prediction/spending authenticated endpoint
 │   └── tests/
-│       └── authAndIsolation.test.ts # 19 automated integration tests (Supertest)
+│       ├── authAndIsolation.test.ts  # 19 automated integration tests (Supertest)
+│       ├── comprehensiveSuite.test.ts# 25 full integration & security tests
+│       └── linearRegression.test.ts  # [CO5] 14 machine learning & isolation tests
 │
 ├── src/                         # React 18 + TypeScript Frontend Architecture
 │   ├── main.tsx                 # React DOM mount point
@@ -220,9 +291,12 @@ AI-Personal-finance-manager-/
 │   │   │   ├── Sidebar.tsx      # Navigation with net surplus preview & user badge
 │   │   │   └── EmptyState.tsx   # Professional empty states for zero-data
 │   │   ├── dashboard/
-│   │   │   ├── DashboardView.tsx       # Master dashboard screen
-│   │   │   ├── AdvisorSummaryCard.tsx  # [CO1] Live Agent Card with manual triggers
-│   │   │   └── BudgetOverviewWidget.tsx# [CO4] Budget widget with rule alerts
+│   │   │   ├── DashboardView.tsx          # Master dashboard screen
+│   │   │   ├── AdvisorSummaryCard.tsx     # [CO1] Live Agent Card with manual triggers
+│   │   │   ├── PredictionSummaryWidget.tsx# [CO5] Spending forecast summary widget
+│   │   │   └── BudgetOverviewWidget.tsx   # [CO4] Budget widget with rule alerts
+│   │   ├── prediction/
+│   │   │   └── SpendingPredictionView.tsx # [CO5] Full prediction dashboard & Recharts
 │   │   ├── transactions/        # Transaction list, modal form, filter tabs
 │   │   ├── budget/
 │   │   │   ├── BudgetPlannerView.tsx   # [CO4] Budget planner with Rule Diagnostics
@@ -236,7 +310,8 @@ AI-Personal-finance-manager-/
 │   │   │   └── GoalFormModal.tsx       # Goal modal with [CO2] plan preview
 │   │   ├── analytics/           # 5 Recharts visualizations
 │   │   ├── advisor/             # FinBot AI chat assistant
-│   │   ├── ai-lab/              # CO1, CO2, CO4 dedicated interactive panels
+│   │   ├── ai-lab/              # CO1, CO2, CO4, CO5 dedicated interactive panels
+│   │   │   └── LinearRegressionPanel.tsx # [CO5] Interactive OLS regression lab
 │   │   └── settings/            # Profile, backup/restore, dev seed
 │   ├── utils/
 │   │   ├── calculations.ts      # Pure financial math (cash flows, health score)
@@ -344,6 +419,10 @@ All `/api/*` endpoints (except `/api/auth/register`, `/api/auth/login`, and `/ap
 - `POST /api/goals/:id/deposit` — Adds money to goal and records linked transaction.
 - `POST /api/goals/:id/withdraw` — Withdraws money from goal and records linked transaction.
 
+### Spending Prediction Endpoints (CO5 Machine Learning)
+- `GET /api/prediction/spending` — Authenticated endpoint returning Ordinary Least Squares Linear Regression next-month spending projection, chronological holdout MAE evaluation, and budget variance comparisons.
+- Query Parameter (optional): `referenceDate=YYYY-MM-DD` (bounds training data to prevent future data leakage during simulations).
+
 ### Data & Backup Endpoints
 - `GET /api/data/export` — Downloads user-isolated JSON snapshot of all records.
 - `POST /api/data/import` — Securely imports records, assigning `user_id = req.user.id`.
@@ -373,9 +452,9 @@ CORS_ORIGIN=http://localhost:3000
 
 ---
 
-## 🧪 Automated Verification & Unit Test Suite (74 Tests)
+## 🧪 Automated Verification & Unit Test Suite (88 Tests)
 
-The application includes **74 automated unit and integration tests** across five suites, running with deterministic file serialization (`--fileParallelism=false`) to ensure 100% reliable execution against the native SQLite database:
+The application includes **88 automated unit and integration tests** across six suites, running with deterministic file serialization (`--fileParallelism=false`) to ensure 100% reliable execution against the native SQLite database:
 
 ```bash
 npm test
@@ -471,6 +550,22 @@ npm test
 - Health score evaluation behaves predictably on zero, low, and high savings.
 - Currency formatter formats numbers with Indian grouping (`₹1,00,000.00`).
 - AI Reasoning engine handles empty transaction facts safely without crashing.
+
+#### 6. CO5 Machine Learning: Linear Regression & Isolation Tests (`server/tests/linearRegression.test.ts` — 14 tests)
+- **1. Known Linear Trend Prediction:** Deterministic test with points $(0, 10000), (1, 12000), (2, 14000), (3, 16000)$ confirming $m=2000, c=10000, R^2=1.0$ and next-month prediction $\hat{y}_4 = 18000$.
+- **2. Insufficient Observations Safeguard:** Verifies $n < 3$ returns `hasEnoughData: false` with explanatory guidance rather than generating misleading or overfitted extrapolations.
+- **3. Zero-Variance Safety:** Confirms that constant historical expenses ($y_i = 15000$) yield $m = 0$, $c = 15000$, and exact prediction $15000$ without division-by-zero errors.
+- **4. Missing Calendar Months:** Confirms distinct historical calendar months are aggregated chronologically without silently inventing fake records.
+- **5. Income Transaction Exclusion:** Confirms `income` and `deposit` transactions are strictly excluded from expense training sets.
+- **6. Future-Dated Transaction Exclusion:** Excludes transactions dated beyond reference date to prevent lookahead bias.
+- **7. User-Specific Scope:** Authenticated User A's prediction trains strictly on User A's SQLite records.
+- **8. Cross-Tenant Protection:** Confirms User B cannot view User A's predictions or transactions; User B sees 0 records and `hasEnoughData: false`.
+- **9. Chronological Holdout Evaluation:** Validates time-ordered split ($n \ge 4$) training on earlier months and testing on holdout months without future data leakage.
+- **10. MAE Precision:** Confirms Mean Absolute Error (MAE) calculation against manual ground truth.
+- **11. Budget Overrun & Buffer Comparison:** Verifies warnings when projected expenses exceed active budget, and surplus buffer when within budget.
+- **12. Graceful Absence of Budget:** Informs user when no category budget exists without crashing.
+- **13. Empty Transaction History:** Empty accounts receive a clear, helpful informational message.
+- **14. Unauthenticated Rejection:** Protects `/api/prediction/spending` endpoint against unauthenticated requests (`401 Unauthorized`).
 
 ---
 
@@ -570,6 +665,33 @@ Follow this structured script when demonstrating the platform for evaluation or 
 2. **CO1 Tab:** Demonstrate the formal 5-stage agent cycle and use the **What-If Expense Spike Slider** to test counterfactual reasoning.
 3. **CO2 Tab:** Run **Compare Both Algorithms** to compare BFS against Best-First Search on explored states, max frontier, and search trace table.
 4. **CO4 Tab:** Inspect working memory facts, fired inference rules, and execute the full **Monte Carlo Budget Risk Simulator** ($N=1,000$, seed: `42`).
+5. **CO5 Tab:** Review live regression parameters or switch to **Academic Viva Mode** to demonstrate manual OLS derivations, zero-variance handling, and chronological holdout MAE.
+
+### Step 6: CO5 Machine Learning Spending Prediction & Intelligent Decision Demonstration
+1. **Empty / Insufficient History Check:**
+   - Log into a fresh account or view an account with fewer than 3 months of recorded expense data.
+   - Click **Spending Prediction (CO5 ML)** in the navigation sidebar.
+   - Observe the clear, helpful message: *"Insufficient Historical Data for ML Training"*.
+   - Notice the progress bar showing how many months have been recorded vs. the 3-month requirement ($n < 3$), with mathematical reasoning explaining why 3 points are required for degrees of freedom ($df = n - 2 \ge 1$).
+2. **Sufficient History & Prediction Check:**
+   - Add expense transactions across 3 distinct calendar months (e.g. Jan 2026: ₹10,000, Feb 2026: ₹12,000, Mar 2026: ₹14,000).
+   - Return to **Spending Prediction**:
+     - The system fits the Ordinary Least Squares model ($m = 2000, c = 10000, R^2 = 1.0$).
+     - The summary card displays the predicted next-month expenditure: **₹16,000**.
+     - The variance card shows $+₹2,000 (+14.3\%)$ with an "Increasing Trend" badge.
+     - The Recharts composed visualization clearly distinguishes solid historical bars from the purple projection marker.
+3. **Model Evaluation via Chronological Holdout (MAE):**
+   - Add a 4th month of expenses (e.g. Apr 2026: ₹16,000).
+   - Observe the **Model Evaluation** card automatically activate: it trains on the first 3 months and tests on the un-seen 4th month.
+   - It displays the Mean Absolute Error (MAE): `₹0.00` confirming that zero temporal data leakage occurred.
+4. **Intelligent Financial Decision (Budget Comparison):**
+   - In **Budget Planner**, set an overall monthly budget (e.g., ₹15,000).
+   - Return to **Spending Prediction** to observe the real-time alert: *"Warning: Projected next-month expenses (₹16,000) exceed your monthly budget limit of ₹15,000 by ₹1,000 (7%)"*.
+   - Adjust the budget to ₹20,000 and verify the status flips to: *"Healthy Margin: Projected expenses remain within your monthly budget, leaving a projected buffer of ₹4,000"*.
+5. **AI Algorithms Lab Viva Testbench:**
+   - Click **AI Algorithms Lab** $\rightarrow$ **CO5: ML Prediction**.
+   - Switch to **Academic Demonstration / Viva Testbench**.
+   - Toggle presets (Known Linear Trend, Zero Variance, Seasonal Variance) and inspect the step-by-step table displaying $\bar{x}, \bar{y}, SS_{xx}, SS_{xy}, SS_{yy}$, proving complete algorithmic transparency to academic examiners.
 
 ---
 

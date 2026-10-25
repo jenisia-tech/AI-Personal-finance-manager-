@@ -1,4 +1,4 @@
-import { Transaction, Budget, SavingsGoal, UserProfile } from '../types/finance';
+import { Transaction, Budget, SavingsGoal, UserProfile, SpendingPredictionData } from '../types/finance';
 
 const BASE_URL = ''; // Relative path, handled by Vite proxy to backend
 
@@ -249,6 +249,17 @@ export const api = {
         method: 'POST',
         body: JSON.stringify(payload),
       });
+    },
+  },
+
+  // Prediction (CO5 Machine Learning)
+  prediction: {
+    async getSpendingPrediction(referenceDate?: string) {
+      const query = referenceDate ? `?referenceDate=${encodeURIComponent(referenceDate)}` : '';
+      const res = await request<{ success: boolean; prediction: SpendingPredictionData }>(
+        `/api/prediction/spending${query}`
+      );
+      return res.prediction;
     },
   },
 };

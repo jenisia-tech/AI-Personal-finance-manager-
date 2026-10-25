@@ -13,6 +13,7 @@ import {
 import { formatINR, getDaysElapsedInMonth, getMonthName } from '../../utils/formatters';
 import { MetricCard } from './MetricCard';
 import { AdvisorSummaryCard } from './AdvisorSummaryCard';
+import { PredictionSummaryWidget } from './PredictionSummaryWidget';
 import { SpendingBreakdown } from './SpendingBreakdown';
 import { GoalsProgressWidget } from './GoalsProgressWidget';
 import { BudgetOverviewWidget } from './BudgetOverviewWidget';
@@ -173,6 +174,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
         onOpenAdvisor={() => setActiveTab('advisor')}
         onOpenLab={() => setActiveTab('ai-lab')}
       />
+
+      {/* CO5 Machine Learning Spending Prediction Banner */}
+      <PredictionSummaryWidget onViewPrediction={() => setActiveTab('prediction')} />
 
       {/* Grid: Spending Breakdown & Widgets */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

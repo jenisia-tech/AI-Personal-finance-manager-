@@ -322,3 +322,59 @@ export interface MonteCarloSimulationResult {
   explanation: string;
   recommendedMitigation: string;
 }
+
+/* =========================================================================
+ * COURSE OUTCOME 5 (CO5): Machine Learning for Intelligent Decision-Making
+ * ========================================================================= */
+
+export interface HoldoutEvaluation {
+  canEvaluate: boolean;
+  trainMonths: number;
+  testMonths: number;
+  mae: number;
+  message: string;
+}
+
+export interface BudgetComparisonResult {
+  hasBudget: boolean;
+  budgetLimit: number;
+  difference: number;
+  isExceeded: boolean;
+  status: 'exceeded' | 'within_budget' | 'no_budget';
+  message: string;
+}
+
+export interface SpendingPredictionData {
+  hasEnoughData: boolean;
+  monthsCount: number;
+  requiredMonths: number;
+  predictedAmount: number;
+  nextMonth: string;
+  nextMonthLabel: string;
+  recentActualAmount: number;
+  differenceRupees: number;
+  differencePercent: number;
+  direction: 'increasing' | 'decreasing' | 'stable';
+  historicalData: Array<{
+    month: string;
+    actualAmount: number;
+    predictedTrend?: number;
+  }>;
+  chartData: Array<{
+    month: string;
+    actual: number | null;
+    predicted: number | null;
+    isProjected?: boolean;
+  }>;
+  model: {
+    slope: number;
+    intercept: number;
+    rSquared: number;
+    isZeroVariance: boolean;
+  } | null;
+  evaluation: HoldoutEvaluation;
+  budgetComparison: BudgetComparisonResult;
+  explanation: string;
+  disclaimer: string;
+}
+

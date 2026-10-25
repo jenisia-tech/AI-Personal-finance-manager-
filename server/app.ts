@@ -9,6 +9,7 @@ import budgetsRouter from './routes/budgets.ts';
 import goalsRouter from './routes/goals.ts';
 import userRouter from './routes/user.ts';
 import dataRouter from './routes/data.ts';
+import predictionRouter from './routes/prediction.ts';
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use('/api/budgets', budgetsRouter);
 app.use('/api/goals', goalsRouter);
 app.use('/api/user', userRouter);
 app.use('/api/data', dataRouter);
+app.use('/api/prediction', predictionRouter);
 
 // Global Error Handler
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
