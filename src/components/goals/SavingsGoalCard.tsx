@@ -9,6 +9,7 @@ interface SavingsGoalCardProps {
   onEdit: (goal: SavingsGoal) => void;
   onDelete: (goal: SavingsGoal) => void;
   onDeposit: (goal: SavingsGoal) => void;
+  onPlan?: (goal: SavingsGoal) => void;
 }
 
 export const SavingsGoalCard: React.FC<SavingsGoalCardProps> = ({
@@ -16,6 +17,7 @@ export const SavingsGoalCard: React.FC<SavingsGoalCardProps> = ({
   onEdit,
   onDelete,
   onDeposit,
+  onPlan,
 }) => {
   const percentage = goal.targetAmount > 0
     ? Math.min(100, Math.round((goal.currentAmount / goal.targetAmount) * 100))
@@ -31,7 +33,7 @@ export const SavingsGoalCard: React.FC<SavingsGoalCardProps> = ({
   const monthlyRequired = Math.round(remaining / monthsRemaining);
 
   return (
-    <div className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between">
+    <div className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2.5">
@@ -98,19 +100,30 @@ export const SavingsGoalCard: React.FC<SavingsGoalCardProps> = ({
         </div>
       </div>
 
-      {/* Deposit Action Trigger */}
-      <div className="pt-3 border-t border-apple-gray-100 dark:border-apple-gray-800/80 flex items-center justify-between">
-        <span className="text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300">
-          {percentage}% funded
-        </span>
+      {/* Action Triggers */}
+      <div className="pt-3 border-t border-apple-gray-100 dark:border-apple-gray-800/80 flex items-center justify-between gap-2">
+        {onPlan && (
+          <button
+            onClick={() => onPlan(goal)}
+            className="flex items-center gap-1 px-2.5 py-1.5 bg-apple-purple/10 hover:bg-apple-purple/20 text-apple-purple rounded-apple-sm text-xs font-semibold transition"
+            title="Generate AI Savings Plan (CO2 Search)"
+          >
+            <span>🧭 AI Plan</span>
+          </button>
+        )}
 
-        <button
-          onClick={() => onDeposit(goal)}
-          className="flex items-center gap-1 px-3 py-1.5 bg-apple-green hover:bg-green-600 text-white rounded-apple-sm text-xs font-semibold transition shadow-apple-pill"
-        >
-          <Plus className="w-3.5 h-3.5" />
-          <span>Add / Withdraw</span>
-        </button>
+        <div className="flex items-center gap-2 ml-auto">
+          <span className="text-[11px] font-semibold text-apple-gray-500">
+            {percentage}%
+          </span>
+          <button
+            onClick={() => onDeposit(goal)}
+            className="flex items-center gap-1 px-3 py-1.5 bg-apple-green hover:bg-green-600 text-white rounded-apple-sm text-xs font-semibold transition shadow-apple-pill"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Add / Withdraw</span>
+          </button>
+        </div>
       </div>
     </div>
   );

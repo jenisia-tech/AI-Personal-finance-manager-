@@ -5,15 +5,15 @@ import { calculateCategoryExpenses } from '../../utils/calculations';
 import { formatINR } from '../../utils/formatters';
 
 const COLORS = [
-  '#0071E3',
-  '#34C759',
-  '#FF9500',
-  '#AF52DE',
-  '#FF3B30',
-  '#5856D6',
-  '#5AC8FA',
-  '#30B0C7',
-  '#8E8E93',
+  '#FF5E97', // Bubblegum Pink
+  '#10B981', // Sweet Mint
+  '#FB923C', // Peach Lace
+  '#D946EF', // Bubblegum Orchid
+  '#F43F5E', // Strawberry Rose
+  '#A855F7', // Soft Lilac
+  '#FF73B3', // Sweet Bubblegum Rose
+  '#38BDF8', // Cotton Candy Sky
+  '#B59F91', // Warm Lace Taupe
 ];
 
 export const CategoryPieChart: React.FC = () => {
@@ -32,7 +32,7 @@ export const CategoryPieChart: React.FC = () => {
   const total = data.reduce((s, i) => s + i.value, 0);
 
   return (
-    <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
+    <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-apple-gray-900 dark:text-white">
           Spending Category Distribution
@@ -59,9 +59,9 @@ export const CategoryPieChart: React.FC = () => {
             <Tooltip
               formatter={(value: number) => [formatINR(value), 'Spent']}
               contentStyle={{
-                backgroundColor: 'rgba(21, 21, 24, 0.95)',
+                backgroundColor: 'rgba(34, 21, 32, 0.95)',
                 borderRadius: '10px',
-                border: 'none',
+                border: '1px solid rgba(255, 94, 151, 0.2)',
                 color: '#fff',
                 fontSize: '12px',
               }}

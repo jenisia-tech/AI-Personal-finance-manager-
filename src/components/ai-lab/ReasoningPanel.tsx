@@ -124,10 +124,8 @@ export const ReasoningPanel: React.FC = () => {
         </div>
       </div>
 
-      {/* =========================================================================
-       * PART A: FORWARD-CHAINING RULE-BASED INFERENCE SYSTEM
-       * ========================================================================= */}
-      <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
+      {/* PART A: FORWARD-CHAINING RULE-BASED INFERENCE SYSTEM */}
+      <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-apple-gray-100 dark:border-apple-gray-800">
           <div>
             <div className="flex items-center gap-2">
@@ -209,7 +207,7 @@ export const ReasoningPanel: React.FC = () => {
                 </div>
 
                 {/* Condition */}
-                <div className="text-[11px] font-mono text-apple-gray-600 dark:text-apple-gray-400 bg-white/60 dark:bg-[#151518]/60 p-2 rounded-apple-sm mb-2">
+                <div className="text-[11px] font-mono text-apple-gray-600 dark:text-apple-gray-400 bg-white/60 dark:bg-apple-darkCard/60 p-2 rounded-apple-sm mb-2">
                   {res.conditionDescription}
                 </div>
 
@@ -240,10 +238,8 @@ export const ReasoningPanel: React.FC = () => {
         </div>
       </div>
 
-      {/* =========================================================================
-       * PART B: PROBABILISTIC MONTE CARLO BUDGET RISK ESTIMATOR
-       * ========================================================================= */}
-      <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-5">
+      {/* PART B: PROBABILISTIC MONTE CARLO BUDGET RISK ESTIMATOR */}
+      <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-5">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-apple-gray-100 dark:border-apple-gray-800">
           <div>
             <div className="flex items-center gap-2">
@@ -467,7 +463,7 @@ export const ReasoningPanel: React.FC = () => {
             </div>
 
             {/* Simulated Distribution Visual Sample */}
-            <div className="p-4 rounded-apple-lg bg-white dark:bg-[#151518] border border-apple-gray-200 dark:border-apple-gray-800">
+            <div className="p-4 rounded-apple-lg bg-white dark:bg-apple-darkCard border border-apple-gray-200 dark:border-apple-gray-800">
               <span className="text-[11px] font-bold uppercase tracking-wider text-apple-gray-400 block mb-2">
                 Simulated Month-End Spend Trajectory Sample (Quantile Spectrum):
               </span>

@@ -10,7 +10,7 @@ export const BudgetAlertsList: React.FC = () => {
 
   if (alerts.length === 0) {
     return (
-      <div className="p-8 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card text-center">
+      <div className="p-8 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card text-center">
         <div className="text-3xl mb-2">🎉</div>
         <h4 className="text-sm font-semibold text-apple-gray-900 dark:text-white">
           No Critical Budget Alerts

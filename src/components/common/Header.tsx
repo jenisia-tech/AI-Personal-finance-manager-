@@ -1,6 +1,7 @@
 import React from 'react';
-import { Sun, Moon, RotateCcw, Calendar, Bot } from 'lucide-react';
+import { Sun, Moon, Calendar, Bot, LogOut } from 'lucide-react';
 import { useFinance } from '../../context/FinanceContext';
+import { useAuth } from '../../context/AuthContext';
 import { getMonthName } from '../../utils/formatters';
 
 interface HeaderProps {
@@ -9,7 +10,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
-  const { userProfile, activeMonth, setActiveMonth, darkMode, toggleDarkMode, resetToDemo } = useFinance();
+  const { userProfile, activeMonth, setActiveMonth, darkMode, toggleDarkMode } = useFinance();
+  const { logout } = useAuth();
 
   const getGreeting = (): string => {
     const hour = new Date().getHours();
@@ -18,17 +20,25 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
     return 'Good evening';
   };
 
-  // Generate selectable months (last 3, current, next 2)
-  const monthOptions = [
-    '2026-08',
-    '2026-09',
-    '2026-10',
-    '2026-11',
-    '2026-12',
-  ];
+  // Generate selectable months (3 previous, current, 3 future)
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonthIdx = now.getMonth();
+  const monthOptions: string[] = [];
+  for (let i = -3; i <= 3; i++) {
+    const d = new Date(currentYear, currentMonthIdx + i, 1);
+    const ym = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    monthOptions.push(ym);
+  }
+
+  // Ensure activeMonth is in options
+  if (!monthOptions.includes(activeMonth)) {
+    monthOptions.push(activeMonth);
+    monthOptions.sort();
+  }
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 dark:bg-[#0A0A0C]/80 backdrop-blur-xl border-b border-apple-gray-200/80 dark:border-apple-gray-800/80 px-4 sm:px-8 py-3.5 flex items-center justify-between transition-colors">
+    <header className="sticky top-0 z-30 bg-white/80 dark:bg-apple-darkBg/80 backdrop-blur-xl border-b border-apple-gray-200/80 dark:border-apple-gray-800/80 px-4 sm:px-8 py-3.5 flex items-center justify-between transition-colors">
       {/* Left: Personalized Greeting & Date */}
       <div>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-apple-gray-900 dark:text-white flex items-center gap-2">
@@ -45,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
         {/* Quick AI Lab Trigger Chip */}
         <button
           onClick={() => setActiveTab('ai-lab')}
-          className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-apple-blue/10 to-apple-purple/10 dark:from-apple-blue/20 dark:to-apple-purple/20 text-apple-blue dark:text-blue-400 hover:opacity-90 rounded-full text-xs font-semibold border border-apple-blue/20 transition shadow-sm"
+          className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-apple-blue/10 to-apple-purple/10 dark:from-apple-blue/20 dark:to-apple-purple/20 text-apple-blue dark:text-pink-300 hover:opacity-90 rounded-full text-xs font-semibold border border-apple-blue/20 transition shadow-sm"
         >
           <Bot className="w-3.5 h-3.5" />
           <span>AI Lab (CO1, CO2, CO4)</span>
@@ -67,15 +77,6 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
           </select>
         </div>
 
-        {/* Reset Demo Data Button */}
-        <button
-          onClick={resetToDemo}
-          title="Reset to Indian Demo Data"
-          className="p-2 rounded-apple-sm text-apple-gray-500 hover:text-apple-gray-900 dark:text-apple-gray-400 dark:hover:text-white hover:bg-apple-gray-100 dark:hover:bg-apple-gray-850 transition"
-        >
-          <RotateCcw className="w-4 h-4" />
-        </button>
-
         {/* Theme Toggle Button */}
         <button
           onClick={toggleDarkMode}
@@ -83,6 +84,15 @@ export const Header: React.FC<HeaderProps> = ({ setActiveTab }) => {
           className="p-2 rounded-apple-sm text-apple-gray-500 hover:text-apple-gray-900 dark:text-apple-gray-400 dark:hover:text-white hover:bg-apple-gray-100 dark:hover:bg-apple-gray-850 transition"
         >
           {darkMode ? <Sun className="w-4 h-4 text-apple-orange" /> : <Moon className="w-4 h-4 text-apple-blue" />}
+        </button>
+
+        {/* Logout Button */}
+        <button
+          onClick={logout}
+          title="Sign Out"
+          className="p-2 rounded-apple-sm text-apple-gray-400 hover:text-apple-red hover:bg-apple-red/10 transition"
+        >
+          <LogOut className="w-4 h-4" />
         </button>
       </div>
     </header>

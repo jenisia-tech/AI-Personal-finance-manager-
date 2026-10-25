@@ -24,7 +24,7 @@ export const BudgetVsActualChart: React.FC = () => {
   }));
 
   return (
-    <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
+    <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-apple-gray-900 dark:text-white">
           Budget Limit vs. Actual Expenditure
@@ -38,9 +38,9 @@ export const BudgetVsActualChart: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-            <XAxis dataKey="category" stroke="#8E8E93" fontSize={11} tickLine={false} />
+            <XAxis dataKey="category" stroke="#B59F91" fontSize={11} tickLine={false} />
             <YAxis
-              stroke="#8E8E93"
+              stroke="#B59F91"
               fontSize={11}
               tickLine={false}
               tickFormatter={(val) => `₹${val / 1000}k`}
@@ -48,16 +48,16 @@ export const BudgetVsActualChart: React.FC = () => {
             <Tooltip
               formatter={(value: number) => [formatINR(value), '']}
               contentStyle={{
-                backgroundColor: 'rgba(21, 21, 24, 0.95)',
+                backgroundColor: 'rgba(34, 21, 32, 0.95)',
                 borderRadius: '10px',
-                border: 'none',
+                border: '1px solid rgba(255, 94, 151, 0.2)',
                 color: '#fff',
                 fontSize: '12px',
               }}
             />
             <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-            <Bar dataKey="Budget" fill="#0071E3" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="Actual" fill="#FF9500" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="Budget" fill="#FF5E97" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="Actual" fill="#FB923C" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -33,7 +33,7 @@ export const InsightCards: React.FC<InsightCardsProps> = ({ setActiveTab }) => {
         {insights.map((item) => (
           <div
             key={item.id}
-            className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between"
+            className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between"
           >
             <div>
               <div className="flex items-start justify-between mb-2">

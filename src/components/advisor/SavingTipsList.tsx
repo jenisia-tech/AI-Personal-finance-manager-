@@ -30,7 +30,7 @@ export const SavingTipsList: React.FC = () => {
         {tips.map((tip) => (
           <div
             key={tip.id}
-            className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between"
+            className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-2 mb-2">

@@ -9,6 +9,7 @@ interface BudgetCardProps {
   spent: number;
   onEdit: (budget: Budget) => void;
   onDelete: (budget: Budget) => void;
+  onSimulate?: (budget: Budget) => void;
 }
 
 export const BudgetCard: React.FC<BudgetCardProps> = ({
@@ -16,6 +17,7 @@ export const BudgetCard: React.FC<BudgetCardProps> = ({
   spent,
   onEdit,
   onDelete,
+  onSimulate,
 }) => {
   const utilization = budget.limit > 0 ? Math.round((spent / budget.limit) * 100) : 0;
   const isOver = spent > budget.limit;
@@ -23,7 +25,7 @@ export const BudgetCard: React.FC<BudgetCardProps> = ({
   const remaining = Math.max(0, budget.limit - spent);
 
   return (
-    <div className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between">
+    <div className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card hover:shadow-apple-card-hover transition-all flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between mb-3">
           <div>
@@ -66,28 +68,42 @@ export const BudgetCard: React.FC<BudgetCardProps> = ({
         </div>
       </div>
 
-      {/* Footer Status Badge */}
-      <div className="pt-3 border-t border-apple-gray-100 dark:border-apple-gray-800/80 flex items-center justify-between text-xs">
-        {isOver ? (
-          <div className="flex items-center gap-1.5 text-apple-red font-semibold">
-            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-            <span>Over by {formatINR(spent - budget.limit)}</span>
-          </div>
-        ) : isNear ? (
-          <div className="flex items-center gap-1.5 text-apple-orange font-semibold">
-            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-            <span>{formatINR(remaining)} remaining</span>
-          </div>
-        ) : (
-          <div className="flex items-center gap-1.5 text-apple-green font-semibold">
-            <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-            <span>{formatINR(remaining)} remaining</span>
+      {/* Footer Status Badge & Risk Action */}
+      <div className="pt-3 border-t border-apple-gray-100 dark:border-apple-gray-800/80 space-y-2">
+        <div className="flex items-center justify-between text-xs">
+          {isOver ? (
+            <div className="flex items-center gap-1.5 text-apple-red font-semibold">
+              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+              <span>Over by {formatINR(spent - budget.limit)}</span>
+            </div>
+          ) : isNear ? (
+            <div className="flex items-center gap-1.5 text-apple-orange font-semibold">
+              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+              <span>{formatINR(remaining)} remaining</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1.5 text-apple-green font-semibold">
+              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+              <span>{formatINR(remaining)} remaining</span>
+            </div>
+          )}
+
+          <span className="text-[10px] text-apple-gray-400 font-medium">
+            Alert at {budget.alertThreshold}%
+          </span>
+        </div>
+
+        {onSimulate && (
+          <div className="pt-1 flex justify-end">
+            <button
+              onClick={() => onSimulate(budget)}
+              className="text-[11px] font-semibold text-apple-purple hover:text-apple-purple/80 bg-apple-purple/10 hover:bg-apple-purple/20 px-2.5 py-1 rounded-apple-sm transition flex items-center gap-1"
+              title="Run Monte Carlo Budget Risk Simulation (CO4)"
+            >
+              <span>🎲 Simulate Risk (CO4)</span>
+            </button>
           </div>
         )}
-
-        <span className="text-[10px] text-apple-gray-400 font-medium">
-          Alert at {budget.alertThreshold}%
-        </span>
       </div>
     </div>
   );

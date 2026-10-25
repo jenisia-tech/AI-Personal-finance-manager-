@@ -1,490 +1,480 @@
 # AI Personal Finance Manager 💸🤖
-### Advanced AI-Driven Personal Finance Platform Demonstrating Course Outcomes CO1, CO2, and CO4
+### Advanced AI-Driven Personal Finance Platform Demonstrating Course Outcomes CO1, CO2, and CO4 with Full-Stack Authentication, Database Persistence & Workflow Integration
 
+[![Node.js](https://img.shields.io/badge/Node.js-v18%2B%20%7C%20v25-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.21.2-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![SQLite](https://img.shields.io/badge/SQLite-Native%20DatabaseSync-003B57?logo=sqlite&logoColor=white)](https://nodejs.org/api/sqlite.html)
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.1.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5.4.21-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Vitest](https://img.shields.io/badge/Vitest-12_Tests_Passed-4BB543?logo=vitest&logoColor=white)](https://vitest.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-49_Tests_Passed-4BB543?logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Currency](https://img.shields.io/badge/Currency-₹_INR-FF9933)](https://en.wikipedia.org/wiki/Indian_rupee)
-[![Offline AI](https://img.shields.io/badge/AI_Engine-100%25_Deterministic_%26_Offline-blueviolet)](#)
+[![Security](https://img.shields.io/badge/Auth-JWT_%2B_Bcrypt_%2B_HttpOnly-red)](#)
 
 ---
 
 ## 📋 Table of Contents
 1. [Executive Summary](#-executive-summary)
-2. [Academic Course Outcomes (CO1, CO2, CO4)](#-academic-course-outcomes)
+2. [Key Enhancements & Bug Fixes](#-key-enhancements--bug-fixes)
+   - [Financial Amount Persistence Bug Resolution](#financial-amount-persistence-bug-resolution)
+   - [Full-Stack Authentication & Session Management](#full-stack-authentication--session-management)
+   - [Persistent SQLite Database Architecture](#persistent-sqlite-database-architecture)
+   - [Multi-Tenant User Workspace Isolation](#multi-tenant-user-workspace-isolation)
+   - [Zero Default/Invented Data Policy](#zero-defaultinvented-data-policy)
+3. [Integration of Course Outcomes (CO1, CO2, CO4) in Normal Workflow](#-integration-of-course-outcomes-co1-co2-co4-in-normal-workflow)
+   - [CO1: Intelligent Agent on Dashboard & AI Advisor](#co1-intelligent-agent-on-dashboard--ai-advisor)
+   - [CO2: Search-Based Milestone Planning in Savings Goals](#co2-search-based-milestone-planning-in-savings-goals)
+   - [CO4: Forward-Chaining Rules & Monte Carlo in Budget Planner](#co4-forward-chaining-rules--monte-carlo-in-budget-planner)
+4. [Academic Course Outcomes (CO1, CO2, CO4) in Dedicated AI Lab](#-academic-course-outcomes-co1-co2-co4-in-dedicated-ai-lab)
    - [CO1: Intelligent Agent Models & Goal-Based Problem Solving](#co1-intelligent-agent-models--goal-based-problem-solving)
    - [CO2: Uninformed & Informed Search Techniques](#co2-uninformed--informed-search-techniques)
    - [CO4: Reasoning Under Uncertainty (Rules & Probabilities)](#co4-reasoning-under-uncertainty-rules--probabilities)
-3. [Core Personal Finance Platform Features](#-core-personal-finance-platform-features)
-4. [Complete Project Architecture & Directory Map](#-complete-project-architecture--directory-map)
-5. [Comprehensive Change Log & Enhancements Audit](#-comprehensive-change-log--enhancements-audit)
-6. [Automated Verification & Unit Test Suite](#-automated-verification--unit-test-suite)
-7. [Getting Started (Run Locally)](#-getting-started-run-locally)
-8. [Step-by-Step Academic Evaluation Demonstration Script](#-step-by-step-academic-evaluation-demonstration-script)
+5. [Complete System Architecture & Directory Map](#-complete-system-architecture--directory-map)
+6. [Database Schema & Migrations](#-database-schema--migrations)
+7. [API Specification](#-api-specification)
+8. [Environment Configuration](#-environment-configuration)
+9. [Automated Verification & Unit Test Suite (49 Tests)](#-automated-verification--unit-test-suite-49-tests)
+10. [Getting Started (Run Locally)](#-getting-started-run-locally)
+11. [Step-by-Step Academic Evaluation Demonstration Script](#-step-by-step-academic-evaluation-demonstration-script)
 
 ---
 
 ## 🌟 Executive Summary
 
-**AI Personal Finance Manager** is a production-grade, privacy-first financial engineering web application tailored for Indian users (students, salaried professionals, and families). Built with **React 18**, **TypeScript**, **Vite**, **Tailwind CSS**, and **localStorage**, it combines full-fledged personal accounting capabilities with **transparent, deterministic, explainable Artificial Intelligence**.
+**AI Personal Finance Manager** is a production-grade, secure financial engineering web application tailored for Indian users (students, salaried professionals, and families). Built with an **Express + Node.js** backend, a **Native SQLite (`node:sqlite`)** persistent database, and a **React 18 + TypeScript + Vite + Tailwind CSS** frontend, it combines comprehensive accounting capabilities with **transparent, deterministic, explainable Artificial Intelligence**.
 
-Unlike generic expense trackers, this application doubles as an interactive **AI Algorithms Laboratory** implementing core concepts from classical and modern Artificial Intelligence courses:
-- **Zero External API Dependencies:** 100% offline, explainable algorithms without black-box cloud dependencies or paid API keys.
+Unlike simple expense trackers, this application doubles as an interactive **AI Algorithms Laboratory** and seamlessly integrates academic AI concepts into everyday financial management:
+- **CO1, CO2, and CO4 in Daily Workflow:** Autonomous agent recommendations on the Dashboard, heuristic search roadmaps in Savings Goals, and forward-chaining rules with Monte Carlo risk simulation in the Budget Planner.
+- **Dedicated Academic AI Algorithms Lab:** An educational workbench to compare BFS vs. Best-First Search traces, test agent counterfactuals with spending sliders, and inspect stochastic distribution quantiles.
+- **100% Deterministic & Offline AI:** Mathematical agent cycles, state-space search with visited-node pruning, forward-chaining deduction, and seeded Monte Carlo stochastic simulations.
+- **Strict Multi-Tenant Security:** Every user has an isolated workspace protected by bcrypt password hashing, JWT authentication stored in HttpOnly cookies, and strict server-side authorization.
+- **Zero Hallucinated / Default Financial Data:** Fresh accounts open with clean, empty states. No fake transactions, budgets, or balances are generated automatically.
 - **Strict Indian Financial Context:** All amounts represented in Indian Rupees (`₹`), formatted in the Indian numbering system (Lakhs & Crores), featuring domestic payment modes (`UPI`, `Net Banking`, `Debit/Credit Card`, `Cash`).
-- **Academic Rigor:** Formal agent cycles, state-space search with visited-node pruning, forward-chaining deduction, and seeded Monte Carlo stochastic simulations.
 
 ---
 
-## 🔬 Academic Course Outcomes
+## 🔧 Key Enhancements & Bug Fixes
+
+### Financial Amount Persistence Bug Resolution
+- **Root Cause 1 (`Math.max` clamping):** Previously, `DashboardView`, `Sidebar`, `AdvisorSummaryCard`, and AI services calculated income using `Math.max(calculateTotalIncome(...), userProfile.monthlyIncome)` where `userProfile.monthlyIncome` defaulted to ₹1,03,000. As a result, entering ₹30,000 salary was overridden visually by ₹1,03,000.
+  - *Fix:* Removed artificial income clamping. Totals are derived directly and strictly from user-entered, validated transaction records.
+- **Root Cause 2 (`storageService` fallback overwrite):** Any parse error or initial load condition in localStorage previously wiped out user state and re-injected hardcoded mock data.
+  - *Fix:* Replaced client-side localStorage fallback mechanisms with server-side database persistence. User records are stored in SQLite and queried by authenticated user ID.
+- **Root Cause 3 (Fake chart fallback generation):** `IncomeExpenseChart` previously contained fallback expressions (`|| 95000`, `|| (58000 + idx * 1500)`) that injected random numbers whenever a month had no entries.
+  - *Fix:* Replaced all mock generators with real transaction aggregation across historical months.
+- **Root Cause 4 (Goal deposit/withdraw cash flow omission):** Savings goal deposits modified goal balances in isolation without affecting transactions or cash-flow balances.
+  - *Fix:* Savings goal deposits and withdrawals now atomically record linked transactions (`deposit` / `withdrawal`) affecting net savings consistently.
+- **Exact Numeric Validation:** Financial amounts are validated to ensure `amount > 0`, sanitized against NaN, and rounded to exact 2-decimal paise precision (`Math.round(amount * 100) / 100`).
+
+### Full-Stack Authentication & Session Management
+- **Registration (`/api/auth/register`):** Normalized email addresses, name validation, password confirmation, minimum length enforcement (8+ characters), and bcrypt hashing (10 salt rounds).
+- **Login (`/api/auth/login`):** Validates credentials, issues a signed JSON Web Token (JWT) with 7-day expiration, and sets a secure `HttpOnly`, `SameSite=Lax` cookie while returning user profile metadata.
+- **Logout (`/api/auth/logout`):** Clears the auth cookie on the server and resets client state.
+- **Session Verification (`/api/auth/me`):** Authenticates the session cookie or `Authorization: Bearer <token>` header on app initialization.
+- **Rate Limiting:** Protects `/api/auth` endpoints against brute-force attacks (15-minute window, max 20 attempts).
+- **Protected Routing:** Unauthenticated users are redirected to the Login/Registration views. All financial pages (`Dashboard`, `Transactions`, `Budgets`, `Goals`, `Analytics`, `Advisor`, `AI Lab`, `Settings`) require authentication.
+
+### Persistent SQLite Database Architecture
+- Implemented with Node's native synchronous SQLite engine (`node:sqlite` / `DatabaseSync`), supported natively in Node.js v22+ and v25 without requiring external C++ compiler tools or `node-gyp`.
+- Automatic table creation, foreign key constraints (`ON DELETE CASCADE`), indexes on `user_id`, and Write-Ahead Logging (WAL) for high concurrency and zero corruption.
+- Server runs on port `5001` (configured via `.env`), while Vite dev server runs on port `3000` with `/api` reverse proxying.
+
+### Multi-Tenant User Workspace Isolation
+- **Server-Side Enforcement:** Every query (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) enforces `WHERE user_id = ?` using `req.user.id` extracted from the validated server-side JWT session.
+- **Zero Client Trust:** Client-supplied `user_id` values in request bodies or parameters are completely ignored.
+- **Cross-User Protection:** Attempting to fetch, update, delete, or export another user's records yields `404 Not Found` or `403 Forbidden`.
+- **Verified via Automated Tests and Browser Agent:** Two separate user accounts (e.g., Alex Sharma and Priya Patel) have completely distinct financial records, transactions, budgets, and goals with zero cross-tenant leakage.
+
+### Zero Default/Invented Data Policy
+- When a new user registers:
+  - Total Income: ₹0.00
+  - Total Expenses: ₹0.00
+  - Net Savings: ₹0.00
+  - Transactions: Empty list
+  - Budgets: Empty list
+  - Savings Goals: Empty list
+- Clean, welcoming empty-state prompts guide users to add their first real transaction.
+- Development demo data is strictly relegated to an explicit, manual seed utility (`/api/data/dev-seed` in Settings) and is never invoked automatically for new registrations.
+
+---
+
+## ⚡ Integration of Course Outcomes (CO1, CO2, CO4) in Normal Workflow
+
+Rather than existing only inside the laboratory, CO1, CO2, and CO4 are integrated directly into the daily user workflow:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       AI PERSONAL FINANCE MANAGER                           │
+│                    DAILY USER WORKFLOW AI INTEGRATION                       │
 ├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│           CO1            │           CO2            │          CO4          │
-│    INTELLIGENT AGENT     │      SEARCH METHODS      │ UNCERTAINTY REASONING │
+│     DASHBOARD (CO1)      │   SAVINGS GOALS (CO2)    │  BUDGET PLANNER (CO4) │
 ├──────────────────────────┼──────────────────────────┼───────────────────────┤
-│ • 5-Stage Agent Loop     │ • Uninformed: BFS        │ • Forward-Chaining    │
-│ • Perceive-Analyze-      │   (FIFO Queue, Set Vis)  │   Rule Engine (IF-THEN│
-│   Decide-Act-Evaluate    │ • Informed: Best-First   │ • Seeded Monte Carlo  │
-│ • Counterfactual Tests   │   h(n) = max(0, T - S)   │   (Mulberry32 PRNG)   │
-│ • "What-If" Spend Slider │ • Trace & Metrics Logger │ • Quantiles P10-50-90 │
+│ • Auto & Manual Advice   │ • Goal Roadmap Generator │ • Real-Time Rule      │
+│ • Active Goal Switcher   │ • Uninformed: BFS Plan   │   Engine Diagnostics  │
+│ • Counterfactual Metrics │ • Informed: Best-First   │ • On-Demand Monte     │
+│ • 5-Stage Agent Pipeline │ • Preview in Goal Modal  │   Carlo Risk (N=1000) │
 └──────────────────────────┴──────────────────────────┴───────────────────────┘
 ```
 
+### CO1: Intelligent Agent on Dashboard & AI Advisor
+- **Live Environmental Perception:** Automatically perceives latest saved income, expenses, daily burn rate, and category distributions using `useMemo`.
+- **On-Demand Manual Trigger:** A prominent **"Request Advice"** button allows users to manually re-analyze their finances on demand with tactile feedback and timestamp indicators.
+- **Goal Selection in Normal View:** Users can toggle between active agent goals directly on the Dashboard:
+  - `Avoid Budget Breaches`: Identifies near-breach and breached categories.
+  - `Accelerate Savings Targets`: Optimizes monthly surplus allocation for milestone goals.
+  - `Maintain Emergency Safety Net`: Preserves 3–6 months of liquid defensive runway.
+  - `Trim Discretionary Outflows`: Caps shopping and entertainment allocations.
+- **Counterfactual Evaluation:** Displays predicted before vs. after metrics (e.g., $+15\%$ savings rate improvement) directly in the card.
+- **5-Stage Pipeline Inspector:** Expandable drawer displays the formal Perceive $\rightarrow$ Analyze $\rightarrow$ Decide $\rightarrow$ Act $\rightarrow$ Evaluate cycle.
+
+### CO2: Search-Based Milestone Planning in Savings Goals
+- **Savings Goal Card Integration:** Every goal card features a **"🧭 AI Plan"** button opening the **Goal Plan Modal**.
+- **Dual Search Techniques:**
+  - **BFS (Breadth-First Search):** Uninformed layer-by-layer exploration guaranteeing minimal planning months.
+  - **Greedy Best-First Search:** Informed search guided by admissible heuristic $h(n) = \max(0, \text{Target} - S_n)$.
+- **Roadmap Visualization:** Displays month-by-month contribution roadmap ($M_1, M_2, \dots$), cumulative savings progress, states explored, and execution time in milliseconds.
+- **Goal Creation Preview:** Integrated directly into `GoalFormModal`, allowing users to preview roadmap feasibility before saving the goal.
+
+### CO4: Forward-Chaining Rules & Monte Carlo in Budget Planner
+- **Forward-Chaining Rule Diagnostics:** Real-time expert inference engine evaluates 7 domain rules against working memory facts. Displays active warnings, condition premises, conclusions, and remediation actions.
+- **On-Demand Monte Carlo Budget Risk Simulation:** On every budget card, a **"🎲 Simulate Risk (CO4)"** action triggers $N=1,000$ iterations using the Mulberry32 PRNG and Gaussian daily spending variance.
+  - Computes breach probability ($0\% - 100\%$) and risk category (Low, Moderate, High).
+  - Calculates statistical quantiles: $P_{10}$ (best-case), $P_{50}$ (median), $P_{90}$ (stress test).
+  - Emits actionable daily spending curbs to ensure budget adherence.
+- **Zero Performance Overhead:** Simulations run strictly on demand, avoiding heavy repeated calculations on unrelated re-renders.
+
 ---
+
+## 🔬 Academic Course Outcomes (CO1, CO2, CO4) in Dedicated AI Lab
+
+The **AI Algorithms Lab** (`src/components/ai-lab/`) remains fully preserved as an educational demonstration workbench sharing the exact same underlying services.
 
 ### CO1: Intelligent Agent Models & Goal-Based Problem Solving
-
-#### 1. Theoretical Foundations
-An intelligent agent perceives its environment through sensors, processes percepts into internal representations, selects actions using utility/goal evaluations, acts through effectors, and continuously evaluates outcomes against performance metrics.
-
-#### 2. The 5-Stage Agentic Loop
-The agent is decoupled into five pure, testable functional stages in [`src/services/financialAgentService.ts`](file:///c:/Users/haeue/OneDrive/Desktop/Jenoi/College/MP/AI-Personal-finance-manager-/src/services/financialAgentService.ts):
-
-```mermaid
-graph LR
-    P[1. Perceive] --> A[2. Analyze]
-    A --> D[3. Decide]
-    D --> Ac[4. Act]
-    Ac --> E[5. Evaluate]
-    E -. Counterfactual Impact .-> P
-```
-
-1. **`Perceive` (`perceiveFinancialState`):**
-   Gathers all environmental parameters into a strongly-typed perception state $\mathcal{P}$:
-   $$\mathcal{P} = \langle I_{\text{month}}, E_{\text{month}}, \text{NetSavings}, \text{Rate}, \text{DailyVelocity}, \text{SafeAllowance}, \text{Budgets}, \text{Goals}, D_{\text{elapsed}}, D_{\text{remaining}} \rangle$$
-2. **`Analyze` (`analyzeFinancialCondition`):**
-   Derives domain conditions and anomalies:
-   - Category budget utilization: $\text{Util}(c) = \frac{\text{Spent}(c)}{\text{Limit}(c)} \times 100\%$
-   - Run-rate projection: $\text{ProjectedSpend}(c) = \text{Spent}(c) + \left(\frac{\text{Spent}(c)}{D_{\text{elapsed}}}\right) \times D_{\text{remaining}}$
-   - Savings target velocity: $\text{Velocity}(g) = \frac{\text{Current}(g)}{\text{Target}(g)}$
-3. **`Decide` (`selectAgentAction`):**
-   Applies utility-based decision rules mapped to one of 4 user-selected goals:
-   - `avoid_budget_breach`: Prioritizes categories where $\text{Util}(c) \ge 90\%$ (sorted descending by severity).
-   - `reach_savings_goal`: Reallocates discretionary surplus into the active savings goal.
-   - `maintain_emergency_fund`: Mandates 3–6 months of fixed monthly expenses as liquid buffer.
-   - `reduce_discretionary`: Recommends spending curbs on `Entertainment`, `Shopping`, and `Dining`.
-4. **`Act` (`generateRecommendation`):**
-   Produces an actionable, mathematically grounded natural language directive containing concrete rupee amounts, category targets, and execution steps.
-5. **`Evaluate` (`evaluateActionOutcome`):**
-   Computes counterfactual metrics showing what the user's financial health score, savings rate, and discretionary runway will become once the action is enacted.
-
-#### 3. Interactive What-If Simulation
-Allows the user or academic evaluator to adjust a spending spike slider (₹0 to ₹25,000) on any category in real-time. The agent instantly re-executes the perception-action cycle without corrupting persistent database records.
-
----
+- 5-Stage Agentic Loop (`src/services/financialAgentService.ts`).
+- Interactive What-If Simulation: Adjust spending spike sliders (₹0 to ₹25,000) on any category in real time to observe instant agent re-evaluation.
 
 ### CO2: Uninformed & Informed Search Techniques
-
-#### 1. Formal State-Space Problem Formulation
-Finding the optimal multi-month savings strategy to achieve a financial milestone is formulated as a formal search problem:
-- **State Representation:** A 2-tuple $s = (m, S_m)$ where:
-  - $m \in \{0, 1, 2, \dots, M\}$ is the elapsed month index ($M = \text{Planning Horizon}$).
-  - $S_m \ge 0$ is the cumulative liquid savings accrued up to month $m$ in `₹ INR`.
-- **Initial State:** $s_0 = (0, S_{\text{initial}})$
-- **Action Space:** Discrete monthly saving allocations:
-  $$A = \{a_1, a_2, \dots, a_k\} \quad \text{where } a_i \in \text{MonthlySavingChoices}$$
-- **Transition Function:**
-  $$T(s, a) = T\big((m, S_m), a\big) = (m + 1, S_m + a)$$
-- **Goal Test:**
-  $$G(s) = \begin{cases} \text{True} & \text{if } S_m \ge S_{\text{target}} \text{ and } m \le M \\ \text{False} & \text{otherwise} \end{cases}$$
-- **Path Cost:** Uniform step cost ($c = 1$ per month) or cumulative financial effort.
-
-#### 2. Uninformed Search: Breadth-First Search (BFS)
-- **Data Structure:** First-In, First-Out (FIFO) queue implemented with explicit JavaScript array shift/push.
-- **Duplicate Detection:** Visited state registry using `Set<string>` with composite key `${month}_${currentSavings}`.
-- **Theoretical Guarantee:** Guarantees finding the plan with the **minimum planning horizon** (shallowest depth in the search tree).
-
-#### 3. Informed Search: Greedy Best-First Search
-- **Data Structure:** Min-Priority Queue ordered by evaluation function $f(n) = h(n)$.
-- **Heuristic Function:**
-  $$h(n) = \max\big(0, S_{\text{target}} - S_n\big)$$
-- **Properties:**
-  - **Admissibility:** Measures remaining financial distance to target.
-  - **Monotonicity:** $h(n)$ decreases monotonically as savings increase along valid paths.
-  - **Frontier Ordering:** Expands the state with the smallest remaining deficit first, aggressively seeking the goal.
-
-#### 4. Comparative Metrics & Search Trace
-The system captures execution telemetry in [`src/services/financialSearchService.ts`](file:///c:/Users/haeue/OneDrive/Desktop/Jenoi/College/MP/AI-Personal-finance-manager-/src/services/financialSearchService.ts):
-
-| Metric | Breadth-First Search (BFS) | Greedy Best-First Search |
-| :--- | :--- | :--- |
-| **Strategy** | Uninformed layer-by-layer exploration | Informed heuristic prioritization |
-| **Frontier Structure** | FIFO Queue | Min-Priority Queue on $h(n)$ |
-| **Optimality (Depth)** | **Guaranteed Minimal Months** | Sub-optimal depth, rapid convergence |
-| **States Explored** | Evaluates all combinations systematically | Focuses on highest-yield saving branches |
-| **Trace Logging** | Step-by-step state key & queue sizes | Step-by-step state key, $h(n)$ values & heap |
-
----
+- State-space formulation $(m, S_m)$ reaching savings target $T$ within horizon $H$.
+- BFS FIFO Queue vs. Greedy Best-First Priority Queue with $h(n)$.
+- Algorithm comparator with state exploration ratios, max frontier size, and complete expansion trace table.
 
 ### CO4: Reasoning Under Uncertainty (Rules & Probabilities)
-
-#### Part A: Forward-Chaining Rule-Based Inference Engine
-Implemented in [`src/services/financialReasoningService.ts`](file:///c:/Users/haeue/OneDrive/Desktop/Jenoi/College/MP/AI-Personal-finance-manager-/src/services/financialReasoningService.ts). Operates on propositional financial facts:
-
-```
-[User Percepts] ──> [Fact Extractor] ──> [Working Memory] ──> [Pattern Matcher] ──> [Fired Rules & Agenda]
-```
-
-##### Standard Rule Base
-1. `RULE_01_BUDGET_OVERRUN_ESSENTIAL`: Fired when an essential category (Groceries, Bills, Healthcare) exceeds 100% of its budget limit.
-2. `RULE_02_BUDGET_OVERRUN_DISCRETIONARY`: Fired when a discretionary category (Entertainment, Dining, Shopping) exceeds 90% of its budget limit.
-3. `RULE_03_SAVINGS_TARGET_DEFICIT`: Fired when projected monthly savings cannot cover monthly milestone allocations.
-4. `RULE_04_ZERO_INCOME_ANOMALY`: Fired when expenses exist but recorded monthly income is ₹0.
-5. `RULE_05_EMERGENCY_FUND_DEFICIT`: Fired when liquid reserves represent $< 3$ months of essential fixed burn rate.
-6. `RULE_06_HEALTHY_SAVINGS_OPPORTUNITY`: Fired when savings rate exceeds 35% and no budget breaches exist, prompting SIP investment advice.
-7. `RULE_07_EXPENSE_RUN_RATE_ALERT`: Fired when mid-month spending velocity projects a month-end deficit ($> 110\%$).
-
-Each fired rule outputs:
-- **Conclusion:** Formal deduction statement.
-- **Evidence / Facts Used:** The exact mathematical percepts that matched the rule premise.
-- **Prescribed Action:** Actionable financial intervention.
+- Forward-Chaining Rule Engine evaluating working memory facts against inference rules.
+- Seeded Monte Carlo Simulation with Box-Muller Gaussian daily volatility and quantile spectrum chart.
 
 ---
 
-#### Part B: Monte Carlo Probabilistic Budget Risk Simulation
-Models spending volatility over the remaining $D_{\text{remaining}}$ days of the calendar month under uncertainty.
-
-##### 1. Mathematical Formulation
-Daily expenditure $E_d$ is treated as a continuous random variable with mean daily spend $\mu$ and standard deviation $\sigma$:
-$$E_d \sim \max\left(0, \mathcal{N}\left(\mu, \sigma^2\right)\right)$$
-Gaussian sampling is generated via the **Box-Muller Transform**:
-$$Z_0 = \sqrt{-2 \ln U_1} \cos(2\pi U_2), \quad E_d = \mu + \sigma \cdot Z_0$$
-Where $U_1, U_2 \sim \mathcal{U}(0, 1)$ are uniform pseudo-random variates.
-
-##### 2. Deterministic Mulberry32 PRNG
-To ensure **100% reproducible results during academic viva/evaluation**, the simulator uses a custom 32-bit stateful PRNG:
-```typescript
-function mulberry32(seed: number): () => number {
-  let s = seed | 0;
-  return function () {
-    s = (s + 0x6d2b79f5) | 0;
-    let t = Math.imul(s ^ (s >>> 15), 1 | s);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-```
-
-##### 3. Simulation Outcomes & Statistical Quantiles
-Over $N = 1,000$ iterations, the engine computes:
-- **Total Projected Spend in Run $i$:**
-  $$\text{TotalSpend}_i = \text{AlreadySpent} + \sum_{d=1}^{D_{\text{remaining}}} E_{d,i}$$
-- **Breach Probability:**
-  $$P(\text{Breach}) = \frac{1}{N} \sum_{i=1}^N \mathbb{I}(\text{TotalSpend}_i > \text{Budget}) \times 100\%$$
-- **Quantiles:**
-  - $P_{10}$ (Best-case disciplined spending)
-  - $P_{50}$ (Median expected outcome)
-  - $P_{90}$ (Worst-case stress-scenario spend)
-- **Risk Classification:**
-  - 🟢 **Low Risk:** $P < 25\%$
-  - 🟡 **Moderate Risk:** $25\% \le P < 60\%$
-  - 🟠 **High Risk:** $60\% \le P < 85\%$
-  - 🔴 **Critical Risk:** $P \ge 85\%$
-
----
-
-## 💻 Core Personal Finance Platform Features
-
-### 1. Executive Financial Dashboard
-- **Contextual Greeting:** Greets the user based on real system time with their custom profile name.
-- **4 Key KPI Cards:**
-  - *Total Balance:* Lifetime surplus net worth (`₹1,03,000`).
-  - *Monthly Income:* Inflows for the selected month (`₹85,000`).
-  - *Monthly Expenses:* Outflows with calculated daily burn rate (`₹32,600` at `₹1,051/day`).
-  - *Net Savings & Velocity:* Current savings rate percentage (`61.6%`).
-- **Interactive Visuals:** Category donut distribution, savings goals widget, recent transactions list, budget utilization summary, and FinBot highlight card.
-
-### 2. Transaction Management & Full CRUD
-- **Add / Edit / Delete Transactions:** Custom modal dialogs with validation ($> ₹0$).
-- **Taxonomies:**
-  - *Types:* `Income`, `Expense`.
-  - *Categories:* `Food`, `Transport`, `Shopping`, `Education`, `Entertainment`, `Bills`, `Healthcare`, `Salary`, `Freelance`, `Investments`, `Allowance`, `Other`.
-  - *Payment Modes:* `UPI` (GPay/PhonePe), `Credit Card`, `Debit Card`, `Net Banking`, `Cash`.
-- **Search & Filtering:** Instant full-text search, multi-select category filters, payment mode filters, and date/amount sorting.
-- **One-Click CSV Export:** Downloads a formatted spreadsheet of filtered transactions.
-
-### 3. Monthly Budget Planner
-- Category-wise spending caps with live calculation against current month's expenses.
-- Visual thresholds: Safe ($<70\%$), Warning ($70\%-90\%$), Danger ($>90\%$).
-- Real-time notification badge displaying total over-budget deficit.
-
-### 4. Savings Goals & Milestones
-- Custom goal creation with emojis, target dates, and target amounts in INR.
-- **Interactive Deposit / Withdraw Modal:** Add money via quick chips (`+₹500`, `+₹1,000`, `+₹5,000`) or custom amounts.
-- Automatic calculation of required monthly savings velocity to hit deadlines.
-
-### 5. Financial Analytics Suite
-Built with **Recharts**:
-1. *Income vs. Expenses Trend:* 6-month historical bar chart with net savings overlay.
-2. *Spending by Category:* Donut chart with category tooltips and percentage breakdown.
-3. *Daily Spending Velocity:* Smooth area chart tracking day-by-day cash burn.
-4. *Budget vs. Actual Spend:* Grouped comparison bar chart.
-5. *Payment Method Distribution:* Pie chart of UPI vs. Cards vs. Cash transactions.
-
-### 6. Conversational AI Advisor (FinBot)
-- Contextual chat interface pre-loaded with quick question chips (*"How healthy is my budget?"*, *"Where am I overspending?"*, *"Tips to save ₹5,000"*).
-- Integrated with the **CO1 Financial Agent** to offer real numbers and explainable recommendations.
-- Multi-tab advisor views: Interactive Chat, Categorized Anomaly Insights, Over-Budget Alerts, and Strategic Saving Tips (50/30/20 Rule, 48-Hour Cart Rule).
-
-### 7. Settings & Local Data Management
-- User profile configuration (name, monthly income target, currency symbol).
-- Local storage data backup to downloadable `.json` snapshot.
-- One-click restore from previous JSON snapshot.
-- Factory reset with confirmation modal.
-
----
-
-## 🛠️ Complete Project Architecture & Directory Map
+## 🛠️ Complete System Architecture & Directory Map
 
 ```
-ai-personal-finance-manager/
-├── index.html                   # HTML5 entry with Inter font & viewport meta
-├── package.json                 # Dependencies, scripts (dev, build, preview, test)
-├── tsconfig.json                # TypeScript strict configuration (noUnusedLocals: true)
-├── vite.config.ts               # Vite bundler configuration (port 3000)
-├── tailwind.config.js           # Custom design tokens, dark mode & slate palette
-├── postcss.config.js            # PostCSS Autoprefixer plugin configuration
-├── powershell.cmd               # Local Windows PowerShell execution wrapper
+AI-Personal-finance-manager-/
+├── package.json                 # Dependencies (express, bcryptjs, jsonwebtoken, etc.)
+├── tsconfig.json                # Strict TypeScript configuration
+├── tsconfig.server.json         # Node.js server TypeScript configuration
+├── vite.config.ts               # Bundler configuration (Port 3000, /api proxy to 5001)
+├── tailwind.config.js           # Design tokens, dark mode & slate palette
+├── .env.example                 # Environment configuration template
+├── .env                         # Local runtime environment secrets
+├── data/
+│   └── finance.db               # SQLite database file (WAL mode, auto-created)
 │
-├── src/
-│   ├── main.tsx                 # React 18 DOM root mount
-│   ├── App.tsx                  # Master layout wrapper, tab router & toast host
-│   │
-│   ├── types/
-│   │   └── finance.ts           # Core TypeScript data contracts:
-│   │                            # Transaction, Budget, Goal, PerceptionState,
-│   │                            # AgentCondition, AgentAction, SearchState,
-│   │                            # SearchNode, SearchTrace, FinancialFact,
-│   │                            # ReasoningRule, MonteCarloConfig, MonteCarloResult
-│   │
-│   ├── utils/
-│   │   ├── formatters.ts        # formatINR (₹ Lakhs/Crores), formatDate, month utils
-│   │   └── calculations.ts      # Pure math: cash flow, safe allowance, health scores
-│   │
-│   ├── services/
-│   │   ├── demoData.ts          # Pre-populated realistic Indian INR financial dataset
-│   │   ├── storageService.ts    # localStorage persistence, JSON snapshot export/import
-│   │   ├── financialAgentService.ts    # [CO1] 5-Stage Autonomous Agent Engine
-│   │   ├── financialSearchService.ts   # [CO2] BFS and Best-First Search Engines
-│   │   ├── financialReasoningService.ts# [CO4] Forward-Chaining Rules & Monte Carlo
-│   │   └── aiAdvisorService.ts         # FinBot chat reasoning & prompt handler
-│   │
+├── server/                      # Express + SQLite Backend Architecture
+│   ├── index.ts                 # Server entry point (starts listener on port 5001)
+│   ├── app.ts                   # Express app setup, CORS, cookies, routes
+│   ├── db/
+│   │   ├── database.ts          # Native DatabaseSync SQLite connection & schema DDL
+│   │   └── seed.ts              # Explicit dev-only demo seed utility
+│   ├── middleware/
+│   │   ├── auth.ts              # JWT authentication & session verification middleware
+│   │   └── rateLimiter.ts       # Auth rate limiter (bypassed in test mode)
+│   ├── routes/
+│   │   ├── auth.ts              # /api/auth/register, /login, /logout, /me
+│   │   ├── transactions.ts      # /api/transactions CRUD with user isolation
+│   │   ├── budgets.ts           # /api/budgets CRUD with user isolation
+│   │   ├── goals.ts             # /api/goals CRUD + /deposit and /withdraw actions
+│   │   ├── user.ts              # /api/user/profile update
+│   │   └── data.ts              # /api/data/dev-seed, /export, /import
+│   └── tests/
+│       └── authAndIsolation.test.ts # 19 automated integration tests (Supertest)
+│
+├── src/                         # React 18 + TypeScript Frontend Architecture
+│   ├── main.tsx                 # React DOM mount point
+│   ├── App.tsx                  # Root layout, router, Auth gating
 │   ├── context/
-│   │   └── FinanceContext.tsx   # Global React context: transactions, budgets,
-│   │                            # goals, active agent goal, theme, toast dispatch
-│   │
+│   │   ├── AuthContext.tsx      # Auth state (user, login, register, logout, init)
+│   │   └── FinanceContext.tsx   # Financial state synced with backend API
+│   ├── services/
+│   │   ├── api.ts               # Fetch client with credentials and token support
+│   │   ├── financialAgentService.ts     # [CO1] 5-Stage Agent Loop
+│   │   ├── financialSearchService.ts    # [CO2] BFS & Best-First Search
+│   │   ├── financialReasoningService.ts # [CO4] Rule Engine & Monte Carlo
+│   │   └── aiAdvisorService.ts          # FinBot conversational reasoning
 │   ├── components/
+│   │   ├── auth/
+│   │   │   ├── LoginPage.tsx    # Clean, responsive sign-in interface
+│   │   │   └── RegisterPage.tsx # Registration with password confirmation
 │   │   ├── common/
-│   │   │   ├── Header.tsx       # Top bar: greeting, month filter, theme switch
-│   │   │   ├── Sidebar.tsx      # Desktop navigation bar with balance preview
-│   │   │   ├── MobileNav.tsx    # Mobile responsive bottom navigation
-│   │   │   ├── Modal.tsx        # Accessible dialog wrapper with backdrop blur
-│   │   │   ├── Toast.tsx        # Animated status notification toast
-│   │   │   ├── ProgressBar.tsx  # Color-coded progress bar (Safe/Warning/Danger)
-│   │   │   └── EmptyState.tsx   # Visual empty states for zero-data views
-│   │   │
+│   │   │   ├── Header.tsx       # Dynamic month selector, sign out, greeting
+│   │   │   ├── Sidebar.tsx      # Navigation with net surplus preview & user badge
+│   │   │   └── EmptyState.tsx   # Professional empty states for zero-data
 │   │   ├── dashboard/
 │   │   │   ├── DashboardView.tsx       # Master dashboard screen
-│   │   │   ├── MetricCard.tsx          # 4 Top summary KPI cards
-│   │   │   ├── SpendingBreakdown.tsx   # Donut chart & legend
-│   │   │   ├── GoalsProgressWidget.tsx # Savings goals preview widget
-│   │   │   ├── RecentTransactions.tsx  # Real-time transaction feed
-│   │   │   ├── AdvisorSummaryCard.tsx  # AI Advisor highlight banner
-│   │   │   └── BudgetOverviewWidget.tsx# Budget status preview
-│   │   │
-│   │   ├── transactions/
-│   │   │   ├── TransactionListView.tsx # Full transactions table with filters & search
-│   │   │   ├── TransactionItem.tsx     # Table row with badges & action buttons
-│   │   │   ├── TransactionFormModal.tsx# Add & Edit transaction form modal
-│   │   │   └── DeleteConfirmModal.tsx  # Delete confirmation dialog
-│   │   │
+│   │   │   ├── AdvisorSummaryCard.tsx  # [CO1] Live Agent Card with manual triggers
+│   │   │   └── BudgetOverviewWidget.tsx# [CO4] Budget widget with rule alerts
+│   │   ├── transactions/        # Transaction list, modal form, filter tabs
 │   │   ├── budget/
-│   │   │   ├── BudgetPlannerView.tsx   # Master budget planner screen
-│   │   │   ├── BudgetCard.tsx          # Category card with dynamic progress
-│   │   │   └── BudgetFormModal.tsx     # Add / Edit budget limit modal
-│   │   │
+│   │   │   ├── BudgetPlannerView.tsx   # [CO4] Budget planner with Rule Diagnostics
+│   │   │   ├── BudgetCard.tsx          # Category card with [CO4] Simulate Risk button
+│   │   │   ├── BudgetRiskModal.tsx     # [CO4] Monte Carlo simulation modal
+│   │   │   └── BudgetFormModal.tsx     # Budget limit modal
 │   │   ├── goals/
 │   │   │   ├── SavingsGoalsView.tsx    # Savings goals grid & summary
-│   │   │   ├── SavingsGoalCard.tsx     # Milestone card with countdown
-│   │   │   ├── GoalFormModal.tsx       # Add / Edit goal modal
-│   │   │   └── DepositModal.tsx        # Instant deposit/withdraw modal with preset chips
-│   │   │
-│   │   ├── analytics/
-│   │   │   └── AnalyticsView.tsx       # 5 Recharts visualizations & insights
-│   │   │
-│   │   ├── advisor/
-│   │   │   ├── AIAdvisorView.tsx       # Tabbed FinBot advisor suite
-│   │   │   ├── ChatInterface.tsx       # Interactive AI chat assistant
-│   │   │   ├── InsightCards.tsx        # Anomaly & velocity insight cards
-│   │   │   ├── BudgetAlertsList.tsx    # Over-budget warning alerts
-│   │   │   └── SavingTipsList.tsx      # Saving rules (50/30/20, 48-hr rule)
-│   │   │
-│   │   ├── ai-lab/
-│   │   │   ├── AIAlgorithmsLabView.tsx    # Master AI Lab screen with 3 CO tabs
-│   │   │   ├── IntelligentAgentPanel.tsx  # [CO1] 5-Stage Agent visualizer & slider
-│   │   │   ├── SearchAlgorithmsPanel.tsx  # [CO2] BFS vs Best-First comparator & trace
-│   │   │   └── ReasoningPanel.tsx         # [CO4] Forward-chaining & Monte Carlo UI
-│   │   │
-│   │   └── settings/
-│   │       └── SettingsView.tsx        # Profile, backup/restore, reset options
-│   │
-│   ├── tests/
-│   │   └── aiAlgorithms.test.ts        # Comprehensive Vitest suite (12 tests)
-│   │
-│   └── styles/
-│       └── index.css                   # Tailwind directives, animations & scrollbars
-│
-└── README.md
+│   │   │   ├── SavingsGoalCard.tsx     # Milestone card with [CO2] AI Plan button
+│   │   │   ├── GoalPlanModal.tsx       # [CO2] BFS & Best-First roadmap modal
+│   │   │   └── GoalFormModal.tsx       # Goal modal with [CO2] plan preview
+│   │   ├── analytics/           # 5 Recharts visualizations
+│   │   ├── advisor/             # FinBot AI chat assistant
+│   │   ├── ai-lab/              # CO1, CO2, CO4 dedicated interactive panels
+│   │   └── settings/            # Profile, backup/restore, dev seed
+│   ├── utils/
+│   │   ├── calculations.ts      # Pure financial math (cash flows, health score)
+│   │   └── formatters.ts        # formatINR (₹ Lakhs & Crores), dates
+│   └── tests/
+│       ├── aiAlgorithms.test.ts         # 12 Vitest tests for AI Lab (CO1, CO2, CO4)
+│       ├── workflowIntegration.test.ts  # 11 Vitest tests for workflow integration
+│       └── financialCalculations.test.ts# 7 Vitest tests for financial math
 ```
 
 ---
 
-## 📝 Comprehensive Change Log & Enhancements Audit
+## 🗄️ Database Schema & Migrations
 
-Below is the complete audit of everything developed, enhanced, and resolved across this project:
+The database is automatically initialized on backend startup in [`server/db/database.ts`](file:///c:/Users/haeue/OneDrive/Desktop/Jenoi/College/MP/AI-Personal-finance-manager-/server/db/database.ts).
 
-### 1. New Core AI Services Built From Scratch
-- **`financialAgentService.ts` (CO1):**
-  - Implemented the formal 5-stage agent cycle: `perceiveFinancialState`, `analyzeFinancialCondition`, `selectAgentAction`, `generateRecommendation`, and `evaluateActionOutcome`.
-  - Added support for 4 active goals (`avoid_budget_breach`, `reach_savings_goal`, `maintain_emergency_fund`, `reduce_discretionary`).
-  - Added counterfactual evaluation producing measurable before vs. after health score and savings rate comparisons.
-- **`financialSearchService.ts` (CO2):**
-  - Formulated the formal multi-month savings search problem $(m, S_m)$.
-  - Built pure TypeScript **Breadth-First Search (BFS)** using a FIFO queue and `Set<string>` visited-state tracking.
-  - Built pure TypeScript **Greedy Best-First Search** using a priority queue ordered by $h(n) = \max(0, \text{Target} - S_n)$.
-  - Added step-by-step trace logger capturing states expanded, frontier states, and execution time.
-  - Built algorithm comparator calculating state exploration ratios and execution metrics.
-- **`financialReasoningService.ts` (CO4):**
-  - Created forward-chaining inference engine evaluating 7 domain rules against extracted financial facts.
-  - Implemented Mulberry32 seeded 32-bit PRNG for 100% reproducible Monte Carlo simulations.
-  - Implemented Box-Muller Gaussian sampling for stochastic daily expenditure volatility.
-  - Computed quantiles ($P_{10}, P_{50}, P_{90}$) and dynamic budget breach risk probabilities.
-- **`aiAdvisorService.ts` Integration:**
-  - Integrated FinBot conversational agent directly with the CO1 agent recommendations and CO4 rule facts.
+### Tables:
 
-### 2. Dedicated AI Algorithms Lab Interface Added
-- **`AIAlgorithmsLabView.tsx`:** Master container tabbed by course outcomes:
-  - **Tab 1: CO1 Intelligent Agent:** Displays the visual 5-stage pipeline, active goal switcher, hypothetical spending spike slider, and counterfactual before vs. after comparison cards.
-  - **Tab 2: CO2 Search Techniques:** Displays problem parameters, execution buttons, comparative metric cards, and an interactive trace table with step-by-step state expansions.
-  - **Tab 3: CO4 Reasoning Under Uncertainty:** Displays working memory facts, fired forward-chaining rules with explanations, and the Monte Carlo budget risk simulator with quantile spectrum chart.
+#### 1. `users`
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | TEXT | PRIMARY KEY | Unique user ID (UUID v4) |
+| `name` | TEXT | NOT NULL | User's full name |
+| `email` | TEXT | UNIQUE NOT NULL | Normalized lowercase email |
+| `password_hash` | TEXT | NOT NULL | Bcrypt salt & hash (10 rounds) |
+| `monthly_income` | REAL | DEFAULT 0 | Target monthly income |
+| `currency` | TEXT | DEFAULT 'INR' | User's preferred currency |
+| `theme` | TEXT | DEFAULT 'dark' | UI theme preference |
+| `created_at` | TEXT | NOT NULL | ISO-8601 timestamp |
+| `updated_at` | TEXT | NOT NULL | ISO-8601 timestamp |
 
-### 3. Application Infrastructure & UI Modules Created
-- **Common & Layout:** `Header.tsx`, `Sidebar.tsx`, `MobileNav.tsx`, `Modal.tsx`, `Toast.tsx`, `ProgressBar.tsx`, `EmptyState.tsx`.
-- **Dashboard:** `DashboardView.tsx`, `MetricCard.tsx`, `SpendingBreakdown.tsx`, `GoalsProgressWidget.tsx`, `RecentTransactions.tsx`, `AdvisorSummaryCard.tsx`, `BudgetOverviewWidget.tsx`.
-- **Transactions:** `TransactionListView.tsx`, `TransactionItem.tsx`, `TransactionFormModal.tsx`, `DeleteConfirmModal.tsx`.
-- **Budgets:** `BudgetPlannerView.tsx`, `BudgetCard.tsx`, `BudgetFormModal.tsx`.
-- **Goals:** `SavingsGoalsView.tsx`, `SavingsGoalCard.tsx`, `GoalFormModal.tsx`, `DepositModal.tsx`.
-- **Analytics:** `AnalyticsView.tsx` with 5 Recharts visualizations.
-- **Advisor:** `AIAdvisorView.tsx`, `ChatInterface.tsx`, `InsightCards.tsx`, `BudgetAlertsList.tsx`, `SavingTipsList.tsx`.
-- **Settings:** `SettingsView.tsx` with JSON export/import and profile management.
-- **Data & Storage:** `demoData.ts` with authentic Indian financial records; `storageService.ts` with localStorage syncing.
+#### 2. `transactions`
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | TEXT | PRIMARY KEY | Unique transaction ID |
+| `user_id` | TEXT | NOT NULL, FK `users(id)` | Record owner |
+| `type` | TEXT | NOT NULL | `income`, `expense`, `deposit`, `withdrawal` |
+| `amount` | REAL | NOT NULL | Monetary amount (> 0, 2 decimals) |
+| `category` | TEXT | NOT NULL | Category name |
+| `description` | TEXT | - | Optional description note |
+| `date` | TEXT | NOT NULL | Transaction date (YYYY-MM-DD) |
+| `payment_mode` | TEXT | DEFAULT 'UPI' | UPI, Credit Card, Debit Card, Cash, etc. |
+| `goal_id` | TEXT | FK `savings_goals(id)` | Linked goal for deposits/withdrawals |
+| `created_at` | TEXT | NOT NULL | ISO-8601 timestamp |
+| `updated_at` | TEXT | NOT NULL | ISO-8601 timestamp |
 
-### 4. Build, TypeScript, and Dependency Fixes Resolved
-1. **Windows Subshell Tool Routing:**
-   - *Problem:* Local shell runner failed to find `powershell` in `%PATH%`.
-   - *Fix:* Created `powershell.cmd` wrapper in project root pointing directly to `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`.
-2. **TypeScript Strict Type Compliance (`TS6133` unused locals):**
-   - *Problem:* `tsconfig.json` enforces `"noUnusedLocals": true`. Minor unused imports or parameters caused compilation failures.
-   - *Fix:* Cleaned up all unused imports across `financialAgentService.ts`, `financialSearchService.ts`, `financialReasoningService.ts`, `aiAdvisorService.ts`, and components.
-3. **Rollup ESM Export Resolution (`lucide-react`):**
-   - *Problem:* Outdated `lucide-react@0.344.0` in lockfile failed during Rollup bundling on specific icon subpaths.
-   - *Fix:* Updated `lucide-react` to latest stable release (`npm i lucide-react@latest`).
-4. **Agent Action Selection Priority:**
-   - *Problem:* Agent selected the first breached budget alert rather than the most severe breach.
-   - *Fix:* Updated `selectAgentAction` in `financialAgentService.ts` to sort breached alerts by descending utilization (`utilization`), guaranteeing highest-risk intervention.
-5. **Production Build Success:**
-   - Ran `tsc && vite build`, successfully generating optimized bundle in `dist/` with zero warnings or errors.
+#### 3. `budgets`
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | TEXT | PRIMARY KEY | Unique budget ID |
+| `user_id` | TEXT | NOT NULL, FK `users(id)` | Record owner |
+| `category` | TEXT | NOT NULL | Budget category |
+| `amount` | REAL | NOT NULL | Spending cap amount (> 0) |
+| `period` | TEXT | DEFAULT 'monthly' | Budget cycle period |
+| `start_date` | TEXT | - | Period start date |
+| `end_date` | TEXT | - | Period end date |
+| `created_at` | TEXT | NOT NULL | ISO-8601 timestamp |
+| `updated_at` | TEXT | NOT NULL | ISO-8601 timestamp |
+
+#### 4. `savings_goals`
+| Column | Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `id` | TEXT | PRIMARY KEY | Unique goal ID |
+| `user_id` | TEXT | NOT NULL, FK `users(id)` | Record owner |
+| `name` | TEXT | NOT NULL | Goal name |
+| `target_amount` | REAL | NOT NULL | Target savings amount (> 0) |
+| `current_amount`| REAL | DEFAULT 0 | Accumulated balance |
+| `target_date` | TEXT | NOT NULL | Target deadline (YYYY-MM-DD) |
+| `category` | TEXT | - | Goal classification category |
+| `icon` | TEXT | - | Emoji icon indicator |
+| `created_at` | TEXT | NOT NULL | ISO-8601 timestamp |
+| `updated_at` | TEXT | NOT NULL | ISO-8601 timestamp |
 
 ---
 
-## 🧪 Automated Verification & Unit Test Suite
+## 📡 API Specification
 
-The project includes an automated test suite in [`src/tests/aiAlgorithms.test.ts`](file:///c:/Users/haeue/OneDrive/Desktop/Jenoi/College/MP/AI-Personal-finance-manager-/src/tests/aiAlgorithms.test.ts) built with **Vitest**.
+All `/api/*` endpoints (except `/api/auth/register`, `/api/auth/login`, and `/api/health`) require authentication via HttpOnly session cookie or `Authorization: Bearer <token>` header.
 
-### Run Tests:
+### Authentication Endpoints
+- `POST /api/auth/register` — Creates user, returns JWT and user profile.
+- `POST /api/auth/login` — Authenticates user credentials, sets session cookie.
+- `POST /api/auth/logout` — Invalidates session cookie.
+- `GET /api/auth/me` — Returns current authenticated user profile.
+
+### Transactions Endpoints
+- `GET /api/transactions` — Returns all transactions for the authenticated user.
+- `POST /api/transactions` — Creates a new transaction with validation.
+- `PUT /api/transactions/:id` — Updates an existing transaction (enforces ownership).
+- `DELETE /api/transactions/:id` — Deletes an existing transaction (enforces ownership).
+
+### Budgets Endpoints
+- `GET /api/budgets` — Returns all category budgets for the authenticated user.
+- `POST /api/budgets` — Creates or updates a category budget.
+- `PUT /api/budgets/:id` — Modifies budget parameters.
+- `DELETE /api/budgets/:id` — Deletes budget.
+
+### Savings Goals Endpoints
+- `GET /api/goals` — Returns savings goals for the authenticated user.
+- `POST /api/goals` — Creates a new savings goal.
+- `PUT /api/goals/:id` — Updates goal parameters.
+- `DELETE /api/goals/:id` — Deletes goal and cascades unlinked associations.
+- `POST /api/goals/:id/deposit` — Adds money to goal and records linked transaction.
+- `POST /api/goals/:id/withdraw` — Withdraws money from goal and records linked transaction.
+
+### Data & Backup Endpoints
+- `GET /api/data/export` — Downloads user-isolated JSON snapshot of all records.
+- `POST /api/data/import` — Securely imports records, assigning `user_id = req.user.id`.
+- `POST /api/data/dev-seed` — Explicit development-only action to seed sample Indian records.
+
+---
+
+## ⚙️ Environment Configuration
+
+Configuration is managed via environment variables. Create a `.env` file in the project root based on `.env.example`:
+
+```env
+# Server Configuration
+PORT=5001
+NODE_ENV=development
+
+# Database Settings
+DATABASE_FILE=./data/finance.db
+
+# Authentication Secrets (Replace with a strong secret in production!)
+JWT_SECRET=your-super-secret-jwt-key-replace-in-production-min-32-chars
+JWT_EXPIRES_IN=7d
+
+# CORS Configuration
+CORS_ORIGIN=http://localhost:3000
+```
+
+---
+
+## 🧪 Automated Verification & Unit Test Suite (49 Tests)
+
+The application includes **49 automated unit and integration tests** across four suites:
+
 ```bash
 npm test
 ```
 
-### Test Coverage Summary:
-| # | Test Name | Course Outcome | Status |
-| :-: | :--- | :-: | :-: |
-| 1 | Intelligent agent changes recommendation when financial state changes | **CO1** | ✅ PASSED |
-| 2 | Separates Perceive, Analyze, Decide, Act, Evaluate stages cleanly | **CO1** | ✅ PASSED |
-| 3 | BFS finds a valid plan for a reachable savings target | **CO2** | ✅ PASSED |
-| 4 | Search algorithms report failure correctly when no goal state is reachable | **CO2** | ✅ PASSED |
-| 5 | Search does not explore the same state repeatedly (`Set` tracking) | **CO2** | ✅ PASSED |
-| 6 | Best-First Search orders its frontier according to heuristic $h(n)$ | **CO2** | ✅ PASSED |
-| 7 | Compares BFS and Best-First Search on identical problem definitions | **CO2** | ✅ PASSED |
-| 8 | Rule-based reasoning fires correct rules for valid input conditions | **CO4** | ✅ PASSED |
-| 9 | Reasoning engine handles multiple simultaneously triggered rules | **CO4** | ✅ PASSED |
-| 10 | Probability estimator produces reproducible results with a fixed seed | **CO4** | ✅ PASSED |
-| 11 | Zero budget, empty transactions, or missing income does not crash app | Robustness | ✅ PASSED |
-| 12 | Financial calculations and Indian formatting (`₹`) handle edge cases | Formatting | ✅ PASSED |
+### Test Suite Breakdown:
 
-**Result:** `12 passed (12)` in `~1.5s`.
+#### 1. Workflow Integration: Normal Daily Workflow Tests (`src/tests/workflowIntegration.test.ts` — 11 tests)
+- **CO1:** Uses latest saved database transactions and budgets to perceive environment.
+- **CO1:** Identifies budget conditions and selects appropriate action on `avoid_budget_breach` goal.
+- **CO1:** Adapts advice when user switches active goal in normal workflow (`avoid_budget_breach`, `reach_savings_goal`, `maintain_emergency_fund`).
+- **CO1:** Produces counterfactual evaluation showing predicted improvement.
+- **CO2:** Generates a step-by-step roadmap for a specific savings goal using BFS.
+- **CO2:** Generates a roadmap for a specific savings goal using Greedy Best-First Search with heuristic $h(n)$.
+- **CO2:** Correctly reports failure when horizon or choices cannot satisfy goal.
+- **CO4:** Evaluates forward-chaining rules on saved user data and triggers budget overrun rule.
+- **CO4:** Evaluates near-breach rule when category utilization is $\ge 90\%$.
+- **CO4:** Runs Monte Carlo budget risk simulation on-demand for a category budget.
+- **CO4:** Produces $100\%$ deterministic Monte Carlo simulation results with the same random seed.
+
+#### 2. Academic AI Algorithms Lab Tests (`src/tests/aiAlgorithms.test.ts` — 12 tests)
+- **CO1:** Intelligent agent changes recommendation when financial state changes.
+- **CO1:** Separates Perceive, Analyze, Decide, Act, Evaluate stages cleanly.
+- **CO2:** BFS finds a valid plan for a reachable savings target.
+- **CO2:** Search algorithms report failure correctly when no goal state is reachable.
+- **CO2:** Search does not explore the same state repeatedly (`Set` tracking).
+- **CO2:** Best-First Search orders its frontier according to heuristic $h(n)$.
+- **CO2:** Compares BFS and Best-First Search on identical problem definitions.
+- **CO4:** Rule-based reasoning fires correct rules for valid input conditions.
+- **CO4:** Reasoning engine handles multiple simultaneously triggered rules.
+- **CO4:** Probability estimator produces reproducible results with a fixed seed.
+- **Robustness:** Zero budget, empty transactions, or missing income does not crash app.
+- **Formatting:** Financial calculations and Indian formatting (`₹`) handle edge cases.
+
+#### 3. Backend Authentication, Multi-Tenant Isolation & Persistence (`server/tests/authAndIsolation.test.ts` — 19 tests)
+- User registration with valid credentials.
+- Duplicate email registration rejection (`409 Conflict`).
+- Rejection of short passwords and missing fields.
+- Login with correct password issuance of JWT and HttpOnly cookie.
+- Rejection of incorrect password (`401 Unauthorized`).
+- Logout and session clearance.
+- Authentication requirement for protected `/api/transactions` endpoint.
+- Registration creates 0 default transactions for new user accounts.
+- Transaction amount exact persistence (no random numbers).
+- Decimal paise precision preservation.
+- Full CRUD operations with user isolation.
+- Cross-tenant security: User A cannot read User B's transactions (`404 Not Found`).
+- Cross-tenant security: User A cannot update User B's transactions (`404 Not Found`).
+- Cross-tenant security: User A cannot delete User B's transactions (`404 Not Found`).
+- Budgets CRUD and user isolation.
+- Savings goals CRUD and user isolation.
+- Goal deposits atomically create linked transactions.
+- Data export isolates user records strictly.
+- Data import assigns ownership to the authenticated user.
+
+#### 4. Financial Calculations & Cash Flow (`src/tests/financialCalculations.test.ts` — 7 tests)
+- Income calculation sums only income transactions.
+- Expense calculation sums only expense transactions.
+- Goal deposits and withdrawals are accurately aggregated.
+- Net savings formula correctly evaluates `Income - Expenses + Withdrawals - Deposits`.
+- Health score evaluation behaves predictably on zero, low, and high savings.
+- Currency formatter formats numbers with Indian grouping (`₹1,00,000.00`).
+- AI Reasoning engine handles empty transaction facts safely without crashing.
 
 ---
 
 ## 🚀 Getting Started (Run Locally)
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher; v22+ or v25 recommended)
 - `npm`
 
 ### Installation & Launch
 
-1. **Clone or open the repository directory:**
+1. **Clone the repository:**
    ```bash
+   git clone <repo-url>
    cd AI-Personal-finance-manager-
    ```
 
-2. **Install project dependencies:**
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Run unit test suite:**
+3. **Configure environment:**
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Run the full test suite:**
    ```bash
    npm test
    ```
 
-4. **Start local development server:**
+5. **Start frontend and backend concurrently:**
    ```bash
    npm run dev
    ```
+   - Frontend starts on: `http://localhost:3000`
+   - Backend API starts on: `http://localhost:5001`
 
-5. **Access the application:**
-   Open your browser and navigate to:
-   ```
-   http://localhost:3000
-   ```
-
-6. **Create production build:**
+6. **Build for production:**
    ```bash
    npm run build
    ```
@@ -493,62 +483,46 @@ npm test
 
 ## 🎓 Step-by-Step Academic Evaluation Demonstration Script
 
-When presenting or demonstrating this project for academic evaluation or viva, follow this structured walkthrough:
+Follow this structured script when demonstrating the platform for evaluation or viva:
 
-### Step 1: Core Financial Dashboard & INR Localization
-1. Open the application at `http://localhost:3000`.
-2. Point out the top greeting, current month selector, and the **4 KPI Cards** formatted in Indian Rupee format (`₹1,03,000` Total Balance, `₹85,000` Income, `₹32,600` Expenses, `61.6%` Savings Rate).
-3. Show the **Category Spending Donut** and the **Budget Overview Widget** highlighting the over-budget alert on `Food` (`100.4%`).
+### Step 1: Authentication & Multi-Tenant Isolation
+1. Open `http://localhost:3000`. You will be directed to the **Login** screen.
+2. Click **Create an account** and register **User A** (`alex@testbank.com`, password `Password123!`).
+3. Notice that the dashboard opens in an **Empty State** with ₹0.00 Income, ₹0.00 Expenses, ₹0.00 Net Savings, and no transactions.
+4. Click **+ Add Income** and record a Salary transaction:
+   - Type: `Income`
+   - Amount: `30000`
+   - Category: `Salary`
+   - Description: `Primary Monthly Salary`
+5. Observe the dashboard update instantly: Total Inflows **₹30,000.00**, Net Surplus **₹30,000.00**.
+6. **Reload the page (`F5`).** Confirm that the amount remains exactly **₹30,000.00** (no random changes or mock resets).
 
-### Step 2: CO1 Intelligent Agent Demonstration
-1. Click **AI Algorithms Lab** in the left sidebar (or bottom nav on mobile).
-2. Ensure you are on the **CO1: Intelligent Agent** tab.
-3. Walk through the 5-stage pipeline visible on screen:
-   - **Perceive:** Point out live inputs (Income: `₹85,000`, Spend: `₹32,600`, Run Rate: `₹32,600/mo`, Days Left).
-   - **Analyze:** Show detected conditions (e.g., `CRITICAL_BUDGET_BREACH` on Food, `HIGH_SAVINGS_CAPACITY`).
-   - **Decide:** Show selected action and active goal (`Avoid Budget Breaches`).
-   - **Act:** Read the concrete, explainable recommendation with real rupee figures.
-   - **Evaluate:** Show the counterfactual cards displaying predicted Health Score improvement (+6 pts) and surplus preservation.
-4. **Interactive What-If Test:**
-   - Change the active goal dropdown to `Accelerate Savings Targets`. Notice how the agent's decision shifts from budget containment to milestone allocation.
-   - Move the **Simulate Hypothetical Expense Spike** slider to `₹8,000` on `Entertainment`.
-   - Point out how the agent immediately re-evaluates in real-time, detecting the new breach and advising spending freezes.
+### Step 2: CO1 in Normal Workflow (Dashboard & AI Advisor)
+1. On the Dashboard, review the **FinBot Intelligence & Health Score** card.
+2. Click the **Request Advice** button. Notice the dynamic refresh indicator and timestamp (`Refreshed at ...`).
+3. Switch active goals directly on the card by clicking `Accelerate Savings Targets` or `Maintain Emergency Net`. Notice how the agent's recommended action and counterfactual metric change in real time.
+4. Click **Inspect 5-Stage Agent Pipeline (CO1)** to reveal the breakdown across Perceive, Analyze, Decide, Act, and Evaluate.
 
-### Step 3: CO2 Search Algorithms Demonstration
-1. Switch to the **CO2: Search Techniques** tab.
-2. Note the initial problem parameters: Current Savings: `₹5,000`, Target: `₹15,000`, Horizon: `4 Months`, Choices: `₹1,000, ₹2,500, ₹4,000`.
-3. Click **Compare Both Algorithms**:
-   - Point out that **BFS (FIFO Queue)** finds the plan with minimal months.
-   - Point out that **Greedy Best-First Search** prioritizes states with the smallest $h(n) = \max(0, \text{Target} - S_n)$.
-   - Review the **Comparative Analysis Summary** comparing states explored, max frontier, and execution time.
-4. Scroll to the **Search Execution Trace Table** and show how visited states are indexed by `${month}_${savings}` to prevent redundant state expansion.
+### Step 3: CO4 in Normal Workflow (Budget Planner)
+1. Navigate to **Budget Planner** in the sidebar.
+2. Review the **CO4 Forward-Chaining Rule Diagnostics** banner. Click **Inspect Rules** to see how formal IF-THEN rules evaluate live working memory facts.
+3. If no budget exists, click **+ Set Category Budget** (e.g. Food, Limit: `₹15,000`).
+4. On the Food budget card, click **🎲 Simulate Risk (CO4)**.
+5. In the **Budget Risk Simulation Modal**, observe the calculated breach probability, P10/P50/P90 quantiles, and the specific mitigation directive generated by the Monte Carlo engine.
 
-### Step 4: CO4 Reasoning Under Uncertainty Demonstration
-1. Switch to the **CO4: Reasoning Under Uncertainty** tab.
-2. **Part A (Forward-Chaining Rule Engine):**
-   - Inspect the **Working Memory Facts** extracted from active state.
-   - Inspect the **Fired Rules Table**: Show the premises, conclusions, and specific facts used for each triggered rule.
-3. **Part B (Monte Carlo Budget Risk Simulator):**
-   - Show the selected category (`Food`, Budget: `₹10,000`, Already Spent: `₹10,040`).
-   - Keep the seed at `42` (ensuring 100% reproducible results).
-   - Click **Execute Monte Carlo (N=1000)**.
-   - Note the calculated **Breach Probability (100%)** and **Critical Risk Level**.
-   - Review the statistical quantiles: $P_{10}$ (best-case), $P_{50}$ (median expected spend), and $P_{90}$ (worst-case stress scenario).
-   - Show the dynamic risk mitigation plan generated below the quantile graph.
+### Step 4: CO2 in Normal Workflow (Savings Goals)
+1. Navigate to **Savings Goals** in the sidebar.
+2. On any goal card (or click **+ New Savings Target** to create one), click **🧭 AI Plan**.
+3. In the **AI Savings Plan Modal**, switch between **Greedy Best-First** (heuristic distance) and **BFS (Minimal Steps)**.
+4. Observe the step-by-step monthly contribution roadmap ($M_1, M_2, \dots$) and the search execution metrics (states explored, execution time).
 
-### Step 5: FinBot Conversational Advisor & Full Integration
-1. Click **AI Advisor** in the sidebar.
-2. Click any quick prompt chip (e.g., *"How healthy is my budget?"* or *"What does the agent recommend?"*).
-3. Demonstrate that FinBot synthesizes findings from both the CO1 Agent and CO4 Rule Engine into a polite, contextual conversational reply.
-
----
-
-## 🔒 Privacy & Offline Integrity
-- **100% Client-Side:** All transactions, calculations, and simulations run entirely in the user's browser.
-- **Zero Cloud Leakage:** No financial data or telemetry is transmitted across the network.
-- **Persistence:** All data is safely stored in browser `localStorage`, with complete export and import capabilities for backup.
+### Step 5: Dedicated AI Algorithms Lab Demonstration
+1. Click **AI Algorithms Lab** in the navigation sidebar.
+2. **CO1 Tab:** Demonstrate the formal 5-stage agent cycle and use the **What-If Expense Spike Slider** to test counterfactual reasoning.
+3. **CO2 Tab:** Run **Compare Both Algorithms** to compare BFS against Best-First Search on explored states, max frontier, and search trace table.
+4. **CO4 Tab:** Inspect working memory facts, fired inference rules, and execute the full **Monte Carlo Budget Risk Simulator** ($N=1,000$, seed: `42`).
 
 ---
 
 ## 📄 License
-This project was developed for educational and academic evaluation purposes. Feel free to use, modify, and extend it with proper attribution.
+This project was developed for educational and academic evaluation purposes.

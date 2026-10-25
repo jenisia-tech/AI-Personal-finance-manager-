@@ -5,17 +5,17 @@ import { calculateCategoryExpenses } from '../../utils/calculations';
 import { formatINR } from '../../utils/formatters';
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Bills: '#0071E3', // Apple Blue
-  Food: '#34C759', // Apple Green
-  Shopping: '#FF9500', // Apple Orange
-  Transport: '#AF52DE', // Apple Purple
-  Entertainment: '#FF3B30', // Apple Red
-  Healthcare: '#5856D6',
-  Education: '#5AC8FA',
-  Investments: '#30B0C7',
-  Freelance: '#34C759',
-  Salary: '#0071E3',
-  Other: '#8E8E93',
+  Bills: '#FF5E97', // Bubblegum Pink
+  Food: '#10B981', // Sweet Mint
+  Shopping: '#FB923C', // Peach Lace
+  Transport: '#D946EF', // Bubblegum Orchid
+  Entertainment: '#F43F5E', // Strawberry Rose
+  Healthcare: '#A855F7', // Soft Lilac
+  Education: '#38BDF8', // Cotton Candy Sky
+  Investments: '#FF73B3', // Sweet Bubblegum Rose
+  Freelance: '#10B981',
+  Salary: '#FF5E97',
+  Other: '#B59F91', // Warm Lace Taupe
 };
 
 export const SpendingBreakdown: React.FC = () => {
@@ -26,7 +26,7 @@ export const SpendingBreakdown: React.FC = () => {
     .map(([name, value]) => ({
       name,
       value,
-      color: CATEGORY_COLORS[name] || '#8E8E93',
+      color: CATEGORY_COLORS[name] || '#B59F91',
     }))
     .filter(item => item.value > 0)
     .sort((a, b) => b.value - a.value);
@@ -35,14 +35,14 @@ export const SpendingBreakdown: React.FC = () => {
 
   if (data.length === 0) {
     return (
-      <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col items-center justify-center min-h-[300px]">
+      <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col items-center justify-center min-h-[300px]">
         <p className="text-sm text-apple-gray-400">No expenses recorded for this month</p>
       </div>
     );
   }
 
   return (
-    <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col justify-between">
+    <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col justify-between">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-sm font-semibold text-apple-gray-900 dark:text-white">

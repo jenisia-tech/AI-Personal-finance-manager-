@@ -4,11 +4,11 @@ import { useFinance } from '../../context/FinanceContext';
 import { formatINR } from '../../utils/formatters';
 
 const PAYMENT_COLORS: Record<string, string> = {
-  UPI: '#34C759',
-  'Credit Card': '#AF52DE',
-  'Debit Card': '#0071E3',
-  'Net Banking': '#FF9500',
-  Cash: '#8E8E93',
+  UPI: '#10B981', // Sweet Mint
+  'Credit Card': '#D946EF', // Bubblegum Orchid
+  'Debit Card': '#FF5E97', // Bubblegum Pink
+  'Net Banking': '#FB923C', // Peach Lace
+  Cash: '#B59F91', // Warm Lace Taupe
 };
 
 export const PaymentMethodChart: React.FC = () => {
@@ -32,12 +32,12 @@ export const PaymentMethodChart: React.FC = () => {
     .map(([method, amount]) => ({
       method,
       amount,
-      color: PAYMENT_COLORS[method] || '#0071E3',
+      color: PAYMENT_COLORS[method] || '#FF5E97',
     }))
     .filter(item => item.amount > 0);
 
   return (
-    <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
+    <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-apple-gray-900 dark:text-white">
           Payment Mode Distribution
@@ -51,9 +51,9 @@ export const PaymentMethodChart: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-            <XAxis dataKey="method" stroke="#8E8E93" fontSize={11} tickLine={false} />
+            <XAxis dataKey="method" stroke="#B59F91" fontSize={11} tickLine={false} />
             <YAxis
-              stroke="#8E8E93"
+              stroke="#B59F91"
               fontSize={11}
               tickLine={false}
               tickFormatter={(val) => `₹${val / 1000}k`}
@@ -61,9 +61,9 @@ export const PaymentMethodChart: React.FC = () => {
             <Tooltip
               formatter={(value: number) => [formatINR(value), 'Spent']}
               contentStyle={{
-                backgroundColor: 'rgba(21, 21, 24, 0.95)',
+                backgroundColor: 'rgba(34, 21, 32, 0.95)',
                 borderRadius: '10px',
-                border: 'none',
+                border: '1px solid rgba(255, 94, 151, 0.2)',
                 color: '#fff',
                 fontSize: '12px',
               }}

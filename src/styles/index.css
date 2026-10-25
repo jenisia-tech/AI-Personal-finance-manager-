@@ -4,19 +4,23 @@
 
 @layer base {
   :root {
-    --color-bg: #F5F5F7;
-    --color-card: #FFFFFF;
-    --color-text: #1D1D1F;
-    --color-text-subtle: #86868B;
-    --color-border: #E5E5EA;
+    --color-bg: #FAF5F0;
+    --color-card: #FFFDFB;
+    --color-text: #2B1D25;
+    --color-text-subtle: #8E756B;
+    --color-border: #EDE2D8;
+    --color-bubblegum: #FF5E97;
+    --color-lace: #FAF5F0;
   }
 
   .dark {
-    --color-bg: #0A0A0C;
-    --color-card: #151518;
-    --color-text: #F5F5F7;
-    --color-text-subtle: #A1A1A6;
-    --color-border: #2C2C2E;
+    --color-bg: #150D14;
+    --color-card: #221520;
+    --color-text: #FAF1F5;
+    --color-text-subtle: #BFA8B5;
+    --color-border: #3D2637;
+    --color-bubblegum: #FF6EA7;
+    --color-lace: #221520;
   }
 
   body {
@@ -28,7 +32,7 @@
   }
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars with delicate bubblegum accent */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -39,27 +43,27 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(142, 142, 147, 0.3);
+  background: rgba(255, 94, 151, 0.25);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(142, 142, 147, 0.5);
+  background: rgba(255, 94, 151, 0.5);
 }
 
-/* Glassmorphism helpers */
+/* Glassmorphism helpers for Bubblegum & Lace */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 253, 251, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(237, 226, 216, 0.8);
 }
 
 .dark .glass-panel {
-  background: rgba(21, 21, 24, 0.75);
+  background: rgba(34, 21, 32, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 110, 167, 0.15);
 }
 
 /* Animation utilities */
@@ -80,3 +84,5 @@
 .animate-pulse-subtle {
   animation: pulseSubtle 2.5s ease-in-out infinite;
 }
+
+/* FinIntel AI Bubblegum & Lace Theme Active */

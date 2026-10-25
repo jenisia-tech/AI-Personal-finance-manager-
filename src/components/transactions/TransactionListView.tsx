@@ -6,6 +6,8 @@ import {
   Filter,
   ArrowUpDown,
   ReceiptText,
+  ArrowDownRight,
+  ArrowUpRight,
 } from 'lucide-react';
 import { useFinance } from '../../context/FinanceContext';
 import { Transaction, TransactionType } from '../../types/finance';
@@ -53,6 +55,7 @@ export const TransactionListView: React.FC = () => {
 
   // Modal states
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [modalType, setModalType] = useState<TransactionType>('expense');
   const [editingTx, setEditingTx] = useState<Transaction | null>(null);
   const [deletingTx, setDeletingTx] = useState<Transaction | null>(null);
 
@@ -92,20 +95,33 @@ export const TransactionListView: React.FC = () => {
   }, [transactions, search, typeFilter, categoryFilter, paymentModeFilter, sortBy, sortOrder]);
 
   const totalFilteredAmount = useMemo(() => {
-    return filteredTransactions.reduce((sum, t) => sum + (t.type === 'income' ? t.amount : -t.amount), 0);
+    return filteredTransactions.reduce((sum, t) => {
+      if (t.type === 'income' || t.type === 'withdrawal') {
+        return sum + t.amount;
+      } else {
+        return sum - t.amount;
+      }
+    }, 0);
   }, [filteredTransactions]);
 
   const handleEditClick = (tx: Transaction) => {
     setEditingTx(tx);
+    setModalType(tx.type);
     setIsFormOpen(true);
   };
 
-  const handleFormSubmit = (data: Omit<Transaction, 'id' | 'createdAt'>) => {
+  const handleFormSubmit = async (data: Omit<Transaction, 'id' | 'createdAt'>) => {
     if (editingTx) {
-      updateTransaction(editingTx.id, data);
+      await updateTransaction(editingTx.id, data);
     } else {
-      addTransaction(data);
+      await addTransaction(data);
     }
+  };
+
+  const openAddModal = (type: TransactionType) => {
+    setEditingTx(null);
+    setModalType(type);
+    setIsFormOpen(true);
   };
 
   return (
@@ -117,34 +133,49 @@ export const TransactionListView: React.FC = () => {
             Transactions
           </h2>
           <p className="text-xs text-apple-gray-500 dark:text-apple-gray-400">
-            {filteredTransactions.length} transaction(s) recorded • Net Inflow/Outflow: {formatINR(totalFilteredAmount)}
+            {filteredTransactions.length} transaction(s) recorded • Net Cash Impact: {formatINR(totalFilteredAmount)}
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-white dark:bg-apple-gray-850 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-800 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-apple-gray-850 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-800 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 transition"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export CSV</span>
           </button>
 
+          {/* Clear Add Income Action */}
           <button
-            onClick={() => {
-              setEditingTx(null);
-              setIsFormOpen(true);
-            }}
-            className="flex items-center gap-1.5 px-4 py-2 bg-apple-blue hover:bg-apple-blue-hover text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
+            onClick={() => openAddModal('income')}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-apple-green hover:bg-green-600 text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
           >
-            <Plus className="w-4 h-4" />
-            <span>Add Transaction</span>
+            <ArrowDownRight className="w-3.5 h-3.5" />
+            <span>Add Income</span>
+          </button>
+
+          {/* Clear Add Expense Action */}
+          <button
+            onClick={() => openAddModal('expense')}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-apple-red hover:bg-red-600 text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
+          >
+            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Add Expense</span>
+          </button>
+
+          <button
+            onClick={() => openAddModal('expense')}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-apple-blue hover:bg-apple-blue-hover text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>More Types</span>
           </button>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-3">
+      <div className="p-4 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-3">
         <div className="flex flex-col md:flex-row items-center gap-3">
           {/* Search Input */}
           <div className="relative w-full md:flex-1">
@@ -159,12 +190,12 @@ export const TransactionListView: React.FC = () => {
           </div>
 
           {/* Type Filter Tabs */}
-          <div className="flex items-center gap-1 bg-apple-gray-100 dark:bg-apple-gray-850 p-1 rounded-apple-md w-full md:w-auto">
-            {(['all', 'income', 'expense'] as const).map((t) => (
+          <div className="flex items-center gap-1 bg-apple-gray-100 dark:bg-apple-gray-850 p-1 rounded-apple-md w-full md:w-auto overflow-x-auto">
+            {(['all', 'income', 'expense', 'deposit', 'withdrawal'] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTypeFilter(t)}
-                className={`flex-1 md:flex-none px-3 py-1.5 rounded-apple-sm text-xs font-semibold capitalize transition ${
+                className={`px-3 py-1.5 rounded-apple-sm text-xs font-semibold capitalize whitespace-nowrap transition ${
                   typeFilter === t
                     ? 'bg-white dark:bg-apple-gray-900 text-apple-gray-900 dark:text-white shadow-sm'
                     : 'text-apple-gray-500 hover:text-apple-gray-900 dark:hover:text-white'
@@ -235,15 +266,16 @@ export const TransactionListView: React.FC = () => {
         <EmptyState
           icon={<ReceiptText className="w-8 h-8" />}
           title="No Transactions Found"
-          description={search ? 'No matches found for your current filter query.' : 'Record your first transaction to start tracking.'}
-          actionText="Add Transaction"
-          onAction={() => {
-            setEditingTx(null);
-            setIsFormOpen(true);
-          }}
+          description={
+            search || typeFilter !== 'all' || categoryFilter !== 'All'
+              ? 'No matches found for your current filter query.'
+              : 'Record your first income or expense to start tracking your finances.'
+          }
+          actionText="Add Income"
+          onAction={() => openAddModal('income')}
         />
       ) : (
-        <div className="rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card overflow-hidden">
+        <div className="rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -280,14 +312,15 @@ export const TransactionListView: React.FC = () => {
         }}
         onSubmit={handleFormSubmit}
         initialData={editingTx}
+        initialType={modalType}
       />
 
       {/* Delete Confirmation Modal */}
       <DeleteConfirmModal
         isOpen={Boolean(deletingTx)}
         onClose={() => setDeletingTx(null)}
-        onConfirm={() => {
-          if (deletingTx) deleteTransaction(deletingTx.id);
+        onConfirm={async () => {
+          if (deletingTx) await deleteTransaction(deletingTx.id);
         }}
         transaction={deletingTx}
       />

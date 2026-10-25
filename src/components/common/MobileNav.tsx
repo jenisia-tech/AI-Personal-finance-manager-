@@ -24,7 +24,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ activeTab, setActiveTab })
   ];
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-[#0A0A0C]/90 backdrop-blur-xl border-t border-apple-gray-200 dark:border-apple-gray-800 px-2 py-2 flex items-center justify-around">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-apple-darkBg/90 backdrop-blur-xl border-t border-apple-gray-200 dark:border-apple-gray-800 px-2 py-2 flex items-center justify-around">
       {items.map((item) => {
         const Icon = item.icon;
         const isActive = activeTab === item.id;

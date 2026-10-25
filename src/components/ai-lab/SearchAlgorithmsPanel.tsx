@@ -117,7 +117,7 @@ export const SearchAlgorithmsPanel: React.FC = () => {
       </div>
 
       {/* Interactive Problem Configuration Panel */}
-      <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
+      <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-apple-gray-100 dark:border-apple-gray-800">
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-apple-gray-500">
@@ -225,7 +225,7 @@ export const SearchAlgorithmsPanel: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* BFS Card */}
         {bfsResult && (
-          <div className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col justify-between">
+          <div className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
@@ -303,7 +303,7 @@ export const SearchAlgorithmsPanel: React.FC = () => {
 
         {/* Best-First Search Card */}
         {bestFirstResult && (
-          <div className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col justify-between">
+          <div className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
@@ -398,7 +398,7 @@ export const SearchAlgorithmsPanel: React.FC = () => {
 
       {/* Step-by-Step Search Trace Table */}
       {activeTraceResult && (
-        <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
+        <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <h4 className="text-sm font-bold text-apple-gray-900 dark:text-white">

@@ -39,7 +39,7 @@ export function extractFinancialFacts(
   yearMonth?: string
 ): Record<string, FinancialFact> {
   const incomeFromTx = calculateTotalIncome(transactions, yearMonth);
-  const totalIncome = Math.max(incomeFromTx, monthlyIncomeBaseline);
+  const totalIncome = incomeFromTx > 0 ? incomeFromTx : (monthlyIncomeBaseline || 0);
   const totalExpenses = calculateTotalExpenses(transactions, yearMonth);
   const netSurplus = calculateNetSavings(totalIncome, totalExpenses);
   const savingsRate = calculateSavingsRate(totalIncome, totalExpenses);

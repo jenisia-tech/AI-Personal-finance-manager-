@@ -5,15 +5,21 @@ import { SavingsGoal } from '../../types/finance';
 import { SavingsGoalCard } from './SavingsGoalCard';
 import { GoalFormModal } from './GoalFormModal';
 import { DepositModal } from './DepositModal';
+import { GoalPlanModal } from './GoalPlanModal';
 import { EmptyState } from '../common/EmptyState';
 import { formatINR } from '../../utils/formatters';
 
-export const SavingsGoalsView: React.FC = () => {
+interface SavingsGoalsViewProps {
+  setActiveTab?: (tab: string) => void;
+}
+
+export const SavingsGoalsView: React.FC<SavingsGoalsViewProps> = ({ setActiveTab }) => {
   const { goals, addGoal, updateGoal, deleteGoal, depositToGoal, withdrawFromGoal } = useFinance();
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingGoal, setEditingGoal] = useState<SavingsGoal | null>(null);
   const [activeDepositGoal, setActiveDepositGoal] = useState<SavingsGoal | null>(null);
+  const [activePlanGoal, setActivePlanGoal] = useState<SavingsGoal | null>(null);
 
   const totalCurrentSaved = goals.reduce((sum, g) => sum + g.currentAmount, 0);
   const totalTargetRequired = goals.reduce((sum, g) => sum + g.targetAmount, 0);
@@ -48,7 +54,7 @@ export const SavingsGoalsView: React.FC = () => {
       </div>
 
       {/* Aggregate Milestones Stats Banner */}
-      <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div>
           <span className="text-xs font-semibold text-apple-gray-500 uppercase tracking-wider">
             Total Accumulated Savings
@@ -109,6 +115,7 @@ export const SavingsGoalsView: React.FC = () => {
               }}
               onDelete={(item) => deleteGoal(item.id)}
               onDeposit={(item) => setActiveDepositGoal(item)}
+              onPlan={(item) => setActivePlanGoal(item)}
             />
           ))}
         </div>
@@ -138,6 +145,14 @@ export const SavingsGoalsView: React.FC = () => {
         goal={activeDepositGoal}
         onDeposit={depositToGoal}
         onWithdraw={withdrawFromGoal}
+      />
+
+      {/* AI Savings Plan Modal (CO2 Search) */}
+      <GoalPlanModal
+        isOpen={Boolean(activePlanGoal)}
+        onClose={() => setActivePlanGoal(null)}
+        goal={activePlanGoal}
+        onOpenLab={setActiveTab ? () => setActiveTab('ai-lab') : undefined}
       />
     </div>
   );

@@ -71,8 +71,8 @@ export const AIAlgorithmsLabView: React.FC = () => {
               onClick={() => setActiveLabTab(tab.id as any)}
               className={`p-4 rounded-apple-xl text-left transition-all border ${
                 isActive
-                  ? 'bg-white dark:bg-[#151518] border-apple-blue ring-2 ring-apple-blue/30 shadow-apple-card-hover'
-                  : 'bg-white/60 dark:bg-[#151518]/60 border-apple-gray-200/80 dark:border-apple-gray-800 hover:bg-white dark:hover:bg-[#151518]'
+                  ? 'bg-white dark:bg-apple-darkCard border-apple-blue ring-2 ring-apple-blue/30 shadow-apple-card-hover'
+                  : 'bg-white/60 dark:bg-apple-darkCard/60 border-apple-gray-200/80 dark:border-apple-gray-800 hover:bg-white dark:hover:bg-apple-darkCard'
               }`}
             >
               <div className="flex items-center justify-between mb-2">

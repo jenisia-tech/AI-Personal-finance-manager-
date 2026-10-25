@@ -99,7 +99,7 @@ export const IntelligentAgentPanel: React.FC = () => {
       </div>
 
       {/* Interactive Controls & Goal Selector */}
-      <div className="p-5 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
+      <div className="p-5 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-apple-gray-500">
@@ -193,7 +193,7 @@ export const IntelligentAgentPanel: React.FC = () => {
       {/* 5-Stage Agent Cycle Flow Visualizer */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
         {/* Stage 1: Perceive */}
-        <div className="p-4 rounded-apple-lg bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
+        <div className="p-4 rounded-apple-lg bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
           <div className="flex items-center gap-2 text-apple-blue">
             <Eye className="w-4 h-4" />
             <span className="text-[11px] font-bold uppercase tracking-wider">1. Perceive</span>
@@ -207,7 +207,7 @@ export const IntelligentAgentPanel: React.FC = () => {
         </div>
 
         {/* Stage 2: Analyze */}
-        <div className="p-4 rounded-apple-lg bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
+        <div className="p-4 rounded-apple-lg bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
           <div className="flex items-center gap-2 text-apple-purple">
             <Activity className="w-4 h-4" />
             <span className="text-[11px] font-bold uppercase tracking-wider">2. Analyze</span>
@@ -221,7 +221,7 @@ export const IntelligentAgentPanel: React.FC = () => {
         </div>
 
         {/* Stage 3: Decide */}
-        <div className="p-4 rounded-apple-lg bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
+        <div className="p-4 rounded-apple-lg bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
           <div className="flex items-center gap-2 text-apple-orange">
             <GitBranch className="w-4 h-4" />
             <span className="text-[11px] font-bold uppercase tracking-wider">3. Decide</span>
@@ -234,7 +234,7 @@ export const IntelligentAgentPanel: React.FC = () => {
         </div>
 
         {/* Stage 4: Act */}
-        <div className="p-4 rounded-apple-lg bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
+        <div className="p-4 rounded-apple-lg bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
           <div className="flex items-center gap-2 text-apple-green">
             <Play className="w-4 h-4" />
             <span className="text-[11px] font-bold uppercase tracking-wider">4. Act</span>
@@ -250,7 +250,7 @@ export const IntelligentAgentPanel: React.FC = () => {
         </div>
 
         {/* Stage 5: Evaluate */}
-        <div className="p-4 rounded-apple-lg bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
+        <div className="p-4 rounded-apple-lg bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-2">
           <div className="flex items-center gap-2 text-apple-red">
             <Sparkles className="w-4 h-4" />
             <span className="text-[11px] font-bold uppercase tracking-wider">5. Evaluate</span>
@@ -265,7 +265,7 @@ export const IntelligentAgentPanel: React.FC = () => {
       </div>
 
       {/* Main Agent Decision & Recommendation Panel */}
-      <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-5">
+      <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card space-y-5">
         <div className="flex items-center justify-between pb-4 border-b border-apple-gray-100 dark:border-apple-gray-800">
           <div>
             <h3 className="text-sm font-bold text-apple-gray-900 dark:text-white flex items-center gap-2">
@@ -331,25 +331,25 @@ export const IntelligentAgentPanel: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
-            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-[#151518] border border-apple-gray-100 dark:border-apple-gray-800">
+            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-apple-darkCard border border-apple-gray-100 dark:border-apple-gray-800">
               <span className="text-[10px] text-apple-gray-400">Metric Evaluated</span>
               <div className="font-semibold text-apple-gray-900 dark:text-white mt-0.5">
                 {counterfactual.metricName}
               </div>
             </div>
-            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-[#151518] border border-apple-gray-100 dark:border-apple-gray-800">
+            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-apple-darkCard border border-apple-gray-100 dark:border-apple-gray-800">
               <span className="text-[10px] text-apple-gray-400">Current Value</span>
               <div className="font-semibold text-apple-gray-900 dark:text-white mt-0.5">
                 {counterfactual.before} {counterfactual.unit}
               </div>
             </div>
-            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-[#151518] border border-apple-gray-100 dark:border-apple-gray-800">
+            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-apple-darkCard border border-apple-gray-100 dark:border-apple-gray-800">
               <span className="text-[10px] text-apple-gray-400">Projected Value</span>
               <div className="font-semibold text-apple-green mt-0.5">
                 {counterfactual.after} {counterfactual.unit}
               </div>
             </div>
-            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-[#151518] border border-apple-gray-100 dark:border-apple-gray-800">
+            <div className="p-2.5 rounded-apple-sm bg-white dark:bg-apple-darkCard border border-apple-gray-100 dark:border-apple-gray-800">
               <span className="text-[10px] text-apple-gray-400">Outcome Quality</span>
               <div className="font-semibold text-apple-green mt-0.5 flex items-center gap-1">
                 <CheckCircle className="w-3.5 h-3.5" />

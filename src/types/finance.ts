@@ -1,4 +1,4 @@
-export type TransactionType = 'income' | 'expense';
+export type TransactionType = 'income' | 'expense' | 'deposit' | 'withdrawal';
 
 export type TransactionCategory =
   | 'Food'
@@ -23,25 +23,32 @@ export type PaymentMode =
 
 export interface Transaction {
   id: string;
+  userId?: string;
   type: TransactionType;
   amount: number;
   category: TransactionCategory;
   paymentMode: PaymentMode;
   date: string; // YYYY-MM-DD
   description: string;
+  goalId?: string;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface Budget {
   id: string;
+  userId?: string;
   category: TransactionCategory;
   limit: number;
   period: 'monthly';
   alertThreshold: number; // percentage, e.g. 80
+  startDate?: string;
+  endDate?: string;
 }
 
 export interface SavingsGoal {
   id: string;
+  userId?: string;
   title: string;
   targetAmount: number;
   currentAmount: number;
@@ -52,12 +59,15 @@ export interface SavingsGoal {
 }
 
 export interface UserProfile {
+  id?: string;
   name: string;
   email: string;
   monthlyIncome: number;
   currency: string;
   theme: 'light' | 'dark';
   apiKey?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface FinancialHealthScore {
@@ -73,7 +83,7 @@ export interface FinancialHealthScore {
 
 export interface FilterOptions {
   search: string;
-  type: 'all' | 'income' | 'expense';
+  type: 'all' | TransactionType;
   category: string;
   paymentMode: string;
   sortBy: 'date' | 'amount';
@@ -218,8 +228,10 @@ export interface SavingsPlanStep {
   resultingSavings: number;
 }
 
+export type SearchAlgorithmType = 'BFS' | 'BestFirst';
+
 export interface SearchResult {
-  algorithm: 'BFS' | 'BestFirst';
+  algorithm: SearchAlgorithmType;
   success: boolean;
   plan: SavingsPlanStep[];
   totalSaved: number;

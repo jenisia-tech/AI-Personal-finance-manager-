@@ -71,7 +71,8 @@ export const aiAdvisorService = {
     monthlyIncomeBaseline: number = 0,
     yearMonth?: string
   ): InsightCardData[] {
-    const totalIncome = Math.max(calculateTotalIncome(transactions, yearMonth), monthlyIncomeBaseline);
+    const incomeFromTx = calculateTotalIncome(transactions, yearMonth);
+    const totalIncome = incomeFromTx > 0 ? incomeFromTx : (monthlyIncomeBaseline || 0);
     const totalExpenses = calculateTotalExpenses(transactions, yearMonth);
     const categoryExpenses = calculateCategoryExpenses(transactions, yearMonth);
     const daysElapsed = getDaysElapsedInMonth();
@@ -248,7 +249,8 @@ export const aiAdvisorService = {
     yearMonth?: string
   ): Promise<{ text: string; chips?: string[]; recommendation?: AgentRecommendation }> {
     const query = userMessage.toLowerCase().trim();
-    const totalIncome = Math.max(calculateTotalIncome(transactions, yearMonth), profile.monthlyIncome);
+    const incomeFromTx = calculateTotalIncome(transactions, yearMonth);
+    const totalIncome = incomeFromTx > 0 ? incomeFromTx : (profile.monthlyIncome || 0);
     const totalExpenses = calculateTotalExpenses(transactions, yearMonth);
     const netSurplus = calculateNetSavings(totalIncome, totalExpenses);
     const savingsRate = calculateSavingsRate(totalIncome, totalExpenses);

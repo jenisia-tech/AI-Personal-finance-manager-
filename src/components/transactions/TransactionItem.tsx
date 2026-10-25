@@ -1,5 +1,5 @@
 import React from 'react';
-import { Edit2, Trash2, ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { Edit2, Trash2, ArrowDownRight, ArrowUpRight, ArrowRightLeft } from 'lucide-react';
 import { Transaction } from '../../types/finance';
 import { formatINR, formatDate } from '../../utils/formatters';
 
@@ -15,6 +15,8 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
   onDelete,
 }) => {
   const isIncome = transaction.type === 'income';
+  const isDeposit = transaction.type === 'deposit';
+  const isWithdrawal = transaction.type === 'withdrawal';
 
   return (
     <tr className="hover:bg-apple-gray-50/80 dark:hover:bg-apple-gray-850/50 transition border-b border-apple-gray-100 dark:border-apple-gray-800/80 text-xs">
@@ -25,11 +27,17 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
             className={`p-1.5 rounded-apple-sm flex items-center justify-center ${
               isIncome
                 ? 'bg-apple-green/10 text-apple-green'
+                : isDeposit
+                ? 'bg-apple-blue/10 text-apple-blue'
+                : isWithdrawal
+                ? 'bg-apple-orange/10 text-apple-orange'
                 : 'bg-apple-red/10 text-apple-red'
             }`}
           >
             {isIncome ? (
               <ArrowDownRight className="w-3.5 h-3.5" />
+            ) : isDeposit || isWithdrawal ? (
+              <ArrowRightLeft className="w-3.5 h-3.5" />
             ) : (
               <ArrowUpRight className="w-3.5 h-3.5" />
             )}
@@ -47,9 +55,16 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
 
       {/* Category Badge */}
       <td className="py-3 px-4">
-        <span className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-apple-gray-100 dark:bg-apple-gray-800 text-apple-gray-700 dark:text-apple-gray-300">
-          {transaction.category}
-        </span>
+        <div className="flex items-center gap-1.5">
+          <span className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-apple-gray-100 dark:bg-apple-gray-800 text-apple-gray-700 dark:text-apple-gray-300">
+            {transaction.category}
+          </span>
+          {(isDeposit || isWithdrawal) && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider bg-apple-blue/10 text-apple-blue">
+              {isDeposit ? 'Deposit' : 'Withdrawal'}
+            </span>
+          )}
+        </div>
       </td>
 
       {/* Payment Mode */}
@@ -60,10 +75,16 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
       {/* Amount */}
       <td
         className={`py-3 px-4 font-bold text-right whitespace-nowrap ${
-          isIncome ? 'text-apple-green' : 'text-apple-gray-900 dark:text-white'
+          isIncome
+            ? 'text-apple-green'
+            : isDeposit
+            ? 'text-apple-blue'
+            : isWithdrawal
+            ? 'text-apple-orange'
+            : 'text-apple-gray-900 dark:text-white'
         }`}
       >
-        {isIncome ? '+' : '-'}
+        {isIncome ? '+' : isWithdrawal ? '+' : '-'}
         {formatINR(transaction.amount)}
       </td>
 

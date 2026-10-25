@@ -29,3 +29,9 @@ dist-ssr
 !.env.example
 .vite
 .gemini
+
+# Database & local data
+data/
+*.db
+*.db-journal
+*.sqlite

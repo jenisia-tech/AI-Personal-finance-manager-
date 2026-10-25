@@ -49,7 +49,7 @@ export const Modal: React.FC<ModalProps> = ({
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-[#151518] rounded-apple-xl shadow-apple-modal border border-apple-gray-200 dark:border-apple-gray-800 p-6 z-10 animate-fade-in my-8 max-h-[90vh] flex flex-col`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-apple-darkCard rounded-apple-xl shadow-apple-modal border border-apple-gray-200 dark:border-apple-gray-800 p-6 z-10 animate-fade-in my-8 max-h-[90vh] flex flex-col`}
       >
         {/* Header */}
         <div className="flex items-start justify-between pb-4 border-b border-apple-gray-100 dark:border-apple-gray-800/80">

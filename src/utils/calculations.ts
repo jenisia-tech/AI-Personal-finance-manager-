@@ -28,8 +28,27 @@ export function calculateTotalExpenses(transactions: Transaction[], yearMonth?: 
     .reduce((sum, t) => sum + t.amount, 0);
 }
 
-export function calculateNetSavings(income: number, expenses: number): number {
-  return income - expenses;
+export function calculateTotalDeposits(transactions: Transaction[], yearMonth?: string): number {
+  const filtered = filterTransactionsByMonth(transactions, yearMonth);
+  return filtered
+    .filter(t => t.type === 'deposit')
+    .reduce((sum, t) => sum + t.amount, 0);
+}
+
+export function calculateTotalWithdrawals(transactions: Transaction[], yearMonth?: string): number {
+  const filtered = filterTransactionsByMonth(transactions, yearMonth);
+  return filtered
+    .filter(t => t.type === 'withdrawal')
+    .reduce((sum, t) => sum + t.amount, 0);
+}
+
+export function calculateNetSavings(
+  income: number,
+  expenses: number,
+  deposits: number = 0,
+  withdrawals: number = 0
+): number {
+  return income + withdrawals - expenses - deposits;
 }
 
 export function calculateSavingsRate(income: number, expenses: number): number {

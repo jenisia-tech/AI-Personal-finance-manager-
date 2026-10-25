@@ -79,7 +79,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onOpenLab }) => {
   };
 
   return (
-    <div className="flex flex-col h-[600px] rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card overflow-hidden">
+    <div className="flex flex-col h-[600px] rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card overflow-hidden">
       {/* Chat Header */}
       <div className="p-4 border-b border-apple-gray-100 dark:border-apple-gray-800 flex items-center justify-between bg-apple-gray-50/50 dark:bg-apple-gray-850/50">
         <div className="flex items-center gap-3">
@@ -184,7 +184,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onOpenLab }) => {
           e.preventDefault();
           handleSend();
         }}
-        className="p-3 border-t border-apple-gray-100 dark:border-apple-gray-800 bg-white dark:bg-[#151518] flex items-center gap-2"
+        className="p-3 border-t border-apple-gray-100 dark:border-apple-gray-800 bg-white dark:bg-apple-darkCard flex items-center gap-2"
       >
         <input
           type="text"

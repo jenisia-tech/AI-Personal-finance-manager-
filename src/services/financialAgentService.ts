@@ -71,10 +71,8 @@ export function perceiveFinancialState(
   monthlyIncomeBaseline: number = 0,
   yearMonth?: string
 ): AgentPerception {
-  const totalIncome = Math.max(
-    calculateTotalIncome(transactions, yearMonth),
-    monthlyIncomeBaseline
-  );
+  const calculatedIncome = calculateTotalIncome(transactions, yearMonth);
+  const totalIncome = calculatedIncome > 0 ? calculatedIncome : (monthlyIncomeBaseline || 0);
   const totalExpenses = calculateTotalExpenses(transactions, yearMonth);
   const netSurplus = calculateNetSavings(totalIncome, totalExpenses);
   const savingsRate = calculateSavingsRate(totalIncome, totalExpenses);

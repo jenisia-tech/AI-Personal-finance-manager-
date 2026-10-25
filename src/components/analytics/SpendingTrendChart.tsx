@@ -35,7 +35,7 @@ export const SpendingTrendChart: React.FC = () => {
   }));
 
   return (
-    <div className="p-6 rounded-apple-xl bg-white dark:bg-[#151518] border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
+    <div className="p-6 rounded-apple-xl bg-white dark:bg-apple-darkCard border border-apple-gray-200/80 dark:border-apple-gray-800 shadow-apple-card">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-apple-gray-900 dark:text-white">
           Daily Spending Velocity
@@ -50,14 +50,14 @@ export const SpendingTrendChart: React.FC = () => {
           <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="spendGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0071E3" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#0071E3" stopOpacity={0.0} />
+                <stop offset="5%" stopColor="#FF5E97" stopOpacity={0.35} />
+                <stop offset="95%" stopColor="#FF5E97" stopOpacity={0.0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" opacity={0.15} vertical={false} />
-            <XAxis dataKey="day" stroke="#8E8E93" fontSize={11} tickLine={false} />
+            <XAxis dataKey="day" stroke="#B59F91" fontSize={11} tickLine={false} />
             <YAxis
-              stroke="#8E8E93"
+              stroke="#B59F91"
               fontSize={11}
               tickLine={false}
               tickFormatter={(val) => `₹${val}`}
@@ -65,9 +65,9 @@ export const SpendingTrendChart: React.FC = () => {
             <Tooltip
               formatter={(value: number) => [formatINR(value), 'Spent']}
               contentStyle={{
-                backgroundColor: 'rgba(21, 21, 24, 0.95)',
+                backgroundColor: 'rgba(34, 21, 32, 0.95)',
                 borderRadius: '10px',
-                border: 'none',
+                border: '1px solid rgba(255, 94, 151, 0.2)',
                 color: '#fff',
                 fontSize: '12px',
               }}
@@ -75,8 +75,8 @@ export const SpendingTrendChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="Spent"
-              stroke="#0071E3"
-              strokeWidth={2}
+              stroke="#FF5E97"
+              strokeWidth={2.5}
               fillOpacity={1}
               fill="url(#spendGradient)"
             />
