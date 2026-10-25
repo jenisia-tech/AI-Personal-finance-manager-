@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import {
+  ArrowUpRight,
+  ArrowDownRight,
+  PiggyBank,
+  TrendingDown,
+} from 'lucide-react';
 import { Modal } from '../common/Modal';
 import {
   Transaction,
@@ -123,207 +129,222 @@ export const TransactionFormModal: React.FC<TransactionFormModalProps> = ({
           : 'Record Outflow / Expense'
       }
       subtitle="Track your inflows and outflows in Indian Rupees (₹)"
-      maxWidth="md"
+      maxWidth="xl"
+      scrollable={false}
     >
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {error && (
-          <div className="p-2.5 rounded-apple-sm bg-apple-red/10 border border-apple-red/20 text-apple-red text-xs font-medium">
-            {error}
-          </div>
-        )}
+      <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0">
+        <div className="flex-1 space-y-3 pr-0.5 overflow-y-auto min-h-0">
+          {error && (
+            <div className="p-3 rounded-apple-md bg-apple-red/10 border border-apple-red/20 text-apple-red text-xs font-medium flex items-center gap-2">
+              <span>{error}</span>
+            </div>
+          )}
 
-        {/* Type Toggle Tabs */}
-        <div>
-          <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1.5">
-            Transaction Classification
-          </label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 bg-apple-gray-100 dark:bg-apple-gray-850 p-1 rounded-apple-md">
-            <button
-              type="button"
-              onClick={() => {
-                setType('expense');
-                if (category === 'Salary' || category === 'Freelance') setCategory('Food');
-              }}
-              className={`py-2 text-xs font-semibold rounded-apple-sm transition ${
-                type === 'expense'
-                  ? 'bg-white dark:bg-apple-gray-900 text-apple-red shadow-sm'
-                  : 'text-apple-gray-500 hover:text-apple-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Expense (-)
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setType('income');
-                setCategory('Salary');
-              }}
-              className={`py-2 text-xs font-semibold rounded-apple-sm transition ${
-                type === 'income'
-                  ? 'bg-white dark:bg-apple-gray-900 text-apple-green shadow-sm'
-                  : 'text-apple-gray-500 hover:text-apple-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Income (+)
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setType('deposit');
-                setCategory('Investments');
-              }}
-              className={`py-2 text-xs font-semibold rounded-apple-sm transition ${
-                type === 'deposit'
-                  ? 'bg-white dark:bg-apple-gray-900 text-apple-blue shadow-sm'
-                  : 'text-apple-gray-500 hover:text-apple-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Deposit (Goal)
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setType('withdrawal');
-                setCategory('Investments');
-              }}
-              className={`py-2 text-xs font-semibold rounded-apple-sm transition ${
-                type === 'withdrawal'
-                  ? 'bg-white dark:bg-apple-gray-900 text-apple-orange shadow-sm'
-                  : 'text-apple-gray-500 hover:text-apple-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Withdrawal
-            </button>
+          {/* Type Toggle Tabs */}
+          <div>
+            <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1.5">
+              Transaction Classification
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-apple-gray-100/90 dark:bg-apple-gray-850/90 p-1.5 rounded-apple-lg border border-apple-gray-200/60 dark:border-apple-gray-800/60">
+              <button
+                type="button"
+                onClick={() => {
+                  setType('expense');
+                  if (category === 'Salary' || category === 'Freelance') setCategory('Food');
+                }}
+                className={`flex items-center justify-center gap-1.5 py-2 px-2.5 text-xs font-semibold rounded-apple-md transition-all duration-150 whitespace-nowrap ${
+                  type === 'expense'
+                    ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-sm font-bold'
+                    : 'text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-apple-gray-800/60 border border-transparent'
+                }`}
+              >
+                <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+                <span>Expense (-)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setType('income');
+                  setCategory('Salary');
+                }}
+                className={`flex items-center justify-center gap-1.5 py-2 px-2.5 text-xs font-semibold rounded-apple-md transition-all duration-150 whitespace-nowrap ${
+                  type === 'income'
+                    ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 shadow-sm font-bold'
+                    : 'text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-apple-gray-800/60 border border-transparent'
+                }`}
+              >
+                <ArrowDownRight className="w-3.5 h-3.5 shrink-0" />
+                <span>Income (+)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setType('deposit');
+                  setCategory('Investments');
+                }}
+                className={`flex items-center justify-center gap-1.5 py-2 px-2.5 text-xs font-semibold rounded-apple-md transition-all duration-150 whitespace-nowrap ${
+                  type === 'deposit'
+                    ? 'bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800 shadow-sm font-bold'
+                    : 'text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-apple-gray-800/60 border border-transparent'
+                }`}
+              >
+                <PiggyBank className="w-3.5 h-3.5 shrink-0" />
+                <span>Goal Deposit</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setType('withdrawal');
+                  setCategory('Investments');
+                }}
+                className={`flex items-center justify-center gap-1.5 py-2 px-2.5 text-xs font-semibold rounded-apple-md transition-all duration-150 whitespace-nowrap ${
+                  type === 'withdrawal'
+                    ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 shadow-sm font-bold'
+                    : 'text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-apple-gray-800/60 border border-transparent'
+                }`}
+              >
+                <TrendingDown className="w-3.5 h-3.5 shrink-0" />
+                <span>Withdrawal</span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Linked Goal Selector if Deposit or Withdrawal */}
-        {(type === 'deposit' || type === 'withdrawal') && goals.length > 0 && (
+          {/* Linked Goal Selector if Deposit or Withdrawal */}
+          {(type === 'deposit' || type === 'withdrawal') && goals.length > 0 && (
+            <div>
+              <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
+                Linked Savings Goal (Optional)
+              </label>
+              <select
+                id="tx-goal-id"
+                value={goalId}
+                onChange={(e) => setGoalId(e.target.value)}
+                className="w-full px-3 py-2 bg-apple-gray-50/80 dark:bg-apple-gray-850/80 border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-md text-xs font-medium text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-bubblegum focus:border-transparent transition"
+              >
+                <option value="">None (Independent Transfer)</option>
+                {goals.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.icon} {g.title} (Current: ₹{g.currentAmount.toLocaleString('en-IN')})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Amount in INR */}
           <div>
             <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
-              Linked Savings Goal (Optional)
+              Exact Amount in INR (₹)
             </label>
-            <select
-              value={goalId}
-              onChange={(e) => setGoalId(e.target.value)}
-              className="w-full p-2 bg-apple-gray-50 dark:bg-apple-gray-850 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            >
-              <option value="">None (Independent Transfer)</option>
-              {goals.map((g) => (
-                <option key={g.id} value={g.id}>
-                  {g.icon} {g.title} (Current: ₹{g.currentAmount.toLocaleString('en-IN')})
-                </option>
-              ))}
-            </select>
+            <div className="relative flex items-center">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-apple-gray-500 dark:text-apple-gray-400 font-bold text-sm">
+                ₹
+              </span>
+              <input
+                id="tx-amount"
+                type="number"
+                step="any"
+                min="0.01"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="e.g. 25000"
+                className="w-full pl-9 pr-3.5 py-2 bg-apple-gray-50/80 dark:bg-apple-gray-850/80 border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-md text-sm font-semibold text-apple-gray-900 dark:text-white placeholder:text-apple-gray-400 focus:outline-none focus:ring-2 focus:ring-bubblegum focus:border-transparent transition"
+                required
+              />
+            </div>
           </div>
-        )}
 
-        {/* Amount in INR */}
-        <div>
-          <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
-            Exact Amount in INR (₹)
-          </label>
-          <div className="relative">
-            <span className="absolute left-3 top-2.5 text-apple-gray-400 font-bold text-sm">
-              ₹
-            </span>
+          {/* Category & Payment Mode */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
+                Category
+              </label>
+              <select
+                id="tx-category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value as TransactionCategory)}
+                className="w-full px-3 py-2 bg-apple-gray-50/80 dark:bg-apple-gray-850/80 border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-md text-xs font-medium text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-bubblegum focus:border-transparent transition"
+              >
+                {CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
+                Payment Mode
+              </label>
+              <select
+                id="tx-payment-mode"
+                value={paymentMode}
+                onChange={(e) => setPaymentMode(e.target.value as PaymentMode)}
+                className="w-full px-3 py-2 bg-apple-gray-50/80 dark:bg-apple-gray-850/80 border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-md text-xs font-medium text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-bubblegum focus:border-transparent transition"
+              >
+                {PAYMENT_MODES.map((mode) => (
+                  <option key={mode} value={mode}>
+                    {mode}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Date */}
+          <div>
+            <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
+              Transaction Date
+            </label>
             <input
-              type="number"
-              step="any"
-              min="0.01"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="e.g. 25000"
-              className="w-full pl-8 pr-3 py-2 bg-apple-gray-50 dark:bg-apple-gray-850 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-sm font-semibold text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-blue"
+              id="tx-date"
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="w-full px-3 py-2 bg-apple-gray-50/80 dark:bg-apple-gray-850/80 border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-md text-xs font-medium text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-bubblegum focus:border-transparent transition"
+              required
+            />
+          </div>
+
+          {/* Description / Merchant */}
+          <div>
+            <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
+              Description / Source / Merchant
+            </label>
+            <input
+              id="tx-description"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder={
+                type === 'income'
+                  ? 'e.g. October Consulting Fee or Software Salary'
+                  : type === 'deposit'
+                  ? 'e.g. Transfer to Emergency Fund'
+                  : type === 'withdrawal'
+                  ? 'e.g. Vacation expense withdrawal from Goal'
+                  : 'e.g. Nature Basket Groceries or Electricity Bill'
+              }
+              className="w-full px-3 py-2 bg-apple-gray-50/80 dark:bg-apple-gray-850/80 border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-md text-xs font-medium text-apple-gray-900 dark:text-white placeholder:text-apple-gray-400 focus:outline-none focus:ring-2 focus:ring-bubblegum focus:border-transparent transition"
               required
             />
           </div>
         </div>
 
-        {/* Category & Payment Mode */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
-              Category
-            </label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value as TransactionCategory)}
-              className="w-full p-2 bg-apple-gray-50 dark:bg-apple-gray-850 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            >
-              {CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
-              Payment Mode
-            </label>
-            <select
-              value={paymentMode}
-              onChange={(e) => setPaymentMode(e.target.value as PaymentMode)}
-              className="w-full p-2 bg-apple-gray-50 dark:bg-apple-gray-850 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            >
-              {PAYMENT_MODES.map((mode) => (
-                <option key={mode} value={mode}>
-                  {mode}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Date */}
-        <div>
-          <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
-            Transaction Date
-          </label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-full p-2 bg-apple-gray-50 dark:bg-apple-gray-850 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            required
-          />
-        </div>
-
-        {/* Description / Merchant */}
-        <div>
-          <label className="block text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 mb-1">
-            Description / Source / Merchant
-          </label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder={
-              type === 'income'
-                ? 'e.g. October Consulting Fee or Software Salary'
-                : type === 'deposit'
-                ? 'e.g. Transfer to Emergency Fund'
-                : 'e.g. Nature Basket Groceries or Electricity Bill'
-            }
-            className="w-full p-2 bg-apple-gray-50 dark:bg-apple-gray-850 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs text-apple-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            required
-          />
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center justify-end gap-2 pt-3 border-t border-apple-gray-100 dark:border-apple-gray-800">
+        {/* Actions - Fixed Footer */}
+        <div className="shrink-0 flex items-center justify-end gap-3 pt-3 mt-2 border-t border-apple-gray-150 dark:border-apple-gray-800">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-medium text-apple-gray-600 dark:text-apple-gray-400 hover:text-apple-gray-900 dark:hover:text-white rounded-apple-sm transition"
+            className="px-4 py-2 text-xs font-semibold text-apple-gray-600 dark:text-apple-gray-300 hover:text-apple-gray-900 dark:hover:text-white hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 rounded-apple-md transition active:scale-[0.98]"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-5 py-2 bg-apple-blue hover:bg-apple-blue-hover text-white text-xs font-semibold rounded-apple-sm transition shadow-apple-pill"
+            className="px-5 py-2 bg-bubblegum hover:bg-bubblegum-hover text-white text-xs font-bold rounded-apple-md transition shadow-apple-pill active:scale-[0.98] flex items-center gap-1.5"
           >
             {initialData ? 'Update Transaction' : 'Save Transaction'}
           </button>

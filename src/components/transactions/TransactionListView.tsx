@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   Plus,
   Search,
@@ -8,6 +8,9 @@ import {
   ReceiptText,
   ArrowDownRight,
   ArrowUpRight,
+  ChevronDown,
+  PiggyBank,
+  TrendingDown,
 } from 'lucide-react';
 import { useFinance } from '../../context/FinanceContext';
 import { Transaction, TransactionType } from '../../types/finance';
@@ -58,6 +61,22 @@ export const TransactionListView: React.FC = () => {
   const [modalType, setModalType] = useState<TransactionType>('expense');
   const [editingTx, setEditingTx] = useState<Transaction | null>(null);
   const [deletingTx, setDeletingTx] = useState<Transaction | null>(null);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
+        setIsMoreMenuOpen(false);
+      }
+    };
+    if (isMoreMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMoreMenuOpen]);
 
   // Filtered & Sorted Transactions
   const filteredTransactions = useMemo(() => {
@@ -137,40 +156,100 @@ export const TransactionListView: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-apple-gray-850 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-800 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-sm text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 transition"
+            className="inline-flex items-center justify-center gap-1.5 h-9 px-3.5 bg-white dark:bg-apple-gray-850 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-800 border border-apple-gray-200 dark:border-apple-gray-800 rounded-apple-md text-xs font-semibold text-apple-gray-700 dark:text-apple-gray-300 transition shadow-sm active:scale-[0.98]"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-apple-gray-500" />
             <span>Export CSV</span>
           </button>
 
-          {/* Clear Add Income Action */}
+          {/* Add Income Action */}
           <button
             onClick={() => openAddModal('income')}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-apple-green hover:bg-green-600 text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
+            className="inline-flex items-center justify-center gap-1.5 h-9 px-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-apple-md text-xs font-semibold shadow-sm transition active:scale-[0.98]"
           >
-            <ArrowDownRight className="w-3.5 h-3.5" />
+            <ArrowDownRight className="w-4 h-4" />
             <span>Add Income</span>
           </button>
 
-          {/* Clear Add Expense Action */}
+          {/* Add Expense Action */}
           <button
             onClick={() => openAddModal('expense')}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-apple-red hover:bg-red-600 text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
+            className="inline-flex items-center justify-center gap-1.5 h-9 px-3.5 bg-rose-500 hover:bg-rose-600 text-white rounded-apple-md text-xs font-semibold shadow-sm transition active:scale-[0.98]"
           >
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-4 h-4" />
             <span>Add Expense</span>
           </button>
 
-          <button
-            onClick={() => openAddModal('expense')}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 bg-apple-blue hover:bg-apple-blue-hover text-white rounded-apple-sm text-xs font-semibold shadow-apple-pill transition"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>More Types</span>
-          </button>
+          {/* More Types Popover */}
+          <div className="relative" ref={moreMenuRef}>
+            <button
+              type="button"
+              onClick={() => setIsMoreMenuOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center gap-1.5 h-9 px-3.5 bg-bubblegum hover:bg-bubblegum-hover text-white rounded-apple-md text-xs font-semibold shadow-sm transition active:scale-[0.98]"
+              aria-expanded={isMoreMenuOpen}
+              aria-haspopup="true"
+            >
+              <Plus className="w-4 h-4" />
+              <span>More Types</span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  isMoreMenuOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+
+            {isMoreMenuOpen && (
+              <div className="absolute right-0 mt-1.5 w-64 bg-white dark:bg-apple-darkCard border border-apple-gray-200 dark:border-apple-gray-750 rounded-apple-xl shadow-apple-modal z-40 p-1.5 animate-scale-in">
+                <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-apple-gray-400 dark:text-apple-gray-500">
+                  Additional Transaction Types
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMoreMenuOpen(false);
+                    openAddModal('deposit');
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-apple-md hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 text-left transition group"
+                >
+                  <div className="p-2 rounded-apple-md bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 group-hover:scale-105 transition-transform">
+                    <PiggyBank className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold text-apple-gray-900 dark:text-white">
+                      Deposit to Goal
+                    </div>
+                    <div className="text-[11px] text-apple-gray-500 dark:text-apple-gray-400">
+                      Allocate savings into a target goal
+                    </div>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMoreMenuOpen(false);
+                    openAddModal('withdrawal');
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-apple-md hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 text-left transition group"
+                >
+                  <div className="p-2 rounded-apple-md bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
+                    <TrendingDown className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold text-apple-gray-900 dark:text-white">
+                      Withdraw from Goal
+                    </div>
+                    <div className="text-[11px] text-apple-gray-500 dark:text-apple-gray-400">
+                      Withdraw saved funds from a goal
+                    </div>
+                  </div>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

@@ -2,13 +2,14 @@
 ### Advanced AI-Driven Personal Finance Platform Demonstrating Course Outcomes CO1, CO2, and CO4 with Full-Stack Authentication, Database Persistence & Workflow Integration
 
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B%20%7C%20v25-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Express](https://img.shields.io/badge/Express-4.21.2-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Express](https://img.shields.io/badge/Express-5.3.0-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-Native%20DatabaseSync-003B57?logo=sqlite&logoColor=white)](https://nodejs.org/api/sqlite.html)
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4.21-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Vitest](https://img.shields.io/badge/Vitest-49_Tests_Passed-4BB543?logo=vitest&logoColor=white)](https://vitest.dev/)
+[![Theme](https://img.shields.io/badge/Theme-Bubblegum_%26_Lace-FF5E97)](https://tailwindcss.com/)
+[![Vitest](https://img.shields.io/badge/Vitest-74_Tests_Passed-4BB543?logo=vitest&logoColor=white)](https://vitest.dev/)
 [![Currency](https://img.shields.io/badge/Currency-₹_INR-FF9933)](https://en.wikipedia.org/wiki/Indian_rupee)
 [![Security](https://img.shields.io/badge/Auth-JWT_%2B_Bcrypt_%2B_HttpOnly-red)](#)
 
@@ -34,7 +35,7 @@
 6. [Database Schema & Migrations](#-database-schema--migrations)
 7. [API Specification](#-api-specification)
 8. [Environment Configuration](#-environment-configuration)
-9. [Automated Verification & Unit Test Suite (49 Tests)](#-automated-verification--unit-test-suite-49-tests)
+9. [Automated Verification & Unit Test Suite (74 Tests)](#-automated-verification--unit-test-suite-74-tests)
 10. [Getting Started (Run Locally)](#-getting-started-run-locally)
 11. [Step-by-Step Academic Evaluation Demonstration Script](#-step-by-step-academic-evaluation-demonstration-script)
 
@@ -42,7 +43,7 @@
 
 ## 🌟 Executive Summary
 
-**AI Personal Finance Manager** is a production-grade, secure financial engineering web application tailored for Indian users (students, salaried professionals, and families). Built with an **Express + Node.js** backend, a **Native SQLite (`node:sqlite`)** persistent database, and a **React 18 + TypeScript + Vite + Tailwind CSS** frontend, it combines comprehensive accounting capabilities with **transparent, deterministic, explainable Artificial Intelligence**.
+**AI Personal Finance Manager** is a production-grade, secure financial engineering web application tailored for Indian users (students, salaried professionals, and families). Built with an **Express + Node.js** backend, a **Native SQLite (`node:sqlite`)** persistent database, and a **React 18 + TypeScript + Vite + Tailwind CSS** frontend styled with an elegant **Bubblegum & Lace** visual theme, it combines comprehensive accounting capabilities with **transparent, deterministic, explainable Artificial Intelligence**.
 
 Unlike simple expense trackers, this application doubles as an interactive **AI Algorithms Laboratory** and seamlessly integrates academic AI concepts into everyday financial management:
 - **CO1, CO2, and CO4 in Daily Workflow:** Autonomous agent recommendations on the Dashboard, heuristic search roadmaps in Savings Goals, and forward-chaining rules with Monte Carlo risk simulation in the Budget Planner.
@@ -50,6 +51,7 @@ Unlike simple expense trackers, this application doubles as an interactive **AI 
 - **100% Deterministic & Offline AI:** Mathematical agent cycles, state-space search with visited-node pruning, forward-chaining deduction, and seeded Monte Carlo stochastic simulations.
 - **Strict Multi-Tenant Security:** Every user has an isolated workspace protected by bcrypt password hashing, JWT authentication stored in HttpOnly cookies, and strict server-side authorization.
 - **Zero Hallucinated / Default Financial Data:** Fresh accounts open with clean, empty states. No fake transactions, budgets, or balances are generated automatically.
+- **Bubblegum & Lace Design System:** A delightful, modern palette featuring Bubblegum Pink (`#FF5E97`), Sweet Mint (`#10B981`), Peach Lace (`#FB923C`), warm lace backgrounds (`#FFF9FA`), and high-contrast dark mode.
 - **Strict Indian Financial Context:** All amounts represented in Indian Rupees (`₹`), formatted in the Indian numbering system (Lakhs & Crores), featuring domestic payment modes (`UPI`, `Net Banking`, `Debit/Credit Card`, `Cash`).
 
 ---
@@ -287,8 +289,9 @@ The database is automatically initialized on backend startup in [`server/db/data
 | `id` | TEXT | PRIMARY KEY | Unique budget ID |
 | `user_id` | TEXT | NOT NULL, FK `users(id)` | Record owner |
 | `category` | TEXT | NOT NULL | Budget category |
-| `amount` | REAL | NOT NULL | Spending cap amount (> 0) |
+| `limit_amount` | REAL | NOT NULL CHECK(limit_amount >= 0) | Spending cap amount |
 | `period` | TEXT | DEFAULT 'monthly' | Budget cycle period |
+| `alert_threshold` | REAL | DEFAULT 80 | Threshold percentage for early warnings |
 | `start_date` | TEXT | - | Period start date |
 | `end_date` | TEXT | - | Period end date |
 | `created_at` | TEXT | NOT NULL | ISO-8601 timestamp |
@@ -299,12 +302,13 @@ The database is automatically initialized on backend startup in [`server/db/data
 | :--- | :--- | :--- | :--- |
 | `id` | TEXT | PRIMARY KEY | Unique goal ID |
 | `user_id` | TEXT | NOT NULL, FK `users(id)` | Record owner |
-| `name` | TEXT | NOT NULL | Goal name |
-| `target_amount` | REAL | NOT NULL | Target savings amount (> 0) |
-| `current_amount`| REAL | DEFAULT 0 | Accumulated balance |
+| `title` | TEXT | NOT NULL | Milestone goal title |
+| `target_amount` | REAL | NOT NULL CHECK(target_amount > 0) | Target savings amount |
+| `current_amount`| REAL | DEFAULT 0 CHECK(current_amount >= 0) | Accumulated savings balance |
 | `target_date` | TEXT | NOT NULL | Target deadline (YYYY-MM-DD) |
-| `category` | TEXT | - | Goal classification category |
-| `icon` | TEXT | - | Emoji icon indicator |
+| `category` | TEXT | DEFAULT 'General' | Goal classification category |
+| `icon` | TEXT | DEFAULT '🎯' | Emoji icon indicator |
+| `color` | TEXT | DEFAULT '#34C759' | Hex color badge indicator |
 | `created_at` | TEXT | NOT NULL | ISO-8601 timestamp |
 | `updated_at` | TEXT | NOT NULL | ISO-8601 timestamp |
 
@@ -369,9 +373,9 @@ CORS_ORIGIN=http://localhost:3000
 
 ---
 
-## 🧪 Automated Verification & Unit Test Suite (49 Tests)
+## 🧪 Automated Verification & Unit Test Suite (74 Tests)
 
-The application includes **49 automated unit and integration tests** across four suites:
+The application includes **74 automated unit and integration tests** across five suites, running with deterministic file serialization (`--fileParallelism=false`) to ensure 100% reliable execution against the native SQLite database:
 
 ```bash
 npm test
@@ -379,7 +383,39 @@ npm test
 
 ### Test Suite Breakdown:
 
-#### 1. Workflow Integration: Normal Daily Workflow Tests (`src/tests/workflowIntegration.test.ts` — 11 tests)
+#### 1. Comprehensive Verification Suite (`server/tests/comprehensiveSuite.test.ts` — 25 tests)
+- **Section 3 Auth & Multi-Tenant Isolation:**
+  - Registration rejection of invalid emails, short passwords, missing fields.
+  - Multi-tenant registration for User A and User B with zero initial records.
+  - Duplicate email collision rejection (`409 Conflict`).
+  - Login failure on invalid password (`401 Unauthorized`) and success with JWT cookie.
+  - User A creates ₹30,000 income, ₹2,500 expense, a Food budget, and an Emergency Reserve goal.
+  - User B sees empty workspace and ZERO data belonging to User A.
+  - Cross-user attacks (`PUT /api/transactions/:id`, `DELETE /api/budgets/:id`, `POST /api/goals/:id/withdraw` using User A IDs) are strictly rejected with `404 Not Found`.
+  - User A re-authenticates and verifies data remains untouched.
+- **Section 4 Exact Persistence & Edge Cases:**
+  - Direct database queries confirm exact ₹30,000 income and ₹2,500 expense storage in SQLite (zero random overrides).
+  - Net surplus calculation ($₹30,000 - ₹2,500 = ₹27,500$) and savings rate ($92\%$).
+  - Decimal precision verification (paise normalization e.g. `₹1,234.567` $\rightarrow$ `₹1,234.57`).
+  - High financial limits (e.g. ₹50,00,000 Lakhs/Crores).
+  - Validation rejections for ₹0 and negative amounts (`400 Bad Request`).
+  - Update and delete operations update database records and totals accurately.
+- **Section 5 CO1 Intelligent Agent Pipeline:**
+  - Stage 1 Perceive, Stage 2 Analyze, Stage 3 Decide, Stage 4 Act, Stage 5 Evaluate.
+  - Counterfactual evaluation demonstrates simulated savings rate improvement without altering database records.
+  - Seamless switching across all 4 agent goals (`avoid_budget_breach`, `reach_savings_goal`, `maintain_emergency_fund`, `reduce_discretionary`).
+- **Section 6 CO2 Search Techniques on Savings Goals:**
+  - Handles already achieved goal at root node (0 months, 1 state explored).
+  - Handles ₹0 initial savings producing feasible monthly contribution sequences.
+  - Safely reports unreachable goals within planning horizon.
+  - Verifies BFS minimum-depth guarantee and Greedy Best-First Search heuristic distance $h(n) = \max(0, \text{Target} - S_n)$.
+- **Section 7 CO4 Forward-Chaining Rules & Monte Carlo:**
+  - Tests all 7 production rules individually against premises, conclusions, and actions.
+  - Monte Carlo simulation verifies statistical quantiles ($P_{10} \le P_{50} \le P_{90}$) and probability bounds ($0\% - 100\%$).
+  - Responds accurately to low-spending ($0\%$ breach) vs. high-spending ($100\%$ breach) scenarios.
+  - Mulberry32 seeded pseudo-random generator produces $100\%$ deterministic reproducibility across consecutive runs.
+
+#### 2. Workflow Integration: Normal Daily Workflow Tests (`src/tests/workflowIntegration.test.ts` — 11 tests)
 - **CO1:** Uses latest saved database transactions and budgets to perceive environment.
 - **CO1:** Identifies budget conditions and selects appropriate action on `avoid_budget_breach` goal.
 - **CO1:** Adapts advice when user switches active goal in normal workflow (`avoid_budget_breach`, `reach_savings_goal`, `maintain_emergency_fund`).
@@ -392,7 +428,7 @@ npm test
 - **CO4:** Runs Monte Carlo budget risk simulation on-demand for a category budget.
 - **CO4:** Produces $100\%$ deterministic Monte Carlo simulation results with the same random seed.
 
-#### 2. Academic AI Algorithms Lab Tests (`src/tests/aiAlgorithms.test.ts` — 12 tests)
+#### 3. Academic AI Algorithms Lab Tests (`src/tests/aiAlgorithms.test.ts` — 12 tests)
 - **CO1:** Intelligent agent changes recommendation when financial state changes.
 - **CO1:** Separates Perceive, Analyze, Decide, Act, Evaluate stages cleanly.
 - **CO2:** BFS finds a valid plan for a reachable savings target.
@@ -406,7 +442,7 @@ npm test
 - **Robustness:** Zero budget, empty transactions, or missing income does not crash app.
 - **Formatting:** Financial calculations and Indian formatting (`₹`) handle edge cases.
 
-#### 3. Backend Authentication, Multi-Tenant Isolation & Persistence (`server/tests/authAndIsolation.test.ts` — 19 tests)
+#### 4. Backend Authentication, Multi-Tenant Isolation & Persistence (`server/tests/authAndIsolation.test.ts` — 19 tests)
 - User registration with valid credentials.
 - Duplicate email registration rejection (`409 Conflict`).
 - Rejection of short passwords and missing fields.
@@ -427,7 +463,7 @@ npm test
 - Data export isolates user records strictly.
 - Data import assigns ownership to the authenticated user.
 
-#### 4. Financial Calculations & Cash Flow (`src/tests/financialCalculations.test.ts` — 7 tests)
+#### 5. Financial Calculations & Cash Flow (`src/tests/financialCalculations.test.ts` — 7 tests)
 - Income calculation sums only income transactions.
 - Expense calculation sums only expense transactions.
 - Goal deposits and withdrawals are accurately aggregated.
@@ -485,7 +521,7 @@ npm test
 
 Follow this structured script when demonstrating the platform for evaluation or viva:
 
-### Step 1: Authentication & Multi-Tenant Isolation
+### Step 1: Authentication, Exact Persistence & Multi-Tenant Isolation
 1. Open `http://localhost:3000`. You will be directed to the **Login** screen.
 2. Click **Create an account** and register **User A** (`alex@testbank.com`, password `Password123!`).
 3. Notice that the dashboard opens in an **Empty State** with ₹0.00 Income, ₹0.00 Expenses, ₹0.00 Net Savings, and no transactions.
@@ -493,9 +529,22 @@ Follow this structured script when demonstrating the platform for evaluation or 
    - Type: `Income`
    - Amount: `30000`
    - Category: `Salary`
+   - Payment Mode: `Net Banking`
    - Description: `Primary Monthly Salary`
 5. Observe the dashboard update instantly: Total Inflows **₹30,000.00**, Net Surplus **₹30,000.00**.
-6. **Reload the page (`F5`).** Confirm that the amount remains exactly **₹30,000.00** (no random changes or mock resets).
+6. Click **+ Add Expense** and record an expense transaction:
+   - Type: `Expense`
+   - Amount: `2500`
+   - Category: `Food`
+   - Payment Mode: `UPI`
+   - Description: `Weekly Groceries`
+7. Observe the dashboard update: Total Inflows **₹30,000.00**, Outflows **₹2,500.00**, and Net Surplus **₹27,500.00**.
+8. **Reload the page (`F5`).** Confirm that the amounts remain exactly **₹30,000.00** and **₹2,500.00** (no random changes or mock resets).
+9. **Multi-Tenant Isolation Check:**
+   - Click the **Logout** icon at the top right.
+   - Register **User B** (`priya@testbank.com`, password `Password456!`).
+   - Notice User B's dashboard is completely empty (₹0.00 balance, zero transactions). User A's data is completely invisible.
+   - Log out and log back in as **User A** (`alex@testbank.com`). Verify all records and the ₹27,500 surplus remain perfectly preserved.
 
 ### Step 2: CO1 in Normal Workflow (Dashboard & AI Advisor)
 1. On the Dashboard, review the **FinBot Intelligence & Health Score** card.

@@ -8,6 +8,7 @@ interface ModalProps {
   subtitle?: string;
   children: React.ReactNode;
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  scrollable?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -17,6 +18,7 @@ export const Modal: React.FC<ModalProps> = ({
   subtitle,
   children,
   maxWidth = 'md',
+  scrollable = true,
 }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -40,21 +42,21 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-apple-darkCard rounded-apple-xl shadow-apple-modal border border-apple-gray-200 dark:border-apple-gray-800 p-6 z-10 animate-fade-in my-8 max-h-[90vh] flex flex-col`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-apple-darkCard rounded-apple-2xl shadow-apple-modal border border-apple-gray-200/80 dark:border-apple-gray-800 p-5 sm:p-6 z-10 animate-fade-in max-h-[92vh] flex flex-col overflow-hidden`}
       >
         {/* Header */}
-        <div className="flex items-start justify-between pb-4 border-b border-apple-gray-100 dark:border-apple-gray-800/80">
+        <div className="flex items-start justify-between pb-3 border-b border-apple-gray-100 dark:border-apple-gray-800/80 shrink-0">
           <div>
-            <h3 className="text-lg font-semibold text-apple-gray-900 dark:text-white">
+            <h3 className="text-lg font-bold text-apple-gray-900 dark:text-white">
               {title}
             </h3>
             {subtitle && (
@@ -65,7 +67,7 @@ export const Modal: React.FC<ModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-apple-gray-400 hover:text-apple-gray-600 dark:hover:text-apple-gray-200 hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 transition"
+            className="p-1.5 -mr-1 -mt-1 rounded-full text-apple-gray-400 hover:text-apple-gray-600 dark:hover:text-apple-gray-200 hover:bg-apple-gray-100 dark:hover:bg-apple-gray-800 transition"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -73,7 +75,11 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="mt-4 overflow-y-auto pr-1">
+        <div
+          className={`mt-3 flex-1 flex flex-col min-h-0 ${
+            scrollable ? 'overflow-y-auto pr-1 sm:pr-1.5' : 'overflow-hidden'
+          }`}
+        >
           {children}
         </div>
       </div>
