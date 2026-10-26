@@ -15,19 +15,44 @@ dotenv.config();
 
 export const app = express();
 
-const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const rawCorsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const configuredOrigins = rawCorsOrigin
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, or same-origin)
+      // Allow requests with no origin (like mobile apps, curl, server-to-server, or same-origin)
       if (!origin) return callback(null, true);
-      if (origin === corsOrigin || origin.startsWith('http://localhost:')) {
+
+      // Check configured origins or localhost/127.0.0.1
+      if (
+        configuredOrigins.includes(origin) ||
+        origin.startsWith('http://localhost:') ||
+        origin.startsWith('http://127.0.0.1:')
+      ) {
         return callback(null, true);
       }
-      callback(new Error('Not allowed by CORS'));
+
+      // Safely allow *.vercel.app deployments and preview branches
+      try {
+        const parsed = new URL(origin);
+        if (parsed.hostname.endsWith('.vercel.app')) {
+          return callback(null, true);
+        }
+      } catch {
+        // Invalid URL format
+      }
+
+      // Disallow origin gracefully without throwing an unhandled 500 error
+      callback(null, false);
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['Set-Cookie'],
   })
 );
 

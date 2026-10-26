@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "start": "tsx server/index.ts",
     "dev": "concurrently -k -p \"[{name}]\" -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"tsx server/index.ts\" \"vite\"",
     "dev:server": "tsx server/index.ts",
     "dev:client": "vite",
@@ -23,7 +24,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recharts": "^2.12.2",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "tsx": "^4.23.15"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -41,7 +43,6 @@
     "postcss": "^8.4.35",
     "supertest": "^7.3.1",
     "tailwindcss": "^3.4.1",
-    "tsx": "^4.23.15",
     "typescript": "^5.3.3",
     "vite": "^5.1.4",
     "vitest": "^4.1.12"

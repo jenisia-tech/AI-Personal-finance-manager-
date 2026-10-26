@@ -1,6 +1,10 @@
 import { Transaction, Budget, SavingsGoal, UserProfile, SpendingPredictionData } from '../types/finance';
 
-const BASE_URL = ''; // Relative path, handled by Vite proxy to backend
+// When deployed to production (e.g. Vercel for frontend and separate cloud host for Express API),
+// VITE_API_URL specifies the target backend URL (e.g. https://api.yourdomain.com).
+// In local development or when reverse-proxied, BASE_URL defaults to '' to use Vite dev proxy.
+const rawApiUrl = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
+const BASE_URL = rawApiUrl.endsWith('/api') ? rawApiUrl.slice(0, -4) : rawApiUrl;
 
 export class ApiError extends Error {
   status: number;
